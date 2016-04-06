@@ -28,6 +28,11 @@ vagrant_synced_folders:
     type: nfs
     create: true
 
+  - local_path: /Applications/MAMP/htdocs/public_html
+    destination: /var/www/public_html/redesign/web/multisite
+    type: nfs
+    create: true
+
 # Memory and CPU to use for this VM.
 vagrant_memory: 1024
 vagrant_cpus: 2
@@ -38,18 +43,22 @@ drupalvm_webserver: apache
 # Set this to false if you are using a different site deployment strategy and
 # would like to configure 'vagrant_synced_folders' and 'apache_vhosts' manually.
 build_makefile: true
-drush_makefile_path: ../../csd.utexas.edu.make.yml
+drush_makefile_path: ../../../redesign/makefiles/csd.utexas.edu.make.yml
 
 # Set this to false if you don't need to install drupal (using the drupal_*
 # settings below), but instead copy down a database (e.g. using drush sql-sync).
-install_site: true
+install_site: false
 
 # Settings for building a Drupal site from a makefile (if 'build_makefile:'
 # is 'true').
+
+# 'install_site' currently set to 'false'.
+# Will need configuration for building/creation of multiple Drupal
+# Instances on the server, not just one.
 drupal_major_version: 7
 drupal_core_path: "/var/www/public_html/redesign"
 drupal_domain: "{{ vagrant_hostname }}"
-drupal_site_name: "CSD"
+drupal_site_name: "Moody"
 drupal_install_profile: utexas
 drupal_enable_modules: [ 'devel' ]
 drupal_account_name: admin
@@ -83,8 +92,74 @@ apache_vhosts:
     extra_parameters: |
           ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
 
+# Drupal 6 Moody Multisite Instance
+  - servername: "advertising.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/multisite"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+
+  - servername: "commstudies.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/multisite"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+
+  - servername: "csd.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/multisite"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+
+  - servername: "journalism.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/multisite"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+
+  - servername: "moody.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/multisite"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+
+  - servername: "rtf.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/multisite"
+    extra_parameters: |
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+
+# Drupal 6 Moody Instances
+  - servername: "advertising.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/advertising"
+
+  - servername: "commstudies.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/commstudies"
+
   - servername: "csd.local.utexas.edu"
     documentroot: "/var/www/public_html/redesign/web/csd"
+
+  - servername: "journalism.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/journalism"
+
+  - servername: "moody.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/moody"
+
+  - servername: "rtf.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/rtf"
+
+# Migrated Drupal 7 Moody Instances
+  - servername: "advertising.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/advertising-redesign"
+
+  - servername: "commstudies.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/commstudies-redesign"
+
+  - servername: "csd.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/csd-redesign"
+
+  - servername: "journalism.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/journalism-redesign"
+
+  - servername: "moody.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/moody-redesign"
+
+  - servername: "rtf.local.utexas.edu"
+    documentroot: "/var/www/public_html/redesign/web/rtf-redesign"
 
   - servername: "adminer.{{ vagrant_hostname }}"
     documentroot: "{{ adminer_install_dir }}"
@@ -116,6 +191,9 @@ apache_mods_enabled:
 # Nginx hosts. Each site will get a server entry using the configuration defined
 # here. Set the 'is_php' property for document roots that contain PHP apps like
 # Drupal.
+
+# UT Web, the platform being used by the Moody College of Communication, does
+#   not support nginx for server configuration, requiring apache2 instead.
 nginx_hosts:
   - server_name: "{{ drupal_domain }}"
     root: "{{ drupal_core_path }}"
@@ -146,6 +224,81 @@ mysql_databases:
     encoding: utf8
     collation: utf8_general_ci
 
+# Drupal 6 Moody Multisite Instance - Databases
+  - name: advertising_multi_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: commstudies_multi_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: csd_multi_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: journalism_multi_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: moody_multi_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: rtf_multi_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+# Drupal 6 Moody Instances - Databases
+  - name: advertising_d6_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: commstudies_d6_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: csd_d6_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: journalism_d6_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: moody_d6_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: rtf_d6_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+# Drupal 6 Moody Multisite Instance - Databases
+  - name: advertising_redesign_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: commstudies_redesign_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: csd_redesign_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: journalism_redesign_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: moody_redesign_db
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: rtf_redesign_db
+    encoding: utf8
+    collation: utf8_general_ci
+
 mysql_users:
   - name: "{{ drupal_mysql_user }}"
     host: "%"
@@ -156,16 +309,16 @@ mysql_users:
 # to install *any* extras, make set this value to an empty set, e.g. `[]`.
 installed_extras:
   - adminer
-  - drupalconsole
-  - mailhog
-  - memcached
+  # drupalconsole
+  # mailhog
+  # memcached
   # - nodejs
   - pimpmylog
   # - redis
   # - ruby
   # - selenium
   # - solr
-  - varnish
+  # varnish
   - xdebug
   - xhprof
 
@@ -176,7 +329,8 @@ extra_packages:
 # `nodejs` must be in installed_extras for this to work. Valid examples: "0.10",
 # "0.12", "4.x", "5.x".
 nodejs_version: "0.12"
-nodejs_npm_global_packages: []
+nodejs_npm_global_packages:
+  - name: grunt
 
 # `ruby` must be in installed_extras for this to work.
 ruby_install_gems_user: "{{ drupalvm_user }}"
@@ -205,7 +359,7 @@ firewall_log_dropped_packets: false
 # PHP Configuration. Currently-supported versions: 5.5, 5.6, 7.0.
 # PHP 7.0 requires a few additional changes. See the documentation at
 # http://docs.drupalvm.com/en/latest/other/php-7/
-php_version: "5.6"
+php_version: "5.5"
 php_memory_limit: "192M"
 php_display_errors: "On"
 php_display_startup_errors: "On"
@@ -242,10 +396,11 @@ mysql_wait_timeout: 300
 adminer_install_filename: index.php
 
 # Varnish Configuration.
-varnish_listen_port: "81"
-varnish_default_vcl_template_path: templates/drupalvm.vcl.j2
-varnish_default_backend_host: "127.0.0.1"
-varnish_default_backend_port: "80"
+# Varnish Unavailable on UT Web
+# varnish_listen_port: "81"
+# varnish_default_vcl_template_path: templates/drupalvm.vcl.j2
+# varnish_default_backend_host: "127.0.0.1"
+# varnish_default_backend_port: "80"
 
 # Pimp my Log settings.
 pimpmylog_install_dir: /usr/share/php/pimpmylog
@@ -262,12 +417,15 @@ php_xdebug_idekey: PHPSTORM
 php_xdebug_max_nesting_level: 256
 
 # Solr Configuration (if enabled above).
-solr_version: "4.10.4"
-solr_xms: "64M"
-solr_xmx: "128M"
+# Unsure if Solr is currently available on UT Web
+# solr_version: "4.10.4"
+# solr_xms: "64M"
+# solr_xmx: "128M"
 
 # Selenium configuration.
-selenium_version: 2.46.0
+# Selenium may be enabled later for browser-testing,
+#   but currently would add cruft to the workflow.
+# selenium_version: 2.46.0
 
 # Other configuration.
 dashboard_install_dir: /var/www/dashboard
