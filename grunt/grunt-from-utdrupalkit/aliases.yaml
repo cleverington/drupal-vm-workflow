@@ -1,0 +1,12 @@
+default:
+- 'watch'
+
+dist:
+- 'clean'
+- 'concurrent:copy-dist'
+- 'sass:dist'
+- 'autoprefixer:dist'
+
+build:
+- 'dist'
+- 'concurrent:copy-build'
