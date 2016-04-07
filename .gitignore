@@ -20,8 +20,7 @@ redesign/**/*settings.php
 # Never move ideas into deployment:
 .idea/
 
-# Removing drupalvm Cruft
-drupalvm/docs
-drupalvm/examples
-drupalvm/scripts
-drupalvm/roles
+# Remove DrupalVM Cruft
+# The only file changes for Drupal VM should be the config.yml file
+#   as the drush.make file will be imported via SymLinks.
+drupalvm/*
