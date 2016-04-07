@@ -16,6 +16,18 @@ npm install -g grunt-cli
 ## Quickstart
 There is not currently a 'quick-start' method to use for the Grunt Moody College of Communication Tasks tool.
 
+Here are the required commands, in order, however:
+```
+
+
+mkdir ~/projects
+cd ~/projects
+git clone git@bitbucket.org:crl2728/grunt-redesign.git .
+(When asked, choose 'yes')
+git submodule add git@github.com:geerlingguy/drupal-vm.git drupalvm/
+
+```
+
 ## Features
 This project is built using the tools of the Grunt community to provide a streamlined and scripted method for automating a number of complicated, yet repetitive PHP & Drupal tasks executed during Development.
 
