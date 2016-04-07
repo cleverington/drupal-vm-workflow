@@ -23,13 +23,20 @@ vagrant_public_ip: ""
 vagrant_synced_folders:
   # The first synced folder will be used for the default Drupal installation, if
   # build_makefile: is 'true'.
-  - local_path: ~/Projects/moodyvm/redesign
-    destination: /var/www/public_html
+  #
+  # The local_path variable needs to be configured based on each User's box/location
+  - local_path: /Volumes/crl2728-usb/moodyvm/development
+    destination: /var/www/development
+    type: rsync
+    create: true
+
+  - local_path: /Volumes/crl2728-usb/moodyvm/redesign
+    destination: /var/www/redesign
     type: rsync
     create: true
 
   - local_path: /Applications/MAMP/htdocs/public_html
-    destination: /var/www/public_html/redesign/web/multisite
+    destination: /var/www/d6/multisite
     type: rsync
     create: true
 
@@ -55,17 +62,17 @@ install_site: false
 # 'install_site' currently set to 'false'.
 # Will need configuration for building/creation of multiple Drupal
 # Instances on the server, not just one.
-drupal_major_version: 7
-drupal_core_path: "/var/www/public_html/redesign"
-drupal_domain: "{{ vagrant_hostname }}"
-drupal_site_name: "Moody"
-drupal_install_profile: utexas
-drupal_enable_modules: [ 'devel' ]
-drupal_account_name: admin
-drupal_account_pass: admin
-drupal_mysql_user: drupal
-drupal_mysql_password: drupal
-drupal_mysql_database: drupal
+#drupal_major_version: 7
+#drupal_core_path: "/var/www/development"
+#drupal_domain: "{{ vagrant_hostname }}"
+#drupal_site_name: "Moody"
+#drupal_install_profile: utexas
+#drupal_enable_modules: [ 'devel' ]
+#drupal_account_name: admin
+#drupal_account_pass: admin
+#drupal_mysql_user: drupal
+#drupal_mysql_password: drupal
+#drupal_mysql_database: drupal
 
 # Additional arguments or options to pass to `drush site-install`.
 drupal_site_install_extra_args: []
@@ -87,80 +94,81 @@ configure_local_drush_aliases: true
 # multisite deployments, you can point multiple servernames at one documentroot.
 # View the geerlingguy.apache Ansible Role README for more options.
 apache_vhosts:
-  - servername: "{{ drupal_domain }}"
-    documentroot: "{{ drupal_core_path }}"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+#  - servername: "{{ drupal_domain }}"
+#    documentroot: "{{ drupal_core_path }}"
+#    extra_parameters: |
+#          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
 
 # Drupal 6 Moody Multisite Instance
-  - servername: "advertising.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/multisite"
+  - servername: "advertising.utexas.edu.multisite.vm"
+    documentroot: "/var/www/d6/multisite"
     extra_parameters: |
           ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
 
-  - servername: "commstudies.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/multisite"
+  - servername: "commstudies.utexas.edu.multisite.vm"
+    documentroot: "/var/www/d6/multisite"
     extra_parameters: |
           ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
 
-  - servername: "csd.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/multisite"
+  - servername: "csd.utexas.edu.multisite.vm"
+    documentroot: "/var/www/d6/multisite"
     extra_parameters: |
           ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
 
-  - servername: "journalism.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/multisite"
+  - servername: "journalism.utexas.edu.multisite.vm"
+    documentroot: "/var/www/d6/multisite"
     extra_parameters: |
           ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
 
-  - servername: "moody.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/multisite"
+  - servername: "moody.utexas.edu.multisite.vm"
+    documentroot: "/var/www/d6/multisite"
     extra_parameters: |
           ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
 
-  - servername: "rtf.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/multisite"
+  - servername: "rtf.utexas.edu.multisite.vm"
+    documentroot: "/var/www/d6/multisite"
     extra_parameters: |
           ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
 
 # Drupal 6 Moody Instances
-  - servername: "advertising.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/advertising"
+  - servername: "advertising.utexas.edu.local.vm"
+    documentroot: "/var/www/d6/advertising"
 
-  - servername: "commstudies.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/commstudies"
+  - servername: "commstudies.utexas.edu.local.vm"
+    documentroot: "/var/www/d6/commstudies"
 
-  - servername: "csd.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/csd"
+  - servername: "csd.utexas.edu.local.vm"
+    documentroot: "/var/www/public_html/d6/csd"
 
-  - servername: "journalism.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/journalism"
+  - servername: "journalism.utexas.edu.local.vm"
+    documentroot: "/var/www/d6/journalism"
 
-  - servername: "moody.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/moody"
+  - servername: "moody.utexas.edu.local.vm"
+    documentroot: "/var/www/d6/moody"
 
-  - servername: "rtf.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/rtf"
+  - servername: "rtf.utexas.edu.local"
+    documentroot: "/var/www/d6/rtf"
 
 # Migrated Drupal 7 Moody Instances
-  - servername: "advertising.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/advertising-redesign"
+  - servername: "advertising.utexas.edu.redesign.vm"
+    documentroot: "/var/www/d7/advertising"
 
-  - servername: "commstudies.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/commstudies-redesign"
+  - servername: "commstudies.utexas.edu.redesign.vm"
+    documentroot: "/var/www/d7/commstudies"
 
-  - servername: "csd.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/csd-redesign"
+  - servername: "csd.utexas.edu.redesign.vm"
+    documentroot: "/var/www/d7/csd"
 
-  - servername: "journalism.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/journalism-redesign"
+  - servername: "journalism.utexas.edu.redesign.vm"
+    documentroot: "/var/www/d7/journalism"
 
-  - servername: "moody.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/moody-redesign"
+  - servername: "moody.utexas.edu.redesign.vm"
+    documentroot: "/var/www/d7/moody"
 
-  - servername: "rtf.local.utexas.edu"
-    documentroot: "/var/www/public_html/redesign/web/rtf-redesign"
+  - servername: "rtf.utexas.edu.redesign.vm"
+    documentroot: "/var/www/d7/rtf"
 
+# Drupal VM Tools
   - servername: "adminer.{{ vagrant_hostname }}"
     documentroot: "{{ adminer_install_dir }}"
     extra_parameters: |
@@ -194,28 +202,30 @@ apache_mods_enabled:
 
 # UT Web, the platform being used by the Moody College of Communication, does
 #   not support nginx for server configuration, requiring apache2 instead.
-nginx_hosts:
-  - server_name: "{{ drupal_domain }}"
-    root: "{{ drupal_core_path }}"
-    is_php: true
-
-  - server_name: "adminer.{{ vagrant_hostname }}"
-    root: "{{ adminer_install_dir }}"
-    is_php: true
-
-  - server_name: "xhprof.{{ vagrant_hostname }}"
-    root: "{{ php_xhprof_html_dir }}"
-    is_php: true
-
-  - server_name: "pimpmylog.{{ vagrant_hostname }}"
-    root: "{{ pimpmylog_install_dir }}"
-    is_php: true
-
-  - server_name: "{{ vagrant_ip }} dashboard.{{ vagrant_hostname }}"
-    root: "{{ dashboard_install_dir }}"
-
-nginx_remove_default_vhost: true
-nginx_ppa_use: true
+#
+#   nginx base configuration removed.
+#nginx_hosts:
+#  - server_name: "{{ drupal_domain }}"
+#    root: "{{ drupal_core_path }}"
+#    is_php: true
+#
+#  - server_name: "adminer.{{ vagrant_hostname }}"
+#    root: "{{ adminer_install_dir }}"
+#    is_php: true
+#
+#  - server_name: "xhprof.{{ vagrant_hostname }}"
+#    root: "{{ php_xhprof_html_dir }}"
+#    is_php: true
+#
+#  - server_name: "pimpmylog.{{ vagrant_hostname }}"
+#    root: "{{ pimpmylog_install_dir }}"
+#    is_php: true
+#
+#  - server_name: "{{ vagrant_ip }} dashboard.{{ vagrant_hostname }}"
+#    root: "{{ dashboard_install_dir }}"
+#
+#nginx_remove_default_vhost: true
+#nginx_ppa_use: true
 
 # MySQL Databases and users. If build_makefile: is true, first database will
 # be used for the makefile-built site.
