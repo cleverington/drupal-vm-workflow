@@ -16,6 +16,11 @@ vagrant_ip: 192.168.88.88
 # See: https://docs.vagrantup.com/v2/networking/public_network.html
 vagrant_public_ip: ""
 
+# Adding permissions for synced folders
+#owner: "vagrant",
+#group: "www-data",
+#mount_options: ["dmode=775,fmode=664"]
+
 # A list of synced folders, with the keys 'local_path', 'destination', and
 # a 'type' of [nfs|rsync|smb] (leave empty for slow native shares). See
 # http://docs.drupalvm.com/en/latest/extras/syncing-folders/ for more info.
@@ -31,6 +36,16 @@ vagrant_synced_folders:
 
   - local_path: ~/moody-projects/redesign
     destination: /var/www/redesign
+    type: rsync
+    create: true
+
+  - local_path: ~/moody-projects/scripts
+    destination: /var/scripts
+    type: rsync
+    create: true
+
+  - local_path: ~/tar-bin/
+    destination: /tar-bin/
     type: rsync
     create: true
 
