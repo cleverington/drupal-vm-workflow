@@ -2,11 +2,16 @@
 ## A Grunt automation tool for building, testing, migrating & reviewing Drupal 6 to Drupal 7 Migration tasks.
 
 ## Requirements
-* git cli
-* python
-* vagrant
-* ansible
-* grunt-cli
+* Git (Apple Shipped is good enough)
+* Python 2.7.11
+* Vagrant 1.8.1
+* Ansible 2.0.1.0
+* grunt-cli v1.2.0
+* Node.js v0.12.13
+* npm 2.15.1
+* Bower 1.7.2
+* Composter version 1.0-dev (cdea645eabe658e08fb2f4e5b80bddbd61c3adef) 2016-02-24 13:07:17
+* Drush 7.1.0
 
 
 > Note that the Grunt Moody College of Communication Tasks tool is intended to be compatible with Node.js 0.12.9, npm 2.10.1, grunt-cli 0.1.13, grunt 0.4.5 & bower 1.4.1 as approved for usage withing the UT Drupal Kit 2.x.
