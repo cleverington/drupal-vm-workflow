@@ -1,5 +1,5 @@
-# Grunt Moody College of Communication Tasks
-## A Grunt automation tool for building, testing, migrating & reviewing Drupal 6 to Drupal 7 Migration tasks.
+# Moody College of Communication Tasks
+## A Vagrant enabled automation tool for building, testing, migrating & reviewing Drupal 6 to Drupal 7 Migration tasks.
 
 ## Requirements
 * Git (Apple Shipped is good enough)
@@ -27,9 +27,24 @@ npm install -g grunt-cli
 ```
 
 ## Quickstart
-There is not currently a 'quick-start' method to use for the Grunt Moody College of Communication Tasks tool.
 
-Here are the required commands, in order, however:
+Download copies of all UT Drupal Kit tools and plugins & Moody College Drupal 6 Multisite errata:
+```
+~/tar-bin
+    - /features
+        - utexas-content_type_team_member-7.x-1.1.zip
+        - utexas-role_landing_page_editor-7.x-1.1.zip
+        - utexas-role_site_builder-7.x-1.1.zip
+        - utexas-role_site_manager-7.x-1.1.zip
+        - utexas-role_standard_page_editor-7.x-1.1.zip
+        - utexas-role_team_member_editor-7.x-1.1.zip
+    - /modules
+    - /profiles
+        - utexas-7.x-2.2.tar.gz
+    - /themes
+```
+
+Here are the required commands, in order:  <These will be scripted>
 ```
 mkdir ~/moody-projects
 cd ~/moody-projects
@@ -69,6 +84,14 @@ cd /var/www/
 ### To Access/Edit the Local Copy of the Moody Drupal 6 Multisite Instance:
 ```
 cd /var/www/d6/multisite/
+git pull origin master
+cp /var/www/redesign/settings-files/d6-multisite/advertising/local-settings.php /var/www/d6/multisite/sites/advertising.utexas.edu.local/
+cp /var/www/redesign/settings-files/d6-multisite/commstudies/local-settings.php /var/www/d6/multisite/sites/commstudies.utexas.edu.local/
+cp /var/www/redesign/settings-files/d6-multisite/csd/local-settings.php /var/www/d6/multisite/sites/csd.utexas.edu.local/
+cp /var/www/redesign/settings-files/d6-multisite/journalism/local-settings.php /var/www/d6/multisite/sites/journalism.utexas.edu.local/
+cp /var/www/redesign/settings-files/d6-multisite/moody/local-settings.php /var/www/d6/multisite/sites/moody.utexas.edu.local/
+cp /var/www/redesign/settings-files/d6-multisite/rtf/local-settings.php /var/www/d6/multisite/sites/rtf.utexas.edu.local/
+
 ```
 
 See config.yml for database information.
@@ -132,7 +155,7 @@ git reset --hard HEAD
 ```
 
 If the patch was successfully applied to 'master', then move to the next step.
- 
+
 #### Submit Patch for Approval
 ```
 git push origin config_changes
@@ -160,3 +183,15 @@ To build the Moody College of Communication site testing-platform, run ```grunt`
 ### Special Flags
 - ```quiet```: Suppress desktop notifications
 - ```notify```: Request a desktop notification, despite timing or environment settings.
+
+## Additional Resources
+* [Mac OS X Setup Guide by Sourabh Bajaj](http://sourabhbajaj.com/mac-setup/ "Mac OS X Setup Guide by Sourabh Bajaj")
+The Mac OS X Setup Guide has step-by-step instructions for installing many of the necessary tools for mastering the Moody Tasks such as:
+  * Homebrew
+  * PIP
+  * Python (non-Apple version)
+  * Git (non-Apple version)
+  * iTerm2 (It's just prettier)
+  * zsh (Its smoother than Bash)
+  * Oh-My-Zsh (Prettiest Terminal coloration out there)
+  * Sublime Text 3 (PHPStorm is a great tool, but nothing beats PHPStorm for straight content editing.)

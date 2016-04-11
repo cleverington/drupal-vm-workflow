@@ -1,6 +1,6 @@
-# redesign-core.utexas.edu.make
+# development.utexas.edu.make
 #
-
+---
 
 core: "7.x"
 api: "2"
