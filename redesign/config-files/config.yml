@@ -11,7 +11,6 @@ vagrant_hostname: moody-redesign
 vagrant_machine_name: moodyredesign
 vagrant_ip: 192.168.88.88
 
-
 # Allow Drupal VM to be accessed via a public network interface on your host.
 # Vagrant boxes are insecure by default, so be careful. You've been warned!
 # See: https://docs.vagrantup.com/v2/networking/public_network.html
@@ -203,109 +202,108 @@ apache_mods_enabled:
 #   not support nginx for server configuration, requiring apache2 instead.
 #
 #   nginx base configuration removed.
-#nginx_hosts:
-#  - server_name: "{{ drupal_domain }}"
-#    root: "{{ drupal_core_path }}"
-#    is_php: true
-#
-#  - server_name: "adminer.{{ vagrant_hostname }}"
-#    root: "{{ adminer_install_dir }}"
-#    is_php: true
-#
-#  - server_name: "xhprof.{{ vagrant_hostname }}"
-#    root: "{{ php_xhprof_html_dir }}"
-#    is_php: true
-#
-#  - server_name: "pimpmylog.{{ vagrant_hostname }}"
-#    root: "{{ pimpmylog_install_dir }}"
-#    is_php: true
-#
-#  - server_name: "{{ vagrant_ip }} dashboard.{{ vagrant_hostname }}"
-#    root: "{{ dashboard_install_dir }}"
-#
-#nginx_remove_default_vhost: true
-#nginx_ppa_use: true
+nginx_hosts:
+ - server_name: "{{ drupal_domain }}"
+   root: "{{ drupal_core_path }}"
+   is_php: true
+
+ - server_name: "adminer.{{ vagrant_hostname }}"
+   root: "{{ adminer_install_dir }}"
+   is_php: true
+
+ - server_name: "xhprof.{{ vagrant_hostname }}"
+   root: "{{ php_xhprof_html_dir }}"
+   is_php: true
+
+ - server_name: "pimpmylog.{{ vagrant_hostname }}"
+   root: "{{ pimpmylog_install_dir }}"
+   is_php: true
+
+ - server_name: "{{ vagrant_ip }} dashboard.{{ vagrant_hostname }}"
+   root: "{{ dashboard_install_dir }}"
+
+nginx_remove_default_vhost: true
+nginx_ppa_use: true
 
 # MySQL Databases and users. If build_makefile: is true, first database will
 # be used for the makefile-built site.
 mysql_databases:
-#  Deleting generic database as unnecessary
-#  - name: "{{ drupal_mysql_database }}"
-#    encoding: utf8
-#    collation: utf8_general_ci
+  - name: "{{ drupal_mysql_database }}"
+    encoding: utf8
+    collation: utf8_general_ci
 
 # Drupal 6 Moody Multisite Instance - Databases
-  - name: advertising_multi_db
+  - name: "advertising_multi_db"
     encoding: utf8
     collation: utf8_general_ci
 
-  - name: commstudies_multi_db
+  - name: "commstudies_multi_db"
     encoding: utf8
     collation: utf8_general_ci
 
-  - name: csd_multi_db
+  - name: "csd_multi_db"
     encoding: utf8
     collation: utf8_general_ci
 
-  - name: journalism_multi_db
+  - name: "journalism_multi_db"
     encoding: utf8
     collation: utf8_general_ci
 
-  - name: moody_multi_db
+  - name: "moody_multi_db"
     encoding: utf8
     collation: utf8_general_ci
 
-  - name: rtf_multi_db
+  - name: "rtf_multi_db"
     encoding: utf8
     collation: utf8_general_ci
 
- Drupal 6 Moody Instances - Databases
-  - name: advertising_d6_db
+# Drupal 6 Moody Instances - Databases
+  - name: "advertising_d6_db"
     encoding: utf8
     collation: utf8_general_ci
 
-  - name: commstudies_d6_db
+  - name: "commstudies_d6_db"
     encoding: utf8
     collation: utf8_general_ci
 
-  - name: csd_d6_db
+  - name: "csd_d6_db"
     encoding: utf8
     collation: utf8_general_ci
 
-  - name: journalism_d6_db
+  - name: "journalism_d6_db"
     encoding: utf8
     collation: utf8_general_ci
 
-  - name: moody_d6_db
+  - name: "moody_d6_db"
     encoding: utf8
     collation: utf8_general_ci
 
-  - name: rtf_d6_db
+  - name: "rtf_d6_db"
     encoding: utf8
     collation: utf8_general_ci
 
 # Drupal 7 Moody UT Drupal Kit Instances - Databases
-  - name: advertising_redesign_db
+  - name: "advertising_redesign_db"
     encoding: utf8
     collation: utf8_general_ci
 
-  - name: commstudies_redesign_db
+  - name: "commstudies_redesign_db"
     encoding: utf8
     collation: utf8_general_ci
 
-  - name: csd_redesign_db
+  - name: "csd_redesign_db"
     encoding: utf8
     collation: utf8_general_ci
 
-  - name: journalism_redesign_db
+  - name: "journalism_redesign_db"
     encoding: utf8
     collation: utf8_general_ci
 
-  - name: moody_redesign_db
+  - name: "moody_redesign_db"
     encoding: utf8
     collation: utf8_general_ci
 
-  - name: rtf_redesign_db
+  - name: "rtf_redesign_db"
     encoding: utf8
     collation: utf8_general_ci
 
