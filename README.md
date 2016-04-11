@@ -2,10 +2,18 @@
 ## A Grunt automation tool for building, testing, migrating & reviewing Drupal 6 to Drupal 7 Migration tasks.
 
 ## Requirements
+* git cli
+* python
+* vagrant
+* ansible
+* grunt-cli
 
-> Note that the Grunt Moody College of Communication Tasks tool is inteneded to be compatible with Node.js 0.12.9, npm 2.10.1, grunt-cli 0.1.13, grunt 0.4.5 & bower 1.4.1 as approved for usage withing the UT Drupal Kit 2.x. 
+
+> Note that the Grunt Moody College of Communication Tasks tool is intended to be compatible with Node.js 0.12.9, npm 2.10.1, grunt-cli 0.1.13, grunt 0.4.5 & bower 1.4.1 as approved for usage withing the UT Drupal Kit 2.x.
+>   In addition, the Tasks tool has only been tested 'Live' with Mac OS X El Capitan 10.11.3
 
 > See [ITS | UT Drupal Kit | Forty Acres Theme - 7. Grunt workflow for using SASS in a sub-theme](https://wikis.utexas.edu/display/UTDK/Forty+Acres+Theme) for more details. (Access to the UT Web Developers Wiki is required.)
+> See [Enterprise Systems Management | Vagrant Virtual Machines | Getting started with Vagrant](https://wikis.utexas.edu/display/itsyesm/Getting+started+with+Vagrant) for more details. (Access to the UT Web Developers Wiki is required.)
 
 * Install _[Node.js v0.12.9](https://nodejs.org/en/blog/release/v0.12.9/ "Node.js v0.12.9")_
 * Once _Node.js v0.12.9_ is installed, use _npm_ to install the most recent version of [grunt-cli](https://github.com/gruntjs/grunt-cli" "grunt-cli"), the Grunt command line interface, by running:
