@@ -7,13 +7,11 @@ api: "2"
 
 # Core
 projects:
-  drupal:
-   version: "7.43"
   utexas:
     type: "core"
     download:
       type: "file"
-      url: "file:///Users/crl2728/tar-bin/profiles/utexas-7.x-2.2.tar.gz"
+      url: "file:///tar-bin/profiles/utexas-7.x-2.2.tar.gz"
 
 
 # Modules
@@ -93,7 +91,7 @@ projects:
     directory_name: "sites/all/modules/custom/features/content_type_team_member"
     download:
       type: "file"
-      url: "file:///Users/crl2728/tar-bin/features/utexas-content_type_team_member-7.x-1.1.zip"
+      url: "file:///tar-bin/features/utexas-content_type_team_member-7.x-1.1.zip"
 
 # UTDK Extension Roles
   role_landing_page_editor:
@@ -101,34 +99,34 @@ projects:
     directory_name: "sites/all/modules/custom/features/role_landing_page_editor"
     download:
       type: "file"
-      url: "file:///Users/crl2728/tar-bin/features/utexas-role_landing_page_editor-7.x-1.0.zip"
+      url: "file:///tar-bin/features/utexas-role_landing_page_editor-7.x-1.0.zip"
 
   role_site_builder:
     type: "module"
     directory_name: "sites/all/modules/custom/features/role_site_builder"
     download:
       type: "file"
-      url: "file:///Users/crl2728/tar-bin/features/utexas-role_site_builder-7.x-1.0.zip"
+      url: "file:///tar-bin/features/utexas-role_site_builder-7.x-1.0.zip"
 
   role_site_manager:
     type: "module"
     directory_name: "sites/all/modules/custom/features/role_site_manager"
     download:
       type: "file"
-      url: "file:///Users/crl2728/tar-bin/features/utexas-role_site_manager-7.x-1.0.zip"
+      url: "file:///tar-bin/features/utexas-role_site_manager-7.x-1.0.zip"
 
   role_standard_page_editor:
     type: "module"
     directory_name: "sites/all/modules/custom/features/role_standard_page_editor"
     download:
       type: "file"
-      url: "file:///Users/crl2728/tar-bin/features/utexas-role_standard_page_editor-7.x-1.0.zip"
+      url: "file:///tar-bin/features/utexas-role_standard_page_editor-7.x-1.0.zip"
 
   role_team_member_editor:
     type: "module"
     directory_name: "sites/all/modules/custom/features/role_team_member_editor"
     download:
       type: "file"
-      url: "file:///Users/crl2728/tar-bin/features/utexas-role_team_member_editor-7.x-1.0.zip"
+      url: "file:///tar-bin/features/utexas-role_team_member_editor-7.x-1.0.zip"
 
 

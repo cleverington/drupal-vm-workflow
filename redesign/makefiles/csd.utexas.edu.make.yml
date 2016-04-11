@@ -55,10 +55,4 @@ projects:
   csd:
     type: "copy"
     download:
-      url: "file://./Users/crl2728/tar-bin/themes/compressed/csd.tar.gz"
-
-
-projects[csd][download][type] = ""
-projects[csd][download][url] = ""
-projects[csd][type] = "theme"
-
+      url: "file://tar-bin/themes/compressed/csd.tar.gz"

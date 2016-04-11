@@ -39,6 +39,11 @@ vagrant_synced_folders:
     type: rsync
     create: true
 
+  - local_path: ~/tar-bin/
+    destination: /tar-bin/
+    type: rsync
+    create: true
+
 # Memory and CPU to use for this VM.
 vagrant_memory: 1024
 vagrant_cpus: 2
@@ -224,6 +229,22 @@ nginx_hosts:
 
 nginx_remove_default_vhost: true
 nginx_ppa_use: true
+
+# RedHeat Enterprise Linux / CentOS 7 removed native support for MySQL
+#  in favor of MariaDB. In order to use MySQL, the following settings are
+#  needed. See
+# http://docs.drupalvm.com/en/latest/other/base-os/#redhat-enterprise-linux-centos-7
+mysql_packages:
+  - mariadb
+  - mariadb-server
+  - mariadb-libs
+  - MySQL-python
+  - perl-DBD-MySQL
+mysql_daemon: mariadb
+mysql_socket: /var/lib/mysql/mysql.sock
+mysql_log_error: /var/log/mariadb/mariadb.log
+mysql_syslog_tag: mariadb
+mysql_pid_file: /var/run/mariadb/mariadb.pid
 
 # MySQL Databases and users. If build_makefile: is true, first database will
 # be used for the makefile-built site.
