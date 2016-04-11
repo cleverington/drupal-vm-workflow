@@ -25,12 +25,12 @@ vagrant_synced_folders:
   # build_makefile: is 'true'.
   #
   # The local_path variable needs to be configured based on each User's box/location
-  - local_path: /Volumes/crl2728-usb/moodyvm/development
+  - local_path: ~/moody-projects/development
     destination: /var/www/development
     type: rsync
     create: true
 
-  - local_path: /Volumes/crl2728-usb/moodyvm/redesign
+  - local_path: ~/moody-projects/redesign
     destination: /var/www/redesign
     type: rsync
     create: true
@@ -50,7 +50,7 @@ drupalvm_webserver: apache
 # Set this to false if you are using a different site deployment strategy and
 # would like to configure 'vagrant_synced_folders' and 'apache_vhosts' manually.
 build_makefile: true
-drush_makefile_path: ../../../redesign/makefiles/csd.utexas.edu.make.yml
+drush_makefile_path: /var/www/redesign/makefiles/redesign-development.utexas.edu.make.yml
 
 # Set this to false if you don't need to install drupal (using the drupal_*
 # settings below), but instead copy down a database (e.g. using drush sql-sync).
@@ -66,7 +66,7 @@ install_site: true
 drupal_major_version: 7
 drupal_core_path: "/var/www/development"
 drupal_domain: "{{ vagrant_hostname }}"
-drupal_site_name: "Moody"
+drupal_site_name: "Moody Development Site"
 drupal_install_profile: utexas
 drupal_enable_modules: [ 'devel' ]
 drupal_account_name: admin
@@ -95,21 +95,19 @@ configure_local_drush_aliases: true
 # multisite deployments, you can point multiple servernames at one documentroot.
 # View the geerlingguy.apache Ansible Role README for more options.
 apache_vhosts:
-#  - servername: "{{ drupal_domain }}"
-#    documentroot: "{{ drupal_core_path }}"
-#    extra_parameters: |
-#          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+  - servername: "{{ drupal_domain }}"
+    documentroot: "{{ drupal_core_path }}"
 
 # Drupal 6 Moody Multisite Instance
   - servername: "advertising.utexas.edu.multisite.vm"
     documentroot: "/var/www/d6/multisite/sites/advertising.utexas.edu.local"
     extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/d6/multisite"
 
   - servername: "commstudies.utexas.edu.multisite.vm"
     documentroot: "/var/www/d6/multisite/sites/commstudies.utexas.edu.local"
     extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/d6/multisite
 
   - servername: "csd.utexas.edu.multisite.vm"
     documentroot: "/var/www/d6/multisite/sites/csd.utexas.edu.local"
