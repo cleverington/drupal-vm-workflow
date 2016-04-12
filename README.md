@@ -45,7 +45,7 @@ Download copies of all UT Drupal Kit tools and plugins & Moody College Drupal 6 
     - /themes
 ```
 
-Here are the required commands, in order:  <These will be scripted>
+#### The required commands, in order:  <These will be scripted>
 ```
 mkdir ~/moody-projects
 cd ~/moody-projects
@@ -53,6 +53,26 @@ git clone git@bitbucket.org:crl2728/grunt-redesign.git .
 (When asked, choose 'yes')
 git submodule add git@github.com:geerlingguy/drupal-vm.git drupalvm/
 cp ~/moody-projects/redesign/config-files/config.yml ~/moody-projects/drupalvm/config.yml
+cp ~/moody-projects/scripts/provision-moody.sh ~/moody-projects/drupalvm/provision-moody.sh
+```
+
+### Download SQL-Dumps for Migration
+Copy SQL-Dumps from Box-Sync folder 'Moody_SQL_backups':
+(See Moody Tech. Svcs. for access, if required.)
+```
+~/moody-projects/
+    - /redesign
+        - sql-dumps
+            - advertising_main_2016XXXX.sql
+            - commstudies_main_2016XXXX.sql
+            - csd_main_2016XXXX.sql
+            - journalism_main_2016XXXX.sql
+            - moody_main_2016XXXX.sql
+            - rtf_main_2016XXXX.sql
+```
+
+#### Turn on the Virtual Server
+```
 cd drupalvm/ && vagrant up
 ```
 > Note - '/moody-projects/' is required to be the root of the directory, based on current configuration.

@@ -44,10 +44,10 @@ vagrant_synced_folders:
     type: rsync
     create: true
 
-  - local_path: /Applications/MAMP/htdocs/public_html
-    destination: /var/www/d6/multisite
-    type: rsync
-    create: true
+#  - local_path: /Applications/MAMP/htdocs/public_html
+#    destination: /var/www/d6/multisite
+#    type: rsync
+#    create: true
 
 # Memory and CPU to use for this VM.
 vagrant_memory: 1024
@@ -419,7 +419,7 @@ composer_home_group: "{{ drupalvm_user }}"
 
 # Run specified scripts after VM is provisioned. Path is relative to the
 # `provisioning/playbook.yml` file.
-post_provision_scripts: []
+post_provision_scripts: [../scripts/provision-moody.sh]
   # - "../examples/scripts/configure-solr.sh"
 
 # MySQL Configuration.
