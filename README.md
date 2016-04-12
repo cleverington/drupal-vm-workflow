@@ -24,6 +24,7 @@
 * Once _Node.js v0.12.9_ is installed, use _npm_ to install the most recent version of [grunt-cli](https://github.com/gruntjs/grunt-cli" "grunt-cli"), the Grunt command line interface, by running:
 ```
 npm install -g grunt-cli
+vagrant plugin install vagrant-vbguest
 ```
 
 ## Quickstart

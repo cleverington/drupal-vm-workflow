@@ -7,7 +7,7 @@ vagrant_synced_folder_default_type: rsync
 
 # If you need to run multiple instances of Drupal VM, set a unique hostname,
 # machine name, and IP address for each instance.
-vagrant_hostname: moody-redesign
+vagrant_hostname: moody-redesign.dev
 vagrant_machine_name: moodyredesign
 vagrant_ip: 192.168.88.88
 
@@ -15,11 +15,6 @@ vagrant_ip: 192.168.88.88
 # Vagrant boxes are insecure by default, so be careful. You've been warned!
 # See: https://docs.vagrantup.com/v2/networking/public_network.html
 vagrant_public_ip: ""
-
-# Adding permissions for synced folders
-#owner: "vagrant",
-#group: "www-data",
-#mount_options: ["dmode=775,fmode=664"]
 
 # A list of synced folders, with the keys 'local_path', 'destination', and
 # a 'type' of [nfs|rsync|smb] (leave empty for slow native shares). See
@@ -63,12 +58,12 @@ drupalvm_webserver: apache
 
 # Set this to false if you are using a different site deployment strategy and
 # would like to configure 'vagrant_synced_folders' and 'apache_vhosts' manually.
-build_makefile: true
+build_makefile: false
 drush_makefile_path: ~/moody-projects/redesign/makefiles/development.utexas.edu.make.yml
 
 # Set this to false if you don't need to install drupal (using the drupal_*
 # settings below), but instead copy down a database (e.g. using drush sql-sync).
-install_site: true
+install_site: false
 # Drupal-VM requires install_site to be true for at least one site,
 #   even when building other sites.
 
@@ -90,7 +85,7 @@ drupal_mysql_password: drupal
 drupal_mysql_database: drupal
 
 # Additional arguments or options to pass to `drush site-install`.
-drupal_site_install_extra_args: []
+drupal_site_install_extra_args: [-y]
 
 # Cron jobs are added to the root user's crontab. Keys include name (required),
 # minute, hour, day, weekday, month, job (required), and state.
@@ -159,7 +154,7 @@ apache_vhosts:
   - servername: "moody.utexas.edu.local.vm"
     documentroot: "/var/www/d6/moody"
 
-  - servername: "rtf.utexas.edu.local"
+  - servername: "rtf.utexas.edu.local.vm"
     documentroot: "/var/www/d6/rtf"
 
 # Migrated Drupal 7 Moody Instances

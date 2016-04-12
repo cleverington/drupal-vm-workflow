@@ -1,11 +1,11 @@
 <?php
 
-$databases['default']['default'] = array(
-   'driver' => 'mysql',
-   'database' => 'journalism_multi_db',
-   'username' => 'drupal',
-   'password' => 'drupal',
-   'host' => 'localhost',
-   'prefix' => '',
-   'collation' => 'utf8_general_ci',
- );
+$base_url = 'http://journalism.utexas.edu.multisite.vm';
+
+$db_url = 'mysqli://drupal:drupal@127.0.0.1:3306/journalism_multi_db';
+$db_prefix = '';
+
+/* Secure Pages Settings */
+$conf['securepages_basepath'] = "http://journalism.utexas.edu.multisite.vm";
+$conf['securepages_basepath_ssl'] = "https://journalism.utexas.edu.multisite.vm";
+$conf['securepages_switch'] = FALSE;
