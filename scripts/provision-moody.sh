@@ -22,6 +22,7 @@
 #   - changes to the infrastructre / setup of the VM, Developers should have
 #   - the option to NOT execute the script.#
 
+# Installing the UT Drupal Kit Development Server
 echo ===========================================================================
 echo "Installing the UT Drupal Kit in /var/www/development for Testing Purposes"
 echo "Username / Password: admin"
