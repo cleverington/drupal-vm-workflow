@@ -22,12 +22,18 @@
 #   - changes to the infrastructre / setup of the VM, Developers should have
 #   - the option to NOT execute the script.#
 
+# Define Variables
+departments="advertising commstudies csd journalism moody rtf"
+
+
+
 # Installing the UT Drupal Kit Development Server
 echo ===========================================================================
 echo "Installing the UT Drupal Kit in /var/www/development for Testing Purposes"
 echo "Username / Password: admin"
 echo " "
-drush make /var/www/redesign/makefiles/development.utexas.edu.make.yml utexas
+cd /var/www
+drush make /var/www/redesign/makefiles/development.utexas.edu.make.yml utexas -y
 sleep 20s
 cd /var/scripts
 echo ===========================================================================
@@ -44,51 +50,39 @@ echo " "
 echo "-- Creating temporary files"
 sudo git clone git@bitbucket.org:utexas-its-mdus/moody.git /var/tmp/multisite
 echo "-- Adding Site Installation Files"
-sudo cp -r /var/tmp/multisite /var/www/d6/multisite
+sudo mkdir /var/www/d6/multisite
+sudo cp -r /var/tmp/multisite /var/www/d6/
 echo " "
 echo ===========================================================================
 echo "-- Adding sym-links for local development...."
-sudo ls -s /var/d6/multisite/sites/advertising.utexas.edu /var/www/d6/multisite/sites/advertising.utexas.edu.multisite.vm
-sudo ls -s /var/d6/multisite/sites/commstudies.utexas.edu /var/www/d6/multisite/sites/commstudies.utexas.edu.multisite.vm
-sudo ls -s /var/d6/multisite/sites/csd.utexas.edu /var/www/d6/multisite/sites/csd.utexas.edu.multisite.vm
-sudo ls -s /var/d6/multisite/sites/journalism.utexas.edu /var/www/d6/multisite/sites/journalism.utexas.edu.multisite.vm
-sudo ls -s /var/d6/multisite/sites/moody.utexas.edu /var/www/d6/multisite/sites/moody.utexas.edu.multisite.vm
-sudo ls -s /var/d6/multisite/sites/rtf.utexas.edu /var/www/d6/multisite/sites/rtf.utexas.edu.multisite.vm
+
+for sym_link_variable in departments
+do
+  sudo ln -s /var/d6/multisite/sites/$sym_link_variable.utexas.edu /var/www/d6/multisite/sites/$sym_link_variable.utexas.edu.multisite.vm
+done
+
 echo "...done."
 echo " "
 echo ===========================================================================
 echo "-- Configuring all site-folders...."
-sudo cp /var/www/redesign/settings-files/d6-default/settings.php /var/www/d6/multisite/sites/advertising.utexas.edu/settings.php
-sudo cp /var/www/redesign/settings-files/d6-default/settings.php /var/www/d6/multisite/sites/commstudies.utexas.edu/settings.php
-sudo cp /var/www/redesign/settings-files/d6-default/settings.php /var/www/d6/multisite/sites/csd.utexas.edu/settings.php
-sudo cp /var/www/redesign/settings-files/d6-default/settings.php /var/www/d6/multisite/sites/journalism.utexas.edu/settings.php
-sudo cp /var/www/redesign/settings-files/d6-default/settings.php /var/www/d6/multisite/sites/moody.utexas.edu/settings.php
-sudo cp /var/www/redesign/settings-files/d6-default/settings.php /var/www/d6/multisite/sites/rtf.utexas.edu/settings.php
+
+for default_settings in departments
+do
+  sudo cp /var/www/redesign/settings-files/d6-default/settings.php /var/www/d6/multisite/sites/$default_settings.utexas.edu/settings.php
+done
+
 echo "...done."
 echo ===========================================================================
-echo "-- Configuring Advertising...."
-sudo cp /var/www/redesign/settings-files/d6-multisite/advertising/local-settings.php /var/www/d6/multisite/sites/advertising.utexas.edu.multisite.vm/local-settings.php
-echo "...done."
+
+for configuring_multisite in departments
+do
+  echo ===========================================================================
+  echo "-- Configuring $configuring_multisite...."
+  sudo cp /var/www/redesign/settings-files/d6-multisite/advertising/local-settings.php /var/www/d6/multisite/sites/$configuring_multisite.utexas.edu.multisite.vm/local-settings.php
+  echo "...done."
 echo ===========================================================================
-echo "-- Configuring Communication Studies...."
-sudo cp /var/www/redesign/settings-files/d6-multisite/commstudies/local-settings.php /var/www/d6/multisite/sites/commstudies.utexas.edu.multisite.vm/local-settings.php
-echo "...done."
-echo ===========================================================================
-echo "-- Configuring Communication Sciences & Disorders...."
-sudo cp /var/www/redesign/settings-files/d6-multisite/csd/local-settings.php /var/www/d6/multisite/sites/csd.utexas.edu.multisite.vm/local-settings.php
-echo "...done."
-echo ===========================================================================
-echo "-- Configuring Journalism...."
-sudo cp /var/www/redesign/settings-files/d6-multisite/journalism/local-settings.php /var/www/d6/multisite/sites/journalism.utexas.edu.multisite.vm/local-settings.php
-echo "...done."
-echo ===========================================================================
-echo "-- Configuring Moody Main Site...."
-sudo cp /var/www/redesign/settings-files/d6-multisite/moody/local-settings.php /var/www/d6/multisite/sites/moody.utexas.edu.multisite.vm/local-settings.php
-echo "...done."
-echo ===========================================================================
-echo "-- Configuring Radio, Television, & Film...."
-cp /var/www/redesign/settings-files/d6-multisite/rtf/local-settings.php /var/www/d6/multisite/sites/rtf.utexas.edu.multisite.vm/local-settings.php
-echo "...done."
+done
+
 echo ===========================================================================
 echo "Unless errors have been received, the Moody College Drupal 6 Installation is ready for configuration and database import/export."
 echo ===========================================================================
@@ -107,162 +101,32 @@ echo ===========================================================================
 #
 echo "Configuring local settings for Moody College Drupal 6 Individual Site installations."
 
-# Advertising
-echo ===========================================================================
-echo "-- Initializing Advertising Site Installation generation..."
-echo " "
-sudo cp -r /var/tmp/multisite /var/www/d6/advertising
-echo ===========================================================================
-echo "-- Removing errata files from Advertising Single Site Instance...."
-sudo rm -r /var/www/d6/advertising/sites/commstudies.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/csd.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/journalism.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/moody.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/rtf.utexas.edu
-echo "...done."
-echo " "
-echo ===========================================================================
-echo "-- Adding sym-links for local development...."
-sudo ls -s /var/d6/advertising/sites/advertising.utexas.edu /var/www/d6/advertising/sites/advertising.utexas.edu.local.vm
-echo "...done."
-echo " "
-echo ===========================================================================
-echo "-- Configuring Advertising...."
-sudo cp /var/www/redesign/settings-files/d6/advertising/local-settings.php /var/www/d6/advertising/sites/advertising.utexas.edu.local.vm/local-settings.php
-echo "...done."
-echo ===========================================================================
-
-# Communication Studies
-echo ===========================================================================
-echo "-- Initializing Communication Studies Site Installation generation..."
-echo " "
-echo cp -r /var/tmp/multisite /var/www/d6/commstudies
-echo ===========================================================================
-echo "-- Removing errata files from Communication Studies Single Site Instance...."
-sudo rm -r /var/www/d6/advertising/sites/advertising.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/csd.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/journalism.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/moody.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/rtf.utexas.edu
-echo "...done."
-echo " "
-echo ===========================================================================
-echo "-- Adding sym-links for local development...."
-sudo ls -s /var/d6/commstudies/sites/commstudies.utexas.edu /var/www/d6/commstudies/sites/commstudies.utexas.edu.local.vm
-echo "...done."
-echo " "
-echo ===========================================================================
-echo "-- Configuring Communication Studies...."
-sudo cp /var/www/redesign/settings-files/d6/commstudies/local-settings.php /var/www/d6/commstudies/sites/commstudies.utexas.edu.local.vm/local-settings.php
-echo "...done."
-echo ===========================================================================
-
-# Communication Sciences & Disorders
-echo ===========================================================================
-echo "-- Initializing Communication Sciences & Disorders Site Installation generation..."
-echo " "
-echo cp -r /var/tmp/multisite /var/www/d6/csd
-echo ===========================================================================
-echo "-- Removing errata files from Communication Sciences & Disorders Single Site Instance...."
-sudo rm -r /var/www/d6/advertising/sites/advertising.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/commstudies.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/journalism.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/moody.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/rtf.utexas.edu
-echo "...done."
-echo " "
-echo ===========================================================================
-echo "-- Adding sym-links for local development...."
-sudo ls -s /var/d6/multisite/csd/csd.utexas.edu /var/www/d6/csd/sites/csd.utexas.edu.local.vm
-echo "...done."
-echo " "
-echo ===========================================================================
-echo "-- Configuring Communication Sciences & Disorders...."
-sudo cp /var/www/redesign/settings-files/d6/csd/local-settings.php /var/www/d6/csd/sites/csd.utexas.edu.local.vm/local-settings.php
-echo "...done."
-echo ===========================================================================
-
-# Journalism
-echo ===========================================================================
-echo "-- Initializing Journalism Site Installation generation..."
-echo " "
-echo cp -r /var/tmp/multisite /var/www/d6/journalism
-echo ===========================================================================
-echo "-- Removing errata files from Journalism Single Site Instance...."
-sudo rm -r /var/www/d6/advertising/sites/advertising.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/commstudies.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/csd.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/moody.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/rtf.utexas.edu
-echo "...done."
-echo " "
-echo ===========================================================================
-echo "-- Adding sym-links for local development...."
-sudo ls -s /var/d6/journalism/sites/journalism.utexas.edu /var/www/d6/journalism/sites/journalism.utexas.edu.local.vm
-echo "...done."
-echo " "
-echo ===========================================================================
-echo "-- Configuring Journalism...."
-sudo cp /var/www/redesign/settings-files/d6/journalism/local-settings.php /var/www/d6/journalism/sites/journalism.utexas.edu.local.vm/local-settings.php
-echo "...done."
-echo ===========================================================================
-
-# Moody
-echo ===========================================================================
-echo "-- Initializing Moody Site Installation generation..."
-echo " "
-echo cp -r /var/tmp/multisite /var/www/d6/moody
-echo ===========================================================================
-echo "-- Removing errata files from Moody Single Site Instance...."
-sudo rm -r /var/www/d6/advertising/sites/advertising.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/commstudies.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/csd.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/journalism.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/rtf.utexas.edu
-echo "...done."
-echo " "
-echo ===========================================================================
-echo "-- Adding sym-links for local development...."
-sudo ls -s /var/d6/moody/sites/moody.utexas.edu /var/www/d6/moody/sites/moody.utexas.edu.local.vm
-echo "...done."
-echo " "
-echo ===========================================================================
-echo "-- Configuring Moody...."
-sudo cp /var/www/redesign/settings-files/d6/moody/local-settings.php /var/www/d6/moody/sites/moody.utexas.edu.local.vm/local-settings.php
-echo "...done."
-echo ===========================================================================
-
-# Radio, Television, & Film
-echo ===========================================================================
-echo "-- Initializing Radio, Television, & Film Site Installation generation..."
-echo " "
-echo cp -r /var/tmp/multisite /var/www/d6/rtf
-echo ===========================================================================
-echo "-- Removing errata files from Radio, Television, & Film Single Site Instance...."
-sudo rm -r /var/www/d6/advertising/sites/advertising.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/commstudies.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/csd.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/moody.utexas.edu
-sudo rm -r /var/www/d6/advertising/sites/rtf.utexas.edu
-echo "...done."
-echo " "
-echo ===========================================================================
-echo "-- Adding sym-links for local development...."
-sudo ls -s /var/d6/rtf/sites/rtf.utexas.edu /var/www/d6/rtf/sites/rtf.utexas.edu.local.vm
-echo "...done."
-echo " "
-echo ===========================================================================
-echo "-- Configuring Radio, Television, & Film...."
-sudo cp /var/www/redesign/settings-files/d6/rtf/local-settings.php /var/www/d6/moody/sites/rtf.utexas.edu.local.vm/local-settings.php
-echo "...done."
-echo ===========================================================================
-echo ===========================================================================
-echo "Unless errors have been received, the Moody College Drupal 6 Individual Site installations are ready for configuration and database import/export."
-echo ===========================================================================
-echo " "
-echo ===========================================================================
-echo ===========================================================================
-
+for configuring_d6_individual_site in departments
+do
+  echo ===========================================================================
+  echo "-- Initializing $configuring_d6_individual_site site Installation generation..."
+  echo " "
+  sudo mkdir /var/www/d6/$configuring_d6_individual_site
+  sudo cp -r /var/tmp/multisite/* /var/www/d6/$configuring_d6_individual_site
+  echo ===========================================================================
+  echo "-- Removing errata files from $configuring_d6_individual_site site Instance...."
+  sudo rm -r /var/www/d6/advertising/sites/*
+  sudo mkdir /var/www/d6/$configuring_d6_individual_site/sites/$configuring_d6_individual_site.utexas.edu.local.vm
+  sudo cp -r /var/tmp/multisite/sites/$configuring_d6_individual_site/$configuring_d6_individual_site.utexas.edu.local.vm/* /var/www/d6/$configuring_d6_individual_site/sites/$configuring_d6_individual_site.utexas.edu.local.vm
+  echo "...done."
+  echo " "
+  echo ===========================================================================
+  echo "-- Adding sym-links for local development...."
+  sudo ln -s /var/d6/$configuring_d6_individual_site/sites/$configuring_d6_individual_site.utexas.edu /var/www/d6/$configuring_d6_individual_site/sites/$configuring_d6_individual_site.utexas.edu.local.vm
+  echo "...done."
+  echo " "
+  echo ===========================================================================
+  echo "-- Configuring Advertising...."
+  sudo cp /var/www/redesign/settings-files/d6/$configuring_d6_individual_site/local-settings.php /var/www/d6/$configuring_d6_individual_site/sites/$configuring_d6_individual_site.utexas.edu.local.vm/local-settings.php
+  echo "...done."
+  echo ===========================================================================
+  echo ===========================================================================
+done
 
 echo "Cleaning up temporary files."
 sudo rm -r /var/tmp/multisite -y
