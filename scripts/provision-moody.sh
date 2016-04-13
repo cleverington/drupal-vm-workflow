@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 # provision-moody.sh
 # This bash script needs to be executed to execute the needed actions
@@ -33,7 +33,7 @@ echo "Installing the UT Drupal Kit in /var/www/development for Testing Purposes"
 echo "Username / Password: admin"
 echo " "
 cd /var/www
-drush make /var/www/redesign/makefiles/development.utexas.edu.make.yml utexas -y
+drush make /var/www/redesign/makefiles/development.utexas.edu.make.yml development -y
 sleep 20s
 cd /var/scripts
 echo ===========================================================================
@@ -48,15 +48,15 @@ echo ===========================================================================
 echo "Configuring local settings for Moody College Drupal 6 Multisite installation."
 echo " "
 echo "-- Creating temporary files"
-sudo git clone git@bitbucket.org:utexas-its-mdus/moody.git /var/tmp/multisite
+sudo git clone git@bitbucket.org:comm-webmaster/moody-multisite.git /var/tmp/multisite
 echo "-- Adding Site Installation Files"
 sudo mkdir /var/www/d6/multisite
-sudo cp -r /var/tmp/multisite /var/www/d6/
+sudo cp -r /var/tmp/multisite/* /var/www/d6/multisite/
 echo " "
 echo ===========================================================================
 echo "-- Adding sym-links for local development...."
 
-for sym_link_variable in departments
+for sym_link_variable in 'echo $departments'
 do
   sudo ln -s /var/d6/multisite/sites/$sym_link_variable.utexas.edu /var/www/d6/multisite/sites/$sym_link_variable.utexas.edu.multisite.vm
 done
@@ -66,7 +66,7 @@ echo " "
 echo ===========================================================================
 echo "-- Configuring all site-folders...."
 
-for default_settings in departments
+for default_settings in 'echo $departments'
 do
   sudo cp /var/www/redesign/settings-files/d6-default/settings.php /var/www/d6/multisite/sites/$default_settings.utexas.edu/settings.php
 done
@@ -74,7 +74,7 @@ done
 echo "...done."
 echo ===========================================================================
 
-for configuring_multisite in departments
+for configuring_multisite in 'echo $departments'
 do
   echo ===========================================================================
   echo "-- Configuring $configuring_multisite...."
@@ -101,7 +101,7 @@ echo ===========================================================================
 #
 echo "Configuring local settings for Moody College Drupal 6 Individual Site installations."
 
-for configuring_d6_individual_site in departments
+for configuring_d6_individual_site in 'echo $departments'
 do
   echo ===========================================================================
   echo "-- Initializing $configuring_d6_individual_site site Installation generation..."
@@ -130,3 +130,6 @@ done
 
 echo "Cleaning up temporary files."
 sudo rm -r /var/tmp/multisite -y
+
+# Install Nano Editor, just in case it is needed.
+sudo yum install nano -y

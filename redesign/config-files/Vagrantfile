@@ -96,7 +96,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       owner: "vagrant",
       group: "www-data",
       create: synced_folder.include?('create') ? synced_folder['create'] : false,
-      mount_options: synced_folder.include?('mount_options') ? synced_folder['mount_options'] : []
+      mount_options: ["dmode=775,fmode=664"]
     }
     if synced_folder.include?('options_override')
       options = options.merge(synced_folder['options_override'])
