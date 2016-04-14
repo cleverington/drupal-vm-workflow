@@ -346,7 +346,7 @@ installed_extras:
   # drupalconsole
   # mailhog
   # memcached
-  # - nodejs
+  - nodejs
   - pimpmylog
   # - redis
   # - ruby
