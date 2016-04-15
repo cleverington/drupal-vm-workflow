@@ -43,62 +43,63 @@ departments="advertising commstudies csd journalism moody rtf"
 # echo "Unless errors have been received, the UT Drupal Kit has been installed in the Development directory."
 # echo "==========================================================================="
 
-# Installing the Moody College Drupal 6 Multisite Instances
-echo "==========================================================================="
-echo "Configuring local settings for Moody College Drupal 6 Multisite installation."
-echo " "
 echo "-- Creating temporary files"
 sudo git clone https://crl2728@bitbucket.org/comm-webmaster/moody-multisite.git /var/tmp/multisite
-echo "-- Adding Site Installation Files"
-sudo mkdir -p /var/www/d6/multisite
-sudo rm -rf /var/www/d6/multisite/*
-sudo cp -rp /var/tmp/multisite/* /var/www/d6/multisite/
-echo " "
-echo "==========================================================================="
-echo "-- Adding sym-links for local development...."
 
-for sym_link_variable in ${departments}
-do
-  echo "-- -- Adding sym-link for ${sym_link_variable}"
-  sudo ln -s /var/www/d6/multisite/sites/${sym_link_variable}.utexas.edu /var/www/d6/multisite/sites/${sym_link_variable}.utexas.edu.multisite.vm
-done
-
-echo "...done."
-echo " "
-echo "==========================================================================="
-echo "-- Configuring all site-folders...."
-
-for default_settings in ${departments}
-do
-  echo "-- -- Configuring site-folder for ${default_settings}"
-  sudo cp -p /var/www/redesign/settings-files/d6-default/settings.php /var/www/d6/multisite/sites/${default_settings}.utexas.edu/settings.php
-done
-
-echo "...done."
-echo "==========================================================================="
-
-for configuring_multisite in ${departments}
-do
-  echo "==========================================================================="
-  echo "-- Configuring ${configuring_multisite}...."
-  sudo cp -p /var/www/redesign/settings-files/d6-multisite/${configuring_multisite}/local-settings.php /var/www/d6/multisite/sites/${configuring_multisite}.utexas.edu.multisite.vm/local-settings.php
-  echo "...done."
-  echo "==========================================================================="
-done
-
-echo "==========================================================================="
-echo "Unless errors have been received, the Moody College Drupal 6 Multisite Installation is ready for configuration and database import/export."
-echo "==========================================================================="
-echo " "
-echo "==========================================================================="
-# Add drush sql-cli commands
-# Add drush dis commands for uninstalling cruft modules
-# Add rm commands for deleting cruft modules
-# Add drush dis commands for uninstalling site-wide Views 2 modules
-# Add rm commands for deleting site-wide Views 2 module.
-# Add git command for downloading Views site-wide 3 module.
-# Add drush en command for enabling Views site-wide 3 module.
-echo "==========================================================================="
+## Installing the Moody College Drupal 6 Multisite Instances
+#echo "==========================================================================="
+#echo "Configuring local settings for Moody College Drupal 6 Multisite installation."
+#echo " "
+#echo "-- Adding Site Installation Files"
+#sudo mkdir -p /var/www/d6/multisite
+#sudo rm -rf /var/www/d6/multisite/*
+#sudo cp -rp /var/tmp/multisite/* /var/www/d6/multisite/
+#echo " "
+#echo "==========================================================================="
+#echo "-- Adding sym-links for local development...."
+#
+#for sym_link_variable in ${departments}
+#do
+#  echo "-- -- Adding sym-link for ${sym_link_variable}"
+#  sudo ln -s /var/www/d6/multisite/sites/${sym_link_variable}.utexas.edu /var/www/d6/multisite/sites/${sym_link_variable}.utexas.edu.multisite.vm
+#done
+#
+#echo "...done."
+#echo " "
+#echo "==========================================================================="
+#echo "-- Configuring all site-folders...."
+#
+#for default_settings in ${departments}
+#do
+#  echo "-- -- Configuring site-folder for ${default_settings}"
+#  sudo cp -p /var/www/redesign/settings-files/d6-default/settings.php /var/www/d6/multisite/sites/${default_settings}.utexas.edu/settings.php
+#done
+#
+#echo "...done."
+#echo "==========================================================================="
+#
+#for configuring_multisite in ${departments}
+#do
+#  echo "==========================================================================="
+#  echo "-- Configuring ${configuring_multisite}...."
+#  sudo cp -p /var/www/redesign/settings-files/d6-multisite/${configuring_multisite}/local-settings.php /var/www/d6/multisite/sites/${configuring_multisite}.utexas.edu.multisite.vm/local-settings.php
+#  echo "...done."
+#  echo "==========================================================================="
+#done
+#
+#echo "==========================================================================="
+#echo "Unless errors have been received, the Moody College Drupal 6 Multisite Installation is ready for configuration and database import/export."
+#echo "==========================================================================="
+#echo " "
+#echo "==========================================================================="
+## Add drush sql-cli commands
+## Add drush dis commands for uninstalling cruft modules
+## Add rm commands for deleting cruft modules
+## Add drush dis commands for uninstalling site-wide Views 2 modules
+## Add rm commands for deleting site-wide Views 2 module.
+## Add git command for downloading Views site-wide 3 module.
+## Add drush en command for enabling Views site-wide 3 module.
+#echo "==========================================================================="
 
 # Installing the Moody College Drupal 6 Individual Site Instances
 #
@@ -112,13 +113,13 @@ do
   echo "-- -- Removing cruft files for ${configuring_d6_individual_site}, if existing..."
   sudo rm -r /var/www/d6/${configuring_d6_individual_site}/sites/*
   echo "-- -- Moving files for ${configuring_d6_individual_site}"
-  sudo mkdir /var/www/d6/${configuring_d6_individual_site}
+  sudo mkdir -p /var/www/d6/${configuring_d6_individual_site}
   sudo cp -rp /var/tmp/multisite/* /var/www/d6/${configuring_d6_individual_site}
   echo "==========================================================================="
   echo "-- Removing errata files from ${configuring_d6_individual_site} site Instance...."
   sudo rm -r /var/www/d6/${configuring_d6_individual_site}/sites/*
   sudo mkdir -p /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu.local.vm
-  sudo cp -r /var/tmp/multisite/sites/${configuring_d6_individual_site}/${configuring_d6_individual_site}.utexas.edu.local/* /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu.local.vm
+  sudo cp -r /var/tmp/multisite/sites/${configuring_d6_individual_site}.utexas.edu/* /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu.local.vm
   echo "...done."
   echo " "
   echo "==========================================================================="
@@ -150,6 +151,10 @@ echo "==========================================================================
 
 echo "Cleaning up temporary files."
 sudo rm -r /var/tmp/multisite -y
+
+
+
+
 
 # Install Nano Editor, just in case it is needed.
 sudo yum install nano -y

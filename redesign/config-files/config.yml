@@ -108,35 +108,35 @@ apache_vhosts:
     documentroot: "{{ drupal_core_path }}"
 
 # Drupal 6 Moody Multisite Instance
-  - servername: "advertising.utexas.edu.multisite.vm"
-    documentroot: "/var/www/d6/multisite/sites/advertising.utexas.edu.local"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/d6/multisite"
-
-  - servername: "commstudies.utexas.edu.multisite.vm"
-    documentroot: "/var/www/d6/multisite/sites/commstudies.utexas.edu.local"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/d6/multisite
-
-  - servername: "csd.utexas.edu.multisite.vm"
-    documentroot: "/var/www/d6/multisite/sites/csd.utexas.edu.local"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
-
-  - servername: "journalism.utexas.edu.multisite.vm"
-    documentroot: "/var/www/d6/multisite/sites/journalism.utexas.edu.local"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
-
-  - servername: "moody.utexas.edu.multisite.vm"
-    documentroot: "/var/www/d6/multisite/sites/moody.utexas.edu.local"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
-
-  - servername: "rtf.utexas.edu.multisite.vm"
-    documentroot: "/var/www/d6/multisite/sites/rtf.utexas.edu.local"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+#  - servername: "advertising.utexas.edu.multisite.vm"
+#    documentroot: "/var/www/d6/multisite/sites/advertising.utexas.edu.local"
+#    extra_parameters: |
+#          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/d6/multisite"
+#
+#  - servername: "commstudies.utexas.edu.multisite.vm"
+#    documentroot: "/var/www/d6/multisite/sites/commstudies.utexas.edu.local"
+#    extra_parameters: |
+#          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/d6/multisite
+#
+#  - servername: "csd.utexas.edu.multisite.vm"
+#    documentroot: "/var/www/d6/multisite/sites/csd.utexas.edu.local"
+#    extra_parameters: |
+#          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+#
+#  - servername: "journalism.utexas.edu.multisite.vm"
+#    documentroot: "/var/www/d6/multisite/sites/journalism.utexas.edu.local"
+#    extra_parameters: |
+#          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+#
+#  - servername: "moody.utexas.edu.multisite.vm"
+#    documentroot: "/var/www/d6/multisite/sites/moody.utexas.edu.local"
+#    extra_parameters: |
+#          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
+#
+#  - servername: "rtf.utexas.edu.multisite.vm"
+#    documentroot: "/var/www/d6/multisite/sites/rtf.utexas.edu.local"
+#    extra_parameters: |
+#          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ drupal_core_path }}"
 
 # Drupal 6 Moody Instances
   - servername: "advertising.utexas.edu.local.vm"
@@ -259,29 +259,29 @@ mysql_databases:
     collation: utf8_general_ci
 
 # Drupal 6 Moody Multisite Instance - Databases
-  - name: "advertising_multi_db"
-    encoding: utf8
-    collation: utf8_general_ci
-
-  - name: "commstudies_multi_db"
-    encoding: utf8
-    collation: utf8_general_ci
-
-  - name: "csd_multi_db"
-    encoding: utf8
-    collation: utf8_general_ci
-
-  - name: "journalism_multi_db"
-    encoding: utf8
-    collation: utf8_general_ci
-
-  - name: "moody_multi_db"
-    encoding: utf8
-    collation: utf8_general_ci
-
-  - name: "rtf_multi_db"
-    encoding: utf8
-    collation: utf8_general_ci
+#  - name: "advertising_multi_db"
+#    encoding: utf8
+#    collation: utf8_general_ci
+#
+#  - name: "commstudies_multi_db"
+#    encoding: utf8
+#    collation: utf8_general_ci
+#
+#  - name: "csd_multi_db"
+#    encoding: utf8
+#    collation: utf8_general_ci
+#
+#  - name: "journalism_multi_db"
+#    encoding: utf8
+#    collation: utf8_general_ci
+#
+#  - name: "moody_multi_db"
+#    encoding: utf8
+#    collation: utf8_general_ci
+#
+#  - name: "rtf_multi_db"
+#    encoding: utf8
+#    collation: utf8_general_ci
 
 # Drupal 6 Moody Instances - Databases
   - name: "advertising_d6_db"

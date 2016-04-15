@@ -18,16 +18,45 @@
 >   In addition, the Tasks tool has only been tested 'Live' with Mac OS X El Capitan 10.11.3
 
 > See [ITS | UT Drupal Kit | Forty Acres Theme - 7. Grunt workflow for using SASS in a sub-theme](https://wikis.utexas.edu/display/UTDK/Forty+Acres+Theme) for more details. (Access to the UT Web Developers Wiki is required.)
+
 > See [Enterprise Systems Management | Vagrant Virtual Machines | Getting started with Vagrant](https://wikis.utexas.edu/display/itsyesm/Getting+started+with+Vagrant) for more details. (Access to the UT Web Developers Wiki is required.)
 
 * Install _[Node.js v0.12.9](https://nodejs.org/en/blog/release/v0.12.9/ "Node.js v0.12.9")_
 * Once _Node.js v0.12.9_ is installed, use _npm_ to install the most recent version of [grunt-cli](https://github.com/gruntjs/grunt-cli" "grunt-cli"), the Grunt command line interface, by running:
 ```
 npm install -g grunt-cli
-vagrant plugin install vagrant-vbguest
 ```
 
 ## Quickstart
+
+#### Install Required Software
+
+* Vagrant - https://www.vagrantup.com/downloads.html
+* Homebrew (for other packages) - http://brew.sh/ 
+* Node.js - https://nodejs.org/en/
+
+```
+brew tap homebrew/dupes
+brew tap homebrew/versions
+
+Python:
+brew install python
+
+PHP 5.4.40
+brew tap homebrew/hombrew-php
+ brew options php54
+ brew install php56
+ brew link php56 (if failed, get IT Support)
+
+Grunt: (Technically unneeded, as it will be installed on the VM)
+npm install -g grunt-cli
+
+Git: (Unneeded)
+brew install git
+
+vagrant plugin install vagrant-vbguest
+```
+
 
 Download copies of all UT Drupal Kit tools and plugins & Moody College Drupal 6 Multisite errata:
 ```
@@ -81,19 +110,23 @@ cd drupalvm/ && vagrant up
 
 Once Vagrant finishes build the VM, Drupal needs to be installed for the various projects using the now headless Virtual Machine.
 
-The following directories have been copied over 'as-is' from 
-> Note - This will eventually be updated to actually pull down the Source Code via Git, ensuring all work can be completed at any machine, anywhere.
-> It requires adding a specialized script (moody.sh or similar) into the /scripts/ folder to pull down a copy of the required content into the /development/, /redesign/, and /multisite (does not yet exist) directories prior to vagrant up.
+> Note - This migration / redesign automation tool requires retrieval of Source Code via Git, ensuring all work can be completed at any machine, anywhere.
+> It requires running a specialized script (moody-build.sh or similar) into the /scripts/ folder to pull down a copy of the required content into the /development/, /redesign/, and /multisite directories prior to vagrant up.
 > This script would then include all of the required commands, so instead of 'vagrant up', the VM would be created by running the script.
 
-###  Tasks for moody-redesign.sh Script:
+>   Currently, however, Users must follow the commands as outlined, after installing required software .
+
+###  Tasks for moody-build.sh Script:
 * Create the ~/moody-project directory, if none exists
 * Clone a copy of the grunt-redesign project, if it does not exist
 * Clone a copy of the drupal-vm project, if it does not exist
-* Copy the config.yml file from /redesign/config-files/config.yml to /drupalvm/config.yml for use in the VM
+* Allow the User to select between two tasks (Redesign Development or Migration Work), and then:
+  * Migration Work - Copy the config.yml file from /redesign/config-files/migration-config.yml to /drupalvm/config.yml for use in the VM
+  * Migration Work - Copy the config.yml file from /redesign/config-files/development-config.yml to /drupalvm/config.yml for use in the VM
+* Copy the Vagrantfile from /redesign/config-files/Vagrantfile to /drupalvm/Vagrantfile for use in the VM
 * Run vagrant up
 * Copy /var/www/redesign/settings-files/d6-multisite/*/local-settings.php to /var/www/d6/multisite/sites/*/local-settings.php
-* Copy /var/www/redesign/settings-files/d6/*/local-settings.php to /var/www/d6/*/sites/*/local-settings.php 
+* Copy /var/www/redesign/settings-files/d6/*/local-settings.php to /var/www/d6/*/sites/*/local-settings.php
 * Copy /var/www/redesign/settings-files/d7/*/local-settings.php to /var/www/d7/*/sites/*/local-settings.php
 
 ###  To Access the VM:
