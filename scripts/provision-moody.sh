@@ -27,14 +27,23 @@ departments="advertising commstudies csd journalism moody rtf"
 
 echo "==========================================================================="
 echo "Initializing..."
-echo "-- Creating temporary files"
-sudo git clone https://crl2728@bitbucket.org/comm-webmaster/moody-multisite.git /var/tmp/multisite
 echo "-- Updating Drush Bash File."
 sudo cp -rp /var/www/redesign/drush-files/moodyredesign.aliases.drushrc.php ~/.drush/
 
 ## Installing the Moody College Drupal 6 Multisite Instances
 echo "==========================================================================="
 echo "Configuring local settings for Moody College Drupal 6 Multisite installation."
+echo "-- Creating temporary files"
+sudo git clone https://crl2728@bitbucket.org/comm-webmaster/moody-multisite.git /var/tmp/multisite
+echo "... done."
+echo "====="
+echo "-- Removing cruft files for Multisite Installation..."
+sudo rm -r /var/tmp/multisite/.htaccess
+echo "... done."
+echo "====="
+echo "-- Adding clean .htaccess file"
+sudo cp -rp /var/www/redesign/settings-files/.htaccess /var/tmp/multisite/.htaccess
+echo "... done."
 echo "====="
 echo "-- Adding Site Installation Files"
 sudo mkdir -p /var/www/d6/multisite
@@ -47,7 +56,8 @@ echo "-- Adding sym-links for local development...."
 for sym_link_variable in ${departments}
 do
   echo "-- -- Adding sym-link for ${sym_link_variable}"
-  sudo ln -s /var/www/d6/multisite/sites/${sym_link_variable}.utexas.edu /var/www/d6/multisite/sites/${sym_link_variable}.utexas.edu.multisite.vm
+  # Sym-link:  ln -s /path-destination/ /path-source/
+  sudo ln -s /var/www/d6/multisite/sites/${sym_link_variable}.utexas.edu.multisite.vm /var/www/d6/multisite/sites/${sym_link_variable}.utexas.edu
 done
 
 echo "...done."
@@ -68,7 +78,7 @@ for configuring_multisite in ${departments}
 do
   echo "==========================================================================="
   echo "-- Configuring ${configuring_multisite}...."
-  sudo cp -p /var/www/redesign/settings-files/d6-multisite/${configuring_multisite}/local-settings.php /var/www/d6/multisite/sites/${configuring_multisite}.utexas.edu.multisite.vm/local-settings.php
+  sudo cp -p /var/www/redesign/settings-files/d6-multisite/${configuring_multisite}/local-settings.php /var/www/d6/multisite/sites/${configuring_multisite}.utexas.edu/local-settings.php
   echo "...done."
   echo "==========================================================================="
 done
@@ -81,15 +91,15 @@ echo "======="
 for multisite_folder in ${departments}
 do
   echo "-- Dropping tables (if any exist)"
-  drush @moody-redesign.${multisite_folder}.utexas.edu.multisite.vm sql-cli sql-drop -y
+  drush @moodyredesign.${multisite_folder}.utexas.edu.multisite.vm sql-drop -y
   echo "... done."
   echo "======="
   echo "-- Importing unedited SQL-Dumps from Live Server"
-  drush @moody-redesign.${multisite_folder}.utexas.edu.multisite.vm sql-cli < /var/www/redesign/${multisite_folder}_main_20160404.sql -y
+  drush @moodyredesign.${multisite_folder}.utexas.edu.multisite.vm sql-cli < /var/www/redesign/sql-dumps/${multisite_folder}_main_20160404.sql -y
   echo "... done."
   echo "======="
   echo "-- Deleting SQL-Dump (to save HDD space)"
-  sudo rm /var/www/redesign/${multisite_folder}_main_20160404.sql
+  sudo rm /var/www/redesign/sql-dumps/${multisite_folder}_main_20160404.sql
   echo "... done."
   echo "======="
 done
@@ -129,13 +139,14 @@ do
   echo "==========================================================================="
   echo "-- Removing errata files from ${configuring_d6_individual_site} site Instance...."
   sudo rm -r /var/www/d6/${configuring_d6_individual_site}/sites/*
-  sudo mkdir -p /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu.local.vm
-  sudo cp -r /var/tmp/multisite/sites/${configuring_d6_individual_site}.utexas.edu/* /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu.local.vm
+  sudo mkdir -p /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu
+  sudo cp -r /var/tmp/multisite/sites/${configuring_d6_individual_site}.utexas.edu/* /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu
   echo "...done."
   echo " "
   echo "==========================================================================="
   echo "-- Adding ${configuring_d6_individual_site} sym-links for local development...."
-  sudo ln -s /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu.local.vm
+  # Sym-link:  ln -s /path-destination/ /path-source/
+  sudo ln -s /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu.local.vm /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu
   echo "...done."
   echo " "
   echo "==========================================================================="
@@ -161,7 +172,8 @@ echo "==========================================================================
 echo "==========================================================================="
 
 echo "Cleaning up temporary files."
-sudo rm -r /var/tmp/multisite -y
+sudo rm -r /var/tmp/multisite
+sudo rm -r /var/tmp/multisite/*
 
 # Installing the UT Drupal Kit Development Server
 # echo "==========================================================================="
@@ -182,4 +194,4 @@ sudo rm -r /var/tmp/multisite -y
 
 
 # Install Nano Editor, just in case it is needed.
-sudo yum install nano -y
+# sudo yum install nano -y

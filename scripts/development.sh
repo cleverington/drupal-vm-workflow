@@ -8,21 +8,6 @@
 
 echo "Configuring MySQL Server for ${departments} in Multisite Installation"
 
-for multisite_folder in ${departments}
-do
-  echo "-- Dropping tables (if any exist)"
-  drush @moody-redesign.${multisite_folder}.utexas.edu.multisite.vm sql-cli sql-drop -y
-  echo "... done."
-  echo "======="
-  echo "-- Importing unedited SQL-Dumps from Live Server"
-  drush @moody-redesign.${multisite_folder}.utexas.edu.multisite.vm sql-cli < /var/www/redesign/${multisite_folder}_main_20160404.sql -y
-  echo "... done."
-  echo "======="
-  echo "-- Deleting SQL-Dump (to save HDD space)"
-  sudo rm /var/www/redesign/${multisite_folder}_main_20160404.sql
-  echo "... done."
-  echo "======="
-done
 
 
 Once the Multisite Servers are Far enough along, a SQL-Dump can be done on the each Drupal instance to 'prepare' a working setup from the multisite to the Single Site.
@@ -48,3 +33,10 @@ run commands:
 - download views
   - drush pm-download views sites/all/modules/--select -1
 - update database
+
+
+Needs to go in the readme.
+
+The .htaccess file needs to be copied from server to server.
+
+Zend OpCache backflow needs to be added into the script as well because it is not inherent in the Drupal VM.
