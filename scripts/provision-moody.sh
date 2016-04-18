@@ -34,7 +34,7 @@ sudo cp -rp /var/www/redesign/drush-files/moodyredesign.aliases.drushrc.php ~/.d
 echo "==========================================================================="
 echo "Configuring local settings for Moody College Drupal 6 Multisite installation."
 echo "-- Creating temporary files"
-sudo git clone https://crl2728@bitbucket.org/comm-webmaster/moody-multisite.git /var/tmp/multisite
+sudo git clone https://comm-webmaster@bitbucket.org/moodycollegedevelopers/moody-multisite.git /var/tmp/multisite
 echo "... done."
 echo "====="
 echo "-- Removing cruft files for Multisite Installation..."
@@ -57,7 +57,7 @@ for sym_link_variable in ${departments}
 do
   echo "-- -- Adding sym-link for ${sym_link_variable}"
   # Sym-link:  ln -s /path-destination/ /path-source/
-  sudo ln -s /var/www/d6/multisite/sites/${sym_link_variable}.utexas.edu.multisite.vm /var/www/d6/multisite/sites/${sym_link_variable}.utexas.edu
+  sudo ln -s /var/www/d6/multisite/sites/${sym_link_variable}.utexas.edu /var/www/d6/multisite/sites/${sym_link_variable}.utexas.edu.multisite.vm
 done
 
 echo "...done."
