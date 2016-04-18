@@ -98,10 +98,10 @@ do
   drush @moodyredesign.${multisite_folder}.utexas.edu.multisite.vm sql-cli < /var/www/redesign/sql-dumps/${multisite_folder}_main_20160404.sql -y
   echo "... done."
   echo "======="
-  echo "-- Deleting SQL-Dump (to save HDD space)"
-  sudo rm /var/www/redesign/sql-dumps/${multisite_folder}_main_20160404.sql
-  echo "... done."
-  echo "======="
+#  echo "-- Deleting SQL-Dump (to save HDD space)"
+#  sudo rm /var/www/redesign/sql-dumps/${multisite_folder}_main_20160404.sql
+#  echo "... done."
+#  echo "======="
 done
 echo "==========================================================================="
 # Add drush sql-cli commands

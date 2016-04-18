@@ -240,6 +240,18 @@ To build the Moody College of Communication site testing-platform, run ```grunt`
 - ```quiet```: Suppress desktop notifications
 - ```notify```: Request a desktop notification, despite timing or environment settings.
 
+## Troubleshooting
+
+The Vagrantbox is not an alpha/omega solution for provisioning needs and sometimes there are issues with accessing needed information and tools.
+
+For example, when creating a new Vagrantbox (```vagrant halt && vagrant destroy && vagrant up```), the SSH RSA key changes. This change makes the connection seem 'insecure', getting scary messages back about a ```Man in the Middle Attack!!!```. In most cases (though not all, obviously), there is no man-in-the-middle attack. The change is simply because, upon generating a new Virtualmachine, you have generated a new insecure/public RSA key as well.
+
+#### Updating RSA Key for Known_Hosts
+To gain access to provisioning access (such as connecting via SSH to the MySQL databases), delete the currently listed ```known_host``` for the Vagrantbox:
+* Using a Text Editor (such as Sublime), edit the known_hosts file located at ~/.ssh/known_hosts
+* Delete the line with the moody-redesign.dev virtualbox (192.168.88.88)
+
+
 ## Additional Resources
 * [Mac OS X Setup Guide by Sourabh Bajaj](http://sourabhbajaj.com/mac-setup/ "Mac OS X Setup Guide by Sourabh Bajaj")
 The Mac OS X Setup Guide has step-by-step instructions for installing many of the necessary tools for mastering the Moody Tasks such as:
