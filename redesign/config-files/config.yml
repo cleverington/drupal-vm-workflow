@@ -318,10 +318,100 @@ mysql_databases:
     collation: utf8_general_ci
 
 mysql_users:
-  - name: "drupal"
+  - name: "{{ drupal_mysql_password }}"
     host: "%"
-    password: "drupal"
+    password: "{{ drupal_mysql_database }}"
     priv: "drupal.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "advertising_multi_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "commstudies_multi_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "csd_multi_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "journalism_multi_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "moody_multi_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "rtf_multi_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "advertising_d6_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "commstudies_d6_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "csd_d6_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "journalism_d6_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "moody_d6_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "rtf_d6_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "advertising_redesign_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "commstudies_redesign_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "csd_redesign_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "journalism_redesign_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "moody_redesign_db.*:ALL"
+
+  - name: "{{ drupal_mysql_password }}"
+    host: "%"
+    password: "{{ drupal_mysql_database }}"
+    priv: "rtf_redesign_db.*:ALL"
 
 # Comment out any extra utilities you don't want to install. If you don't want
 # to install *any* extras, make set this value to an empty set, e.g. `[]`.
@@ -343,6 +433,7 @@ installed_extras:
 # Add any extra apt or yum packages you would like installed.
 extra_packages:
   - unzip
+  - nano
 
 # `nodejs` must be in installed_extras for this to work. Valid examples: "0.10",
 # "0.12", "4.x", "5.x".

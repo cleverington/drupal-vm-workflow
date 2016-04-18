@@ -189,9 +189,3 @@ sudo rm -r /var/tmp/multisite/*
 # echo "==========================================================================="
 # echo "Unless errors have been received, the UT Drupal Kit has been installed in the Development directory."
 # echo "==========================================================================="
-
-
-
-
-# Install Nano Editor, just in case it is needed.
-# sudo yum install nano -y

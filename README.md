@@ -55,6 +55,7 @@ Git: (Unneeded)
 brew install git
 
 vagrant plugin install vagrant-vbguest
+sudo ansible-galaxy install -r provisioning/requirements.yml --force
 ```
 
 
@@ -83,6 +84,7 @@ git clone git@bitbucket.org:crl2728/grunt-redesign.git .
 git submodule add git@github.com:geerlingguy/drupal-vm.git drupalvm/
 cp ~/moody-projects/redesign/config-files/config.yml ~/moody-projects/drupalvm/config.yml
 cp ~/moody-projects/scripts/provision-moody.sh ~/moody-projects/drupalvm/provision-moody.sh
+cp ~/moody-projects/scripts/provision-redesign.sh ~/moody-projects/drupalvm/provision-redesign.sh
 ```
 
 ### Download SQL-Dumps for Migration

@@ -109,8 +109,3 @@ echo "==========================================================================
 echo "Cleaning up temporary files."
 sudo rm -r /var/tmp/redesign
 sudo rm -r /var/tmp/redesign/*
-
-
-
-# Install Nano Editor, just in case it is needed.
-# sudo yum install nano -y
