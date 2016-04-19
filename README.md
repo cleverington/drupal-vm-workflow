@@ -55,6 +55,7 @@ Git: (Unneeded)
 brew install git
 
 vagrant plugin install vagrant-vbguest
+vagrant plugin install vagrant-hostmanager
 sudo ansible-galaxy install -r provisioning/requirements.yml --force
 ```
 
@@ -102,9 +103,10 @@ Copy SQL-Dumps from Box-Sync folder 'Moody_SQL_backups':
             - rtf_main_2016XXXX.sql
 ```
 
-#### Turn on the Virtual Server
+#### Turn on the Virtual Server and Update
 ```
 cd drupalvm/ && vagrant up
+sudo yum upgrade -y
 ```
 > Note - '/moody-projects/' is required to be the root of the directory, based on current configuration.
 >   Deviation from using /moody-projects/ requires the 'vagrant_synced_folders' variable to be edited.
@@ -114,11 +116,10 @@ Once Vagrant finishes build the VM, Drupal needs to be installed for the various
 
 > Note - This migration / redesign automation tool requires retrieval of Source Code via Git, ensuring all work can be completed at any machine, anywhere.
 > It requires running a specialized script (moody-build.sh or similar) into the /scripts/ folder to pull down a copy of the required content into the /development/, /redesign/, and /multisite directories prior to vagrant up.
-> This script would then include all of the required commands, so instead of 'vagrant up', the VM would be created by running the script.
 
->   Currently, however, Users must follow the commands as outlined, after installing required software .
+>   Users must follow the commands as outlined because a password is currently required for accessing the Git repository.
 
-###  Tasks for moody-build.sh Script:
+###  Future Tasks for moody-build.sh Script:
 * Create the ~/moody-project directory, if none exists
 * Clone a copy of the grunt-redesign project, if it does not exist
 * Clone a copy of the drupal-vm project, if it does not exist
@@ -137,20 +138,30 @@ vagrant ssh
 cd /var/www/
 ```
 
-### To Access/Edit the Local Copy of the Moody Drupal 6 Multisite Instance:
-```
-cd /var/www/d6/multisite/
-git pull origin master
-cp /var/www/redesign/settings-files/d6-multisite/advertising/local-settings.php /var/www/d6/multisite/sites/advertising.utexas.edu.local/
-cp /var/www/redesign/settings-files/d6-multisite/commstudies/local-settings.php /var/www/d6/multisite/sites/commstudies.utexas.edu.local/
-cp /var/www/redesign/settings-files/d6-multisite/csd/local-settings.php /var/www/d6/multisite/sites/csd.utexas.edu.local/
-cp /var/www/redesign/settings-files/d6-multisite/journalism/local-settings.php /var/www/d6/multisite/sites/journalism.utexas.edu.local/
-cp /var/www/redesign/settings-files/d6-multisite/moody/local-settings.php /var/www/d6/multisite/sites/moody.utexas.edu.local/
-cp /var/www/redesign/settings-files/d6-multisite/rtf/local-settings.php /var/www/d6/multisite/sites/rtf.utexas.edu.local/
-
-```
-
 See config.yml for database information.
+
+### To provision Moody Drupal 6 Multisite Installation and Moody Drupal 6 Single Site Installations:
+```
+vagrant ssh
+source /var/scripts/provision-moody.sh
+```
+When prompted, enter the required Comm-Webmaster password to pull down a copy of the required Git repository.
+
+### To provision the Moody Drupal 7 Single Site Installations:
+```
+vagrant ssh
+source /var/scripts/provision-redesign.sh
+```
+When prompted, enter the required Comm-Webmaster password to pull down a copy of the required Git repository.
+
+### (Pending) To provision the Moody Digital Asset Library:
+**Required:** The Moody Drupal 7 Single Site Installations must be provisioned prior to attempting to provision the Digital Asset Library.
+```
+vagrant ssh
+source /var/scripts/provision-DAL.sh
+```
+When prompted, enter the required Comm-Webmaster password to pull down a copy of the required Git repository.
+
 
 ## Features
 This project is built using the tools of the Grunt, Ansible, Vagrant, and Drupal communities to provide a streamlined and scripted method for automating a number of complicated, yet repetitive PHP & Drupal tasks executed during Development.
@@ -182,15 +193,38 @@ The final project should be created separately in a folder by itself, with Confi
 - Using Drush:
  - Add/Update modules required for Moody College, but unavailable within the UT Drupal Kit.
 
+### Software Packages Available
+In addition to the base software required for any functional LAMP-stack, the MoodyVM is provisioned with a few other useful developer tools, which can be altered within the ```config.yml``` file:
+```
+# Add any extra apt or yum packages you would like installed.
+extra_packages:
+  - unzip
+  - nano
+  - links
+```
+
+* **unzip**
+  * ```unzip``` is a tool for 'unzipping' compressed files and directories such as Zip files and tar-balls. It is a requirement for the MoodyVM and should not be removed. The necessary files downloaded by the Developer via the ```~/tarb-bin``` directory are all tar-balls, for example, which require the ```unzip``` package.
+* **nano**
+  * ```nano``` is a text-editor similar to Vim (vi) with a much simpler User Interface, including on-screen instructions for commands.
+* **links**
+  *```links``` is an *extremely* simple text-based web-browser.
+  * *Shortcut Keys*
+    * **g**: open an address
+    * **Left Navigation Arrow**: back page
+    * **Right Navigation Arrow**: Activate Link / Next Page
+    * **Up/Down Navigation Arrow**: Navigate Through Page
+
+
 ## Editing the Project
 
 Because some files shared between projects, such as the local-settings.php files and Drupal-VM generated files will never be necessary within the Git Repository, changes should be completed using the ```git diff``` patching functionality.
 
-This is especially true when applying changes to UT Web. By using the 'patch' functionality, only the specific changes to specific files are made, whereas using the ```git pull``` functionality pulls down complete copies of every single file and compares them to the files on the server. By using patches, changes are done in KB instead of MB, which can greatly reduce the digital overhead on UT Web. 
+This is especially true when applying changes to UT Web. By using the 'patch' functionality, only the specific changes to specific files are made, whereas using the ```git pull``` functionality pulls down complete copies of every single file and compares them to the files on the server. By using patches, changes are done in KB instead of MB, which can greatly reduce the digital overhead on UT Web.
 
 The project root will always be known as 'master', with various Branches and Forks eventually created based on Project needs.
 
-### Example Workflow 
+### Example Workflow
 #### Changes are made to ~/moody-project/redesign/config-files/config.yml from branch 'master':
 ```
 git branch config_changes
@@ -250,7 +284,18 @@ For example, when creating a new Vagrantbox (```vagrant halt && vagrant destroy 
 To gain access to provisioning access (such as connecting via SSH to the MySQL databases), delete the currently listed ```known_host``` for the Vagrantbox:
 * Using a Text Editor (such as Sublime), edit the known_hosts file located at ~/.ssh/known_hosts
 * Delete the line with the moody-redesign.dev virtualbox (192.168.88.88)
+* Re-run ```vagrant up``` from the ````~/moody-projects/drupalvm``` directory
 
+#### Updating User Tables
+Within the current draft version of the installation, the ```drupal``` user is not being granted ANY priveleges within any database except the Development database (```drupal```).
+
+Until a script can be used to correct the issue during VM generation, Developers must manually grant priveleges within all databases.
+
+The easiest method to do this is either using the MySQL CLI or through a simple DBA program such as Sequel Pro.
+
+See http://docs.drupalvm.com/en/latest/extras/mysql/ for instructions.
+
+The global priveleges for the drupal user should only need to be altered once for the entire MySQL instance.
 
 ## Additional Resources
 * [Mac OS X Setup Guide by Sourabh Bajaj](http://sourabhbajaj.com/mac-setup/ "Mac OS X Setup Guide by Sourabh Bajaj")
