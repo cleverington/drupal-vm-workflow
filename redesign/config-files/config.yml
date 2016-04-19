@@ -23,9 +23,12 @@ vagrant_synced_folders:
   # The first synced folder will be used for the default Drupal installation, if
   # build_makefile: is 'true'.
   #
+  # The first synced folder is also the default folder traditionally used for
+  #   'public_html'. So installations should be done using this path as 'root'.
+  #
   # The local_path variable needs to be configured based on each User's box/location
-  - local_path: ~/moody-projects/development
-    destination: /var/www/development
+  - local_path: ~/moody-projects/public_html
+    destination: /var/www/public_html
     type: rsync
     create: true
 
@@ -73,7 +76,7 @@ install_site: false
 # Will need configuration for building/creation of multiple Drupal
 # Instances on the server, not just one.
 drupal_major_version: 7
-drupal_core_path: "/var/www/development"
+drupal_core_path: "/var/www/public_html/development"
 drupal_domain: "{{ vagrant_hostname }}"
 drupal_site_name: "Moody Development Site"
 drupal_install_profile: utexas
@@ -109,72 +112,72 @@ apache_vhosts:
 
 # Drupal 6 Moody Multisite Instance
   - servername: "advertising.utexas.edu.multisite.vm"
-    documentroot: "/var/www/d6/multisite/sites/advertising.utexas.edu.multisite.vm"
+    documentroot: "/var/www/public_html/d6/multisite/sites/advertising.utexas.edu.multisite.vm"
     extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/d6/multisite"
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/public_html/d6/multisite"
 
   - servername: "commstudies.utexas.edu.multisite.vm"
-    documentroot: "/var/www/d6/multisite/sites/commstudies.utexas.edu.multisite.vm"
+    documentroot: "/var/www/public_html/d6/multisite/sites/commstudies.utexas.edu.multisite.vm"
     extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/d6/multisite"
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/public_html/d6/multisite"
 
   - servername: "csd.utexas.edu.multisite.vm"
-    documentroot: "/var/www/d6/multisite/sites/csd.utexas.edu.multisite.vm"
+    documentroot: "/var/www/public_html/d6/multisite/sites/csd.utexas.edu.multisite.vm"
     extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/d6/multisite"
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/public_html/d6/multisite"
 
   - servername: "journalism.utexas.edu.multisite.vm"
-    documentroot: "/var/www/d6/multisite/sites/journalism.utexas.edu.multisite.vm"
+    documentroot: "/var/www/public_html/d6/multisite/sites/journalism.utexas.edu.multisite.vm"
     extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/d6/multisite"
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/public_html/d6/multisite"
 
   - servername: "moody.utexas.edu.multisite.vm"
-    documentroot: "/var/www/d6/multisite/sites/moody.utexas.edu.multisite.vm"
+    documentroot: "/var/www/public_html/d6/multisite/sites/moody.utexas.edu.multisite.vm"
     extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/d6/multisite"
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/public_html/d6/multisite"
 
   - servername: "rtf.utexas.edu.multisite.vm"
-    documentroot: "/var/www/d6/multisite/sites/rtf.utexas.edu.multisite.vm"
+    documentroot: "/var/www/public_html/d6/multisite/sites/rtf.utexas.edu.multisite.vm"
     extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/d6/multisite"
+          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/public_html/d6/multisite"
 
 # Drupal 6 Moody Instances
   - servername: "advertising.utexas.edu.local.vm"
-    documentroot: "/var/www/d6/advertising"
+    documentroot: "/var/www/public_html/d6/advertising"
 
   - servername: "commstudies.utexas.edu.local.vm"
-    documentroot: "/var/www/d6/commstudies"
+    documentroot: "/var/www/public_html/d6/commstudies"
 
   - servername: "csd.utexas.edu.local.vm"
-    documentroot: "/var/www/d6/csd"
+    documentroot: "/var/www/public_html/d6/csd"
 
   - servername: "journalism.utexas.edu.local.vm"
-    documentroot: "/var/www/d6/journalism"
+    documentroot: "/var/www/public_html/d6/journalism"
 
   - servername: "moody.utexas.edu.local.vm"
-    documentroot: "/var/www/d6/moody"
+    documentroot: "/var/www/public_html/d6/moody"
 
   - servername: "rtf.utexas.edu.local.vm"
-    documentroot: "/var/www/d6/rtf"
+    documentroot: "/var/www/public_html/d6/rtf"
 
 # Migrated Drupal 7 Moody Instances
   - servername: "advertising.utexas.edu.redesign.vm"
-    documentroot: "/var/www/d7/advertising"
+    documentroot: "/var/www/public_html/d7/advertising"
 
   - servername: "commstudies.utexas.edu.redesign.vm"
-    documentroot: "/var/www/d7/commstudies"
+    documentroot: "/var/www/public_html/d7/commstudies"
 
   - servername: "csd.utexas.edu.redesign.vm"
-    documentroot: "/var/www/d7/csd"
+    documentroot: "/var/www/public_html/d7/csd"
 
   - servername: "journalism.utexas.edu.redesign.vm"
-    documentroot: "/var/www/d7/journalism"
+    documentroot: "/var/www/public_html/d7/journalism"
 
   - servername: "moody.utexas.edu.redesign.vm"
-    documentroot: "/var/www/d7/moody"
+    documentroot: "/var/www/public_html/d7/moody"
 
   - servername: "rtf.utexas.edu.redesign.vm"
-    documentroot: "/var/www/d7/rtf"
+    documentroot: "/var/www/public_html/d7/rtf"
 
 # Drupal VM Tools
   - servername: "adminer.{{ vagrant_hostname }}"

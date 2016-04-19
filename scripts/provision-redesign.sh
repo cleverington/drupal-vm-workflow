@@ -48,10 +48,10 @@ sudo mkdir -p /var/www/d7
 for utdk_redesign_folders in ${departments}
 do
   echo "-- -- Adding directory for ${utdk_redesign_folders}"
-  sudo mkdir -p /var/www/d7/${utdk_redesign_folders}
+  sudo mkdir -p /var/www/public_html/d7/${utdk_redesign_folders}
   echo "====="
   echo "-- -- Creating UTDK Instance for ${utdk_redesign_folders}"
-  sudo cp -rp /var/tmp/utdrupalkit/* /var/www/d7/${utdk_redesign_folders}/
+  sudo cp -rp /var/tmp/utdrupalkit/* /var/www/public_html/d7/${utdk_redesign_folders}/
 done
 
 echo "==========================================================================="
@@ -60,8 +60,8 @@ echo "-- Configuring all site-folders...."
 for default_settings in ${departments}
 do
   echo "-- -- Configuring site-folder for ${default_settings}"
-  sudo cp -p /var/www/redesign/settings-files/d7-default/settings.php /var/www/d7/${default_settings}/sites/default/settings.php
-  sudo cp -p /var/www/redesign/settings-files/d7-default/default.settings.php /var/www/d7/${default_settings}/sites/default/
+  sudo cp -p /var/www/redesign/settings-files/d7-default/settings.php /var/www/public_html/d7/${default_settings}/sites/default/settings.php
+  sudo cp -p /var/www/redesign/settings-files/d7-default/default.settings.php /var/www/public_html/d7/${default_settings}/sites/default/
 done
 
 echo "...done."
@@ -71,7 +71,9 @@ for configuring_redesign in ${departments}
 do
   echo "==========================================================================="
   echo "-- Configuring ${configuring_redesign}...."
-  sudo cp -p /var/www/redesign/settings-files/d7/${configuring_redesign}/local-settings.php /var/www/d7/${configuring_redesign}/sites/default/
+  sudo cp -p /var/www/redesign/settings-files/d7/${configuring_redesign}/local-settings.php /var/www/public_html/d7/${configuring_redesign}/sites/default/
+  sudo cp -p /var/www/redesign/settings-files/d7-default/.htaccess /var/www/public_html/d7/${configuring_redesign}/sites/default/
+  sudo cp -p /var/www/redesign/settings-files/d7-default/.htaccess /var/www/public_html/d7/${configuring_redesign}/
   echo "...done."
   echo "==========================================================================="
 done
@@ -107,5 +109,4 @@ echo "==========================================================================
 echo "==========================================================================="
 
 echo "Cleaning up temporary files."
-sudo rm -r /var/tmp/redesign
-sudo rm -r /var/tmp/redesign/*
+sudo rm -r /var/tmp/utdrupalkit

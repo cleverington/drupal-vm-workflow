@@ -10,7 +10,7 @@
 
 $aliases['moody-redesign.dev'] = array(
   'uri' => 'moody-redesign.dev',
-  'root' => '/var/www/development',
+  'root' => '/var/www/public_html/development',
   'path-aliases' => array(
     '%files' => 'sites/default/files',
     '%dump-dir' => '/var/tmp',
@@ -22,7 +22,7 @@ $aliases['moody-redesign.dev'] = array(
 
 $aliases['advertising.utexas.edu.multisite.vm'] = array(
   'uri' => 'advertising.utexas.edu.multisite.vm',
-  'root' => '/var/www/d6/multisite/sites/advertising.utexas.edu.multisite.vm',
+  'root' => '/var/www/public_html/d6/multisite/sites/advertising.utexas.edu.multisite.vm',
   'path-aliases' => array(
     '%files' => 'sites/advertising.utexas.edu.multisite.vm/files',
     '%dump-dir' => '/var/tmp',
@@ -32,7 +32,7 @@ $aliases['advertising.utexas.edu.multisite.vm'] = array(
 
 $aliases['commstudies.utexas.edu.multisite.vm'] = array(
   'uri' => 'commstudies.utexas.edu.multisite.vm',
-  'root' => '/var/www/d6/multisite/sites/commstudies.utexas.edu.multisite.vm',
+  'root' => '/var/www/public_html/d6/multisite/sites/commstudies.utexas.edu.multisite.vm',
   'path-aliases' => array(
     '%files' => 'sites/commstudies.utexas.edu.multisite.vm/files',
     '%dump-dir' => '/var/tmp',
@@ -42,7 +42,7 @@ $aliases['commstudies.utexas.edu.multisite.vm'] = array(
 
 $aliases['csd.utexas.edu.multisite.vm'] = array(
   'uri' => 'csd.utexas.edu.multisite.vm',
-  'root' => '/var/www/d6/multisite/sites/csd.utexas.edu.multisite.vm',
+  'root' => '/var/www/public_html/d6/multisite/sites/csd.utexas.edu.multisite.vm',
   'path-aliases' => array(
     '%files' => 'sites/csd.utexas.edu.multisite.vm/files',
     '%dump-dir' => '/var/tmp',
@@ -52,7 +52,7 @@ $aliases['csd.utexas.edu.multisite.vm'] = array(
 
 $aliases['journalism.utexas.edu.multisite.vm'] = array(
   'uri' => 'journalism.utexas.edu.multisite.vm',
-  'root' => '/var/www/d6/multisite/sites/journalism.utexas.edu.multisite.vm',
+  'root' => '/var/www/public_html/d6/multisite/sites/journalism.utexas.edu.multisite.vm',
   'path-aliases' => array(
     '%files' => 'sites/journalism.utexas.edu.multisite.vm/files',
     '%dump-dir' => '/var/tmp',
@@ -62,7 +62,7 @@ $aliases['journalism.utexas.edu.multisite.vm'] = array(
 
 $aliases['moody.utexas.edu.multisite.vm'] = array(
   'uri' => 'moody.utexas.edu.multisite.vm',
-  'root' => '/var/www/d6/multisite/sites/moody.utexas.edu.multisite.vm',
+  'root' => '/var/www/public_html/d6/multisite/sites/moody.utexas.edu.multisite.vm',
   'path-aliases' => array(
     '%files' => 'sites/moody.utexas.edu.multisite.vm/files',
     '%dump-dir' => '/var/tmp',
@@ -72,7 +72,7 @@ $aliases['moody.utexas.edu.multisite.vm'] = array(
 
 $aliases['rtf.utexas.edu.multisite.vm'] = array(
   'uri' => 'rtf.utexas.edu.multisite.vm',
-  'root' => '/var/www/d6/multisite/sites/rtf.utexas.edu.multisite.vm',
+  'root' => '/var/www/public_html/d6/multisite/sites/rtf.utexas.edu.multisite.vm',
   'path-aliases' => array(
     '%files' => 'sites/rtf.utexas.edu.multisite.vm/files',
     '%dump-dir' => '/var/tmp',
@@ -84,7 +84,7 @@ $aliases['rtf.utexas.edu.multisite.vm'] = array(
 
 $aliases['advertising.utexas.edu.local.vm'] = array(
   'uri' => 'advertising.utexas.edu.local.vm',
-  'root' => '/var/www/d6/advertising',
+  'root' => '/var/www/public_html/d6/advertising',
   'path-aliases' => array(
     '%files' => 'sites/advertising.utexas.edu.local.vm/files',
     '%dump-dir' => '/var/tmp',
@@ -94,7 +94,7 @@ $aliases['advertising.utexas.edu.local.vm'] = array(
 
 $aliases['commstudies.utexas.edu.local.vm'] = array(
   'uri' => 'commstudies.utexas.edu.local.vm',
-  'root' => '/var/www/d6/commstudies',
+  'root' => '/var/www/public_html/d6/commstudies',
   'path-aliases' => array(
     '%files' => 'sites/commstudies.utexas.edu.local.vm/files',
     '%dump-dir' => '/var/tmp',
@@ -104,7 +104,7 @@ $aliases['commstudies.utexas.edu.local.vm'] = array(
 
 $aliases['csd.utexas.edu.local.vm'] = array(
   'uri' => 'csd.utexas.edu.local.vm',
-  'root' => '/var/www/d6/csd',
+  'root' => '/var/www/public_html/d6/csd',
   'path-aliases' => array(
     '%files' => 'sites/csd.utexas.edu.local.vm/files',
     '%dump-dir' => '/var/tmp',
@@ -114,7 +114,7 @@ $aliases['csd.utexas.edu.local.vm'] = array(
 
 $aliases['journalism.utexas.edu.local.vm'] = array(
   'uri' => 'journalism.utexas.edu.local.vm',
-  'root' => '/var/www/d6/journalism',
+  'root' => '/var/www/public_html/d6/journalism',
   'path-aliases' => array(
     '%files' => 'sites/journalism.utexas.edu.local.vm/files',
     '%dump-dir' => '/var/tmp',
@@ -124,7 +124,7 @@ $aliases['journalism.utexas.edu.local.vm'] = array(
 
 $aliases['moody.utexas.edu.local.vm'] = array(
   'uri' => 'moody.utexas.edu.local.vm',
-  'root' => '/var/www/d6/moody',
+  'root' => '/var/www/public_html/d6/moody',
   'path-aliases' => array(
     '%files' => 'sites/moody.utexas.edu.local.vm/files',
     '%dump-dir' => '/var/tmp',
@@ -134,7 +134,7 @@ $aliases['moody.utexas.edu.local.vm'] = array(
 
 $aliases['rtf.utexas.edu.local.vm'] = array(
   'uri' => 'rtf.utexas.edu.local.vm',
-  'root' => '/var/www/d6/rtf',
+  'root' => '/var/www/public_html/d6/rtf',
   'path-aliases' => array(
     '%files' => 'sites/rtf.utexas.edu.local.vm/files',
     '%dump-dir' => '/var/tmp',
@@ -146,7 +146,7 @@ $aliases['rtf.utexas.edu.local.vm'] = array(
 
 $aliases['advertising.utexas.edu.redesign.vm'] = array(
   'uri' => 'advertising.utexas.edu.redesign.vm',
-  'root' => '/var/www/d7/advertising',
+  'root' => '/var/www/public_html/d7/advertising',
   'path-aliases' => array(
     '%files' => 'sites/default/files',
     '%dump-dir' => '/var/tmp',
@@ -156,7 +156,7 @@ $aliases['advertising.utexas.edu.redesign.vm'] = array(
 
 $aliases['commstudies.utexas.edu.redesign.vm'] = array(
   'uri' => 'commstudies.utexas.edu.redesign.vm',
-  'root' => '/var/www/d7/commstudies',
+  'root' => '/var/www/public_html/d7/commstudies',
   'path-aliases' => array(
     '%files' => 'sites/default/files',
     '%dump-dir' => '/var/tmp',
@@ -166,7 +166,7 @@ $aliases['commstudies.utexas.edu.redesign.vm'] = array(
 
 $aliases['csd.utexas.edu.redesign.vm'] = array(
   'uri' => 'csd.utexas.edu.redesign.vm',
-  'root' => '/var/www/d7/csd',
+  'root' => '/var/www/public_html/d7/csd',
   'path-aliases' => array(
     '%files' => 'sites/default/files',
     '%dump-dir' => '/var/tmp',
@@ -176,7 +176,7 @@ $aliases['csd.utexas.edu.redesign.vm'] = array(
 
 $aliases['journalism.utexas.edu.redesign.vm'] = array(
   'uri' => 'journalism.utexas.edu.redesign.vm',
-  'root' => '/var/www/d7/journalism',
+  'root' => '/var/www/public_html/d7/journalism',
   'path-aliases' => array(
     '%files' => 'sites/default/files',
     '%dump-dir' => '/var/tmp',
@@ -186,7 +186,7 @@ $aliases['journalism.utexas.edu.redesign.vm'] = array(
 
 $aliases['moody.utexas.edu.redesign.vm'] = array(
   'uri' => 'moody.utexas.edu.redesign.vm',
-  'root' => '/var/www/d7/moody',
+  'root' => '/var/www/public_html/d7/moody',
   'path-aliases' => array(
     '%files' => 'sites/default/files',
     '%dump-dir' => '/var/tmp',
@@ -196,7 +196,7 @@ $aliases['moody.utexas.edu.redesign.vm'] = array(
 
 $aliases['rtf.utexas.edu.redesign.vm'] = array(
   'uri' => 'rtf.utexas.edu.redesign.vm',
-  'root' => '/var/www/d7/rtf',
+  'root' => '/var/www/public_html/d7/rtf',
   'path-aliases' => array(
     '%files' => 'sites/default/files',
     '%dump-dir' => '/var/tmp',

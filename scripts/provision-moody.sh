@@ -46,9 +46,9 @@ sudo cp -rp /var/www/redesign/settings-files/.htaccess /var/tmp/multisite/.htacc
 echo "... done."
 echo "====="
 echo "-- Adding Site Installation Files"
-sudo mkdir -p /var/www/d6/multisite
-sudo rm -rf /var/www/d6/multisite/*
-sudo cp -rp /var/tmp/multisite/* /var/www/d6/multisite/
+sudo mkdir -p /var/www/public_html/d6/multisite
+sudo rm -rf /var/www/public_html/d6/multisite/*
+sudo cp -rp /var/tmp/multisite/* /var/www/public_html/d6/multisite/
 echo " "
 echo "==========================================================================="
 echo "-- Adding sym-links for local development...."
@@ -57,7 +57,7 @@ for sym_link_variable in ${departments}
 do
   echo "-- -- Adding sym-link for ${sym_link_variable}"
   # Sym-link:  ln -s /path-destination/ /path-source/
-  sudo ln -s /var/www/d6/multisite/sites/${sym_link_variable}.utexas.edu /var/www/d6/multisite/sites/${sym_link_variable}.utexas.edu.multisite.vm
+  sudo ln -s /var/www/public_html/d6/multisite/sites/${sym_link_variable}.utexas.edu /var/www/public_html/d6/multisite/sites/${sym_link_variable}.utexas.edu.multisite.vm
 done
 
 echo "...done."
@@ -68,7 +68,7 @@ echo "-- Configuring all site-folders...."
 for default_settings in ${departments}
 do
   echo "-- -- Configuring site-folder for ${default_settings}"
-  sudo cp -p /var/www/redesign/settings-files/d6-default/settings.php /var/www/d6/multisite/sites/${default_settings}.utexas.edu/settings.php
+  sudo cp -p /var/www/redesign/settings-files/d6-default/settings.php /var/www/public_html/d6/multisite/sites/${default_settings}.utexas.edu/settings.php
 done
 
 echo "...done."
@@ -78,7 +78,7 @@ for configuring_multisite in ${departments}
 do
   echo "==========================================================================="
   echo "-- Configuring ${configuring_multisite}...."
-  sudo cp -p /var/www/redesign/settings-files/d6-multisite/${configuring_multisite}/local-settings.php /var/www/d6/multisite/sites/${configuring_multisite}.utexas.edu/local-settings.php
+  sudo cp -p /var/www/redesign/settings-files/d6-multisite/${configuring_multisite}/local-settings.php /var/www/public_html/d6/multisite/sites/${configuring_multisite}.utexas.edu/local-settings.php
   echo "...done."
   echo "==========================================================================="
 done
@@ -118,12 +118,12 @@ echo "==========================================================================
 echo "Configuring local settings for Moody College Drupal 6 Individual Site installations."
 
 echo "-- Cleaning up Multisite temporary files from Drupal 6 Multisite Installation."
-sudo rm -r /var/tmp/multisite -y
+sudo rm -r /var/tmp/multisite
 echo "... done."
 
 echo "-- Creating temporary files"
 sudo mkdir -p /var/tmp/multisite
-sudo cp -rp /var/www/d6/multisite/* /var/tmp/multisite/
+sudo cp -rp /var/www/public_html/d6/multisite/* /var/tmp/multisite/
 echo "... done."
 
 for configuring_d6_individual_site in ${departments}
@@ -132,26 +132,26 @@ do
   echo "-- Initializing ${configuring_d6_individual_site} site Installation generation..."
   echo " "
   echo "-- -- Removing cruft files for ${configuring_d6_individual_site}, if existing..."
-  sudo rm -r /var/www/d6/${configuring_d6_individual_site}/sites/*
+  sudo rm -r /var/www/public_html/d6/${configuring_d6_individual_site}/sites/*
   echo "-- -- Moving files for ${configuring_d6_individual_site}"
-  sudo mkdir -p /var/www/d6/${configuring_d6_individual_site}
-  sudo cp -rp /var/tmp/multisite/* /var/www/d6/${configuring_d6_individual_site}
+  sudo mkdir -p /var/www/public_html/d6/${configuring_d6_individual_site}
+  sudo cp -rp /var/tmp/multisite/* /var/www/public_html/d6/${configuring_d6_individual_site}
   echo "==========================================================================="
   echo "-- Removing errata files from ${configuring_d6_individual_site} site Instance...."
-  sudo rm -r /var/www/d6/${configuring_d6_individual_site}/sites/*
-  sudo mkdir -p /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu
-  sudo cp -r /var/tmp/multisite/sites/${configuring_d6_individual_site}.utexas.edu/* /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu
+  sudo rm -r /var/www/public_html/d6/${configuring_d6_individual_site}/sites/*
+  sudo mkdir -p /var/www/public_html/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu
+  sudo cp -r /var/tmp/multisite/sites/${configuring_d6_individual_site}.utexas.edu/* /var/www/public_html/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu
   echo "...done."
   echo " "
   echo "==========================================================================="
   echo "-- Adding ${configuring_d6_individual_site} sym-links for local development...."
   # Sym-link:  ln -s /path-destination/ /path-source/
-  sudo ln -s /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu.local.vm /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu
+  sudo ln -s /var/www/public_html/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu /var/www/public_html/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu.local.vm
   echo "...done."
   echo " "
   echo "==========================================================================="
   echo "-- Configuring ${configuring_d6_individual_site} Local Settings...."
-  sudo cp -p /var/www/redesign/settings-files/d6/${configuring_d6_individual_site}/local-settings.php /var/www/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu.local.vm/local-settings.php
+  sudo cp -p /var/www/redesign/settings-files/d6/${configuring_d6_individual_site}/local-settings.php /var/www/public_html/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu.local.vm/local-settings.php
   echo "...done."
   echo "==========================================================================="
   echo "==========================================================================="
