@@ -25,11 +25,6 @@
 # Define Variables
 departments="advertising commstudies csd journalism moody rtf"
 
-echo "==========================================================================="
-echo "Initializing..."
-echo "-- Updating Drush Bash File."
-sudo cp -rp /var/www/redesign/drush-files/moodyredesign.aliases.drushrc.php ~/.drush/
-
 ## Installing the Moody College Drupal 7 UTDK installations
 echo "==========================================================================="
 echo "Configuring local Moody College Drupal 7 UTDK installations."
@@ -39,11 +34,12 @@ sudo git clone https://comm-webmaster@bitbucket.org/moodycollegedevelopers/migra
 echo "... done."
 echo "====="
 echo "-- Adding clean .htaccess file to respository"
-sudo cp -rp /var/www/redesign/settings-files/d7-default/.htaccess /var/tmp/utdrupalkit/.htaccess
+sudo cp -rp /var/www/redesign/settings-files/d7-default/.htaccess /var/www/var/tmp/utdrupalkit/.htaccess
+sudo cp -rp /var/www/redesign/settings-files/d7-default/sites/default/files/.htaccess /var/tmp/utdrupalkit/sites/default/files/.htaccess
 echo "... done."
 echo "====="
 echo "-- Adding Site Installation Files"
-sudo mkdir -p /var/www/d7
+sudo mkdir -p /var/www/public_html/d7
 
 for utdk_redesign_folders in ${departments}
 do
@@ -78,35 +74,6 @@ do
   echo "==========================================================================="
 done
 
-echo "==========================================================================="
-echo "Unless errors have been received, the Moody College Drupal 7 UTDK installations are ready for configuration and database import/export."
-echo "==========================================================================="
-#echo "Configuring MySQL Server for ${departments} in Multisite Installation"
-#echo "======="
-#for multisite_folder in ${departments}
-#do
-#  echo "-- Dropping tables (if any exist)"
-#  drush @moodyredesign.${multisite_folder}.utexas.edu.multisite.vm sql-drop -y
-#  echo "... done."
-#  echo "======="
-#  echo "-- Importing unedited SQL-Dumps from Live Server"
-#  drush @moodyredesign.${multisite_folder}.utexas.edu.multisite.vm sql-cli < /var/www/redesign/sql-dumps/${multisite_folder}_main_20160404.sql -y
-#  echo "... done."
-#  echo "======="
-#  echo "-- Deleting SQL-Dump (to save HDD space)"
-#  sudo rm /var/www/redesign/sql-dumps/${multisite_folder}_main_20160404.sql
-#  echo "... done."
-#  echo "======="
-#done
-#echo "==========================================================================="
-# Add drush sql-cli commands
-# Add drush dis commands for uninstalling cruft modules
-# Add rm commands for deleting cruft modules
-# Add drush dis commands for uninstalling site-wide Views 2 modules
-# Add rm commands for deleting site-wide Views 2 module.
-# Add git command for downloading Views site-wide 3 module.
-# Add drush en command for enabling Views site-wide 3 module.
-echo "==========================================================================="
-
-echo "Cleaning up temporary files."
-sudo rm -r /var/tmp/utdrupalkit
+# Leaving temporary files in place currently as an excellent place to run upgrades/upgrades.
+#echo "Cleaning up temporary files."
+#sudo rm -r /var/tmp/utdrupalkit

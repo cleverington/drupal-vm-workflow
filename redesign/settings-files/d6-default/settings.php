@@ -109,7 +109,7 @@ if (file_exists(dirname(__FILE__).'/local-settings.php')) {
  * check. After finishing the upgrade, be sure to open this file again
  * and change the TRUE back to a FALSE!
  */
-$update_free_access = FALSE;
+$update_free_access = TRUE;
 
 /**
  * Base URL (optional).

@@ -76,7 +76,7 @@ Download copies of all UT Drupal Kit tools and plugins & Moody College Drupal 6 
     - /themes
 ```
 
-#### The required commands, in order:  <These will be scripted>
+#### The required commands, in order:  <These will eventually be scripted>
 ```
 mkdir ~/moody-projects
 cd ~/moody-projects
@@ -84,8 +84,6 @@ git clone git@bitbucket.org:crl2728/grunt-redesign.git .
 (When asked, choose 'yes')
 git submodule add git@github.com:geerlingguy/drupal-vm.git drupalvm/
 cp ~/moody-projects/redesign/config-files/config.yml ~/moody-projects/drupalvm/config.yml
-cp ~/moody-projects/scripts/provision-moody.sh ~/moody-projects/drupalvm/provision-moody.sh
-cp ~/moody-projects/scripts/provision-redesign.sh ~/moody-projects/drupalvm/provision-redesign.sh
 ```
 
 ### Download SQL-Dumps for Migration
@@ -95,12 +93,39 @@ Copy SQL-Dumps from Box-Sync folder 'Moody_SQL_backups':
 ~/moody-projects/
     - /redesign
         - sql-dumps
-            - advertising_main_2016XXXX.sql
-            - commstudies_main_2016XXXX.sql
-            - csd_main_2016XXXX.sql
-            - journalism_main_2016XXXX.sql
-            - moody_main_2016XXXX.sql
-            - rtf_main_2016XXXX.sql
+            - advertising_main.sql
+            - commstudies_main.sql
+            - csd_main.sql
+            - journalism_main.sql
+            - moody_main.sql
+            - rtf_main.sql
+```
+> Note - '/moody-projects/' is **required** to be the root project directory.
+
+>   Deviation from using /moody-projects/ requires the 'vagrant_synced_folders' variable to be edited within the ```config.yml``` file.
+
+#### Download Site Files
+> **Note:** This task should only be performed once. Git should be used for all other changes.
+##### Download Active Moody Drupal 6 Multisite Installation
+```
+vagrant ssh
+sudo source /var/scripts/provision-moody.sh
+sudo source /var/scripts/provision-moody_db.sh
+
+```
+
+##### Download Active Moody Upgraded Drupal 7 Installation Locally
+* Eventually, this line-item task will also ```scp``` downloading of a 'completed' Drupal 7 clean upgrade of each Moody College of Communication site.
+
+*_placeholder_*
+
+
+##### Download Active Moody UTDK Multisite Installation
+```
+vagrant ssh
+sudo source /var/scripts/provision-redesign.sh
+sudo source /var/scripts/provision-redesign_files.sh
+
 ```
 
 #### Turn on the Virtual Server and Update
@@ -108,11 +133,9 @@ Copy SQL-Dumps from Box-Sync folder 'Moody_SQL_backups':
 cd drupalvm/ && vagrant up
 sudo yum upgrade -y
 ```
-> Note - '/moody-projects/' is required to be the root of the directory, based on current configuration.
->   Deviation from using /moody-projects/ requires the 'vagrant_synced_folders' variable to be edited.
->   Though, currently, the 'vagrant_synced_folders' variable must me configured due to development needs for VM.
 
 Once Vagrant finishes build the VM, Drupal needs to be installed for the various projects using the now headless Virtual Machine.
+In addition, the databases *must* be configured to give Global permission to the ```drupal``` user. See **Troubleshooting**
 
 > Note - This migration / redesign automation tool requires retrieval of Source Code via Git, ensuring all work can be completed at any machine, anywhere.
 > It requires running a specialized script (moody-build.sh or similar) into the /scripts/ folder to pull down a copy of the required content into the /development/, /redesign/, and /multisite directories prior to vagrant up.
@@ -120,37 +143,31 @@ Once Vagrant finishes build the VM, Drupal needs to be installed for the various
 >   Users must follow the commands as outlined because a password is currently required for accessing the Git repository.
 
 ###  Future Tasks for moody-build.sh Script:
-* Create the ~/moody-project directory, if none exists
-* Clone a copy of the grunt-redesign project, if it does not exist
-* Clone a copy of the drupal-vm project, if it does not exist
 * Allow the User to select between two tasks (Redesign Development or Migration Work), and then:
   * Migration Work - Copy the config.yml file from /redesign/config-files/migration-config.yml to /drupalvm/config.yml for use in the VM
   * Migration Work - Copy the config.yml file from /redesign/config-files/development-config.yml to /drupalvm/config.yml for use in the VM
-* Copy the Vagrantfile from /redesign/config-files/Vagrantfile to /drupalvm/Vagrantfile for use in the VM
-* Run vagrant up
-* Copy /var/www/redesign/settings-files/d6-multisite/*/local-settings.php to /var/www/d6/multisite/sites/*/local-settings.php
-* Copy /var/www/redesign/settings-files/d6/*/local-settings.php to /var/www/d6/*/sites/*/local-settings.php
-* Copy /var/www/redesign/settings-files/d7/*/local-settings.php to /var/www/d7/*/sites/*/local-settings.php
 
 ###  To Access the VM:
 ```
 vagrant ssh
-cd /var/www/
+cd /var/www/public_html/
 ```
 
 See config.yml for database information.
 
-### To provision Moody Drupal 6 Multisite Installation and Moody Drupal 6 Single Site Installations:
+### To re-provision Moody Drupal 6 Multisite Installation and Moody Drupal 6 Single Site Installations:
 ```
 vagrant ssh
 source /var/scripts/provision-moody.sh
+source /var/scripts/provision-moody_db.sh
 ```
 When prompted, enter the required Comm-Webmaster password to pull down a copy of the required Git repository.
 
-### To provision the Moody Drupal 7 Single Site Installations:
+### To re-provision the Moody Drupal 7 Single Site Installations:
 ```
 vagrant ssh
 source /var/scripts/provision-redesign.sh
+source /var/scripts/provision-redeisng_files.sh
 ```
 When prompted, enter the required Comm-Webmaster password to pull down a copy of the required Git repository.
 
@@ -222,7 +239,7 @@ Because some files shared between projects, such as the local-settings.php files
 
 This is especially true when applying changes to UT Web. By using the 'patch' functionality, only the specific changes to specific files are made, whereas using the ```git pull``` functionality pulls down complete copies of every single file and compares them to the files on the server. By using patches, changes are done in KB instead of MB, which can greatly reduce the digital overhead on UT Web.
 
-The project root will always be known as 'master', with various Branches and Forks eventually created based on Project needs.
+The project root will always be known as '6.x-?.x' (for Drupal 6) or '7.x-?.x' (for Drupal 7), with various Branches and Forks eventually created based on Project needs. Currently the project root for both projects is 'master', but this is temporary.
 
 ### Example Workflow
 #### Changes are made to ~/moody-project/redesign/config-files/config.yml from branch 'master':
@@ -251,11 +268,28 @@ If the patch was successfully applied to 'master', then move to the next step.
 git push origin config_changes
 ```
 
-#### Apply A Patch on UT Web Servers
+#### Example: Apply A Patch on the MoodyVM
 > Note - Always run ```git status``` on the server prior to applying any patches.
 
 ```
-scp ~/moody-project/config_changes_YYYY-MM-DD.patch utw10xxx@panel.utweb.utexas.edu://home/utweb/utw10xxx/public_html/config_changes_YYYY-MM-DD.patch
+scp ~/moody-projects/config_changes_YYYY-MM-DD.patch vagrant@moody-redesign.dev/var/tmp/config_changes_YYYY-MM-DD.patch
+cd ~/moody-projects/drupalvm/
+vagrant ssh
+cd /var/tmp/utdrupalkit/
+git apply -v /var/tmp/config_changes_YYYY-MM-DD.patch
+sudo rm -R sites/
+
+Clean Up:
+rm /var/tmp/config_changes_YYYY-MM-DD.patch
+```
+Once finished patching, copy the updated files into each folder.
+
+
+#### Example: Apply A Patch on UT Web Servers
+> Note - Always run ```git status``` on the server prior to applying any patches.
+
+```
+scp ~/moody-projects/config_changes_YYYY-MM-DD.patch utw10xxx@panel.utweb.utexas.edu://home/utweb/utw10xxx/public_html/config_changes_YYYY-MM-DD.patch
 ssh utw10xxx@panel.utweb.utexas.edu
 cd public_html/
 git apply -v config_changes_YYYY-MM-DD.patch
