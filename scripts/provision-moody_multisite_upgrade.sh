@@ -14,6 +14,12 @@ departments="advertising commstudies csd journalism moody rtf"
 #   - VM, therefore will need to be moved into a separate
 #   - script, such as 'moody_db_provision.sh'.
 
+# Drush expects to have a live and bootstrapped site to work with for almost all functionality.
+#   - Because of this limitation, many commands must be run from the 'root' directory of EACH site
+#   - within the multisite installation.
+#
+# Non-critical modules, for example, must be disabled in 'each' folder within the $departments list.
+
 echo "==========================================================================="
 echo "Initializing..."
 echo "-- Updating Drush Bash File."
@@ -26,6 +32,7 @@ echo "Disabling non-critical modules for all sites."
 for disabling_modules in ${departments}
 do
     echo "-- Disabling non-critical modules in Drupal 6 instance of ${disabling_modules}"
+    cd /var/www/public_html/d6/multisite/sites/{disabling_modules}.utexas.edu.multisite.vm
     drush @moodyredesign.${disabling_modules}.utexas.edu.multisite.vm pml --no-core --type=module --status=enabled --pipe > modules.txt
     cat modules.txt | xargs drush @moodyredesign.${disabling_modules}.utexas.edu.multisite.vm -y dis
     cat modules.txt | xargs drush @moodyredesign.${disabling_modules}.utexas.edu.multisite.vm -y en
