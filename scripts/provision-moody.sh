@@ -55,6 +55,8 @@ do
   sudo ln -s /var/www/public_html/d6/multisite/sites/${sym_link_variable}.utexas.edu /var/www/public_html/d6/multisite/sites/${sym_link_variable}.utexas.edu.multisite.vm
 done
 
+sudo cp -rp /var/tmp/multisite/.htaccess /var/www/public_html/d6/multisite/.htaccess
+
 echo "...done."
 echo " "
 echo "==========================================================================="
@@ -85,60 +87,60 @@ echo "==========================================================================
 
 # Installing the Moody College Drupal 6 Individual Site Instances
 #
-echo "-- Configuring local settings for Moody College Drupal 6 Individual Site installations."
-echo "====="
-#echo "-- Cleaning up Multisite temporary files from Drupal 6 Multisite Installation."
-#sudo rm -r /var/tmp/multisite
+#echo "-- Configuring local settings for Moody College Drupal 6 Individual Site installations."
+#echo "====="
+##echo "-- Cleaning up Multisite temporary files from Drupal 6 Multisite Installation."
+##sudo rm -r /var/tmp/multisite
+##echo "... done."
+#
+#echo "-- Creating temporary files"
+#sudo mkdir -p /var/tmp/multisite
+#sudo cp -rp /var/www/public_html/d6/multisite/* /var/tmp/multisite/
 #echo "... done."
-
-echo "-- Creating temporary files"
-sudo mkdir -p /var/tmp/multisite
-sudo cp -rp /var/www/public_html/d6/multisite/* /var/tmp/multisite/
-echo "... done."
-
-for configuring_d6_individual_site in ${departments}
-do
-  echo "==========================================================================="
-  echo "-- Initializing ${configuring_d6_individual_site} site Installation generation..."
-  echo " "
-  echo "-- -- Removing cruft files for ${configuring_d6_individual_site}, if existing..."
-  sudo rm -r /var/www/public_html/d6/${configuring_d6_individual_site}/sites/*
-  echo "-- -- Moving files for ${configuring_d6_individual_site}"
-  sudo mkdir -p /var/www/public_html/d6/${configuring_d6_individual_site}
-  sudo cp -rp /var/tmp/multisite/* /var/www/public_html/d6/${configuring_d6_individual_site}
-  echo "==========================================================================="
-  echo "-- Removing errata files from ${configuring_d6_individual_site} site Instance...."
-  sudo rm -r /var/www/public_html/d6/${configuring_d6_individual_site}/sites/*
-  sudo mkdir -p /var/www/public_html/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu
-  sudo cp -r /var/tmp/multisite/sites/${configuring_d6_individual_site}.utexas.edu/* /var/www/public_html/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu
-  echo "...done."
-  echo "-- Adding Moody errata files back into ${configuring_d6_individual_site} site Instance for multisite stability...."
-  sudo mkdir -p /var/www/public_html/d6/${configuring_d6_individual_site}/sites/moody.utexas.edu
-  sudo mkdir -p /var/www/public_html/d6/${configuring_d6_individual_site}/sites/all
-  sudo cp -r /var/www/public_html/d6/multisite/sites/moody.utexas.edu/* /var/www/public_html/d6/${configuring_d6_individual_site}/sites/moody.utexas.edu
-  sudo cp -r /var/www/public_html/d6/multisite/sites/all/* /var/www/public_html/d6/${configuring_d6_individual_site}/sites/all
-  echo " "
-  echo "==========================================================================="
-  echo "-- Adding ${configuring_d6_individual_site} sym-links for local development...."
-  # Sym-link:  ln -s /path-destination/ /path-source/
-  sudo ln -s /var/www/public_html/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu /var/www/public_html/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu.local.vm
-  sudo ln -s /var/www/public_html/d6/${configuring_d6_individual_site}/sites/moody.utexas.edu /var/www/public_html/d6/${configuring_d6_individual_site}/sites/moody.utexas.edu.local.vm
-  sudo ln -s /var/www/public_html/d6/${configuring_d6_individual_site}/sites/moody.utexas.edu /var/www/public_html/d6/${configuring_d6_individual_site}/sites/default
-  echo "...done."
-  echo " "
-  echo "==========================================================================="
-  echo "-- Configuring ${configuring_d6_individual_site} Local Settings...."
-  sudo cp -p /var/www/redesign/settings-files/d6/${configuring_d6_individual_site}/local-settings.php /var/www/public_html/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu.local.vm/local-settings.php
-  echo "...done."
-  echo "==========================================================================="
-  echo "==========================================================================="
-done
-
-echo "==========================================================================="
-echo "Unless errors have been received, the Moody College Drupal 6 Single Site Installations are ready for migration work, including CCK migration, Views migration, etc."
-echo "==========================================================================="
-echo "  "
-echo "==========================================================================="
+#
+#for configuring_d6_individual_site in ${departments}
+#do
+#  echo "==========================================================================="
+#  echo "-- Initializing ${configuring_d6_individual_site} site Installation generation..."
+#  echo " "
+#  echo "-- -- Removing cruft files for ${configuring_d6_individual_site}, if existing..."
+#  sudo rm -r /var/www/public_html/d6/${configuring_d6_individual_site}/sites/*
+#  echo "-- -- Moving files for ${configuring_d6_individual_site}"
+#  sudo mkdir -p /var/www/public_html/d6/${configuring_d6_individual_site}
+#  sudo cp -rp /var/tmp/multisite/* /var/www/public_html/d6/${configuring_d6_individual_site}
+#  echo "==========================================================================="
+#  echo "-- Removing errata files from ${configuring_d6_individual_site} site Instance...."
+#  sudo rm -r /var/www/public_html/d6/${configuring_d6_individual_site}/sites/*
+#  sudo mkdir -p /var/www/public_html/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu
+#  sudo cp -r /var/tmp/multisite/sites/${configuring_d6_individual_site}.utexas.edu/* /var/www/public_html/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu
+#  echo "...done."
+#  echo "-- Adding Moody errata files back into ${configuring_d6_individual_site} site Instance for multisite stability...."
+#  sudo mkdir -p /var/www/public_html/d6/${configuring_d6_individual_site}/sites/moody.utexas.edu
+#  sudo mkdir -p /var/www/public_html/d6/${configuring_d6_individual_site}/sites/all
+#  sudo cp -r /var/www/public_html/d6/multisite/sites/moody.utexas.edu/* /var/www/public_html/d6/${configuring_d6_individual_site}/sites/moody.utexas.edu
+#  sudo cp -r /var/www/public_html/d6/multisite/sites/all/* /var/www/public_html/d6/${configuring_d6_individual_site}/sites/all
+#  echo " "
+#  echo "==========================================================================="
+#  echo "-- Adding ${configuring_d6_individual_site} sym-links for local development...."
+#  # Sym-link:  ln -s /path-destination/ /path-source/
+#  sudo ln -s /var/www/public_html/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu /var/www/public_html/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu.local.vm
+#  sudo ln -s /var/www/public_html/d6/${configuring_d6_individual_site}/sites/moody.utexas.edu /var/www/public_html/d6/${configuring_d6_individual_site}/sites/moody.utexas.edu.local.vm
+#  sudo ln -s /var/www/public_html/d6/${configuring_d6_individual_site}/sites/moody.utexas.edu /var/www/public_html/d6/${configuring_d6_individual_site}/sites/default
+#  echo "...done."
+#  echo " "
+#  echo "==========================================================================="
+#  echo "-- Configuring ${configuring_d6_individual_site} Local Settings...."
+#  sudo cp -p /var/www/redesign/settings-files/d6/${configuring_d6_individual_site}/local-settings.php /var/www/public_html/d6/${configuring_d6_individual_site}/sites/${configuring_d6_individual_site}.utexas.edu.local.vm/local-settings.php
+#  echo "...done."
+#  echo "==========================================================================="
+#  echo "==========================================================================="
+#done
+#
+#echo "==========================================================================="
+#echo "Unless errors have been received, the Moody College Drupal 6 Single Site Installations are ready for migration work, including CCK migration, Views migration, etc."
+#echo "==========================================================================="
+#echo "  "
+#echo "==========================================================================="
 
 #echo " "
 #echo "==========================================================================="

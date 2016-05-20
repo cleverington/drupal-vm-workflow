@@ -35,7 +35,7 @@ echo "... done."
 echo "====="
 echo "-- Adding clean .htaccess file to respository"
 sudo cp -rp /var/www/redesign/settings-files/d7-default/.htaccess /var/www/var/tmp/utdrupalkit/.htaccess
-sudo cp -rp /var/www/redesign/settings-files/d7-default/sites/default/files/.htaccess /var/tmp/utdrupalkit/sites/default/files/.htaccess
+sudo cp -rp /var/www/redesign/settings-files/d7-default/files/.htaccess /var/tmp/utdrupalkit/sites/default/files/.htaccess
 echo "... done."
 echo "====="
 echo "-- Adding Site Installation Files"
