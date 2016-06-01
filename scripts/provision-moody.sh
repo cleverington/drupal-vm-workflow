@@ -29,11 +29,11 @@ departments="advertising commstudies csd journalism moody rtf"
 echo "==========================================================================="
 echo "Configuring local settings for Moody College Drupal 6 Multisite installation."
 echo "-- Creating temporary files"
-sudo git clone https://comm-webmaster@bitbucket.org/moodycollegedevelopers/moody-multisite.git /var/tmp/multisite
+git clone https://comm-webmaster@bitbucket.org/moodycollegedevelopers/moody-multisite.git /var/tmp/multisite
 echo "... done."
 echo "====="
 echo "-- Removing cruft files for Multisite Installation..."
-sudo rm -r /var/tmp/multisite/.htaccess
+rm -r /var/tmp/multisite/.htaccess
 echo "... done."
 echo "====="
 echo "-- Adding clean .htaccess file"
@@ -41,9 +41,9 @@ sudo cp -rp /var/www/redesign/settings-files/.htaccess /var/tmp/multisite/.htacc
 echo "... done."
 echo "====="
 echo "-- Adding Site Installation Files"
-sudo mkdir -p /var/www/public_html/d6/multisite
-sudo rm -rf /var/www/public_html/d6/multisite/*
-sudo cp -rp /var/www/var/tmp/multisite/* /var/www/public_html/d6/multisite/
+mkdir -p /var/www/public_html/d6/multisite
+rm -rf /var/www/public_html/d6/multisite/*
+cp -rp /var/www/var/tmp/multisite/* /var/www/public_html/d6/multisite/
 echo " "
 echo "==========================================================================="
 echo "-- Adding sym-links for local development...."
@@ -65,7 +65,7 @@ echo "-- Configuring all site-folders...."
 for default_settings in ${departments}
 do
   echo "-- -- Configuring site-folder for ${default_settings}"
-  sudo cp -p /var/www/redesign/settings-files/d6-default/settings.php /var/www/public_html/d6/multisite/sites/${default_settings}.utexas.edu/settings.php
+  cp -p /var/www/redesign/settings-files/d6-default/settings.php /var/www/public_html/d6/multisite/sites/${default_settings}.utexas.edu/settings.php
 done
 
 echo "...done."
