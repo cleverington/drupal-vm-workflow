@@ -43,4 +43,5 @@ echo "Creating the VM"
 echo "You will need to add your Drupal to ~/utexas-drupalvm-projects/development separately."
 echo "Another great option is to edit ~/utexas-drupalvm-projects/redesign/scripts/provision-development.sh with your Git Repository and run the script!"
 cd ~/utexas-drupalvm-projects/drupal-vm/
+sudo ansible-galaxy install -r provisioning/requirements.yml --force
 vagrant up
