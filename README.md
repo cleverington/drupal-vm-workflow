@@ -29,6 +29,9 @@ npm install -g grunt-cli
 ## Recommendations
 * Sublime Text 3 **OR** Atom.io **OR** Brackets.io
 * PHPStorm
+* iTerm2
+* Sequel Pro
+* FileZilla
 
 ## Quickstart
 > **Note:** Despite the Drupal VM being 'baseline' configured for PHP 7.0, this config.yml file is configured for PHP 5.6.
@@ -314,6 +317,52 @@ As a reminder though, these keys aren't safe. Even the 'generation' in the D-VM 
 ### NFS vs RSYNC
 
 Sometimes NFS is wonky and/or hard to configure (especially on Windows machines). If you do not have Administrative access, it is best to simply use rsync for sycing files to the Drupal VM.
+
+### FileZilla
+
+Select *SFTP - SSH File Transfer Protocol* as the connection type.
+
+#### General Tab
+| Label  | Input  |
+| :-------------: |:-------------:|
+| **Host**  | 127.0.0.1 *OR* utexas-drupalvm.dev**  |
+| **Port**  | Leave blank  |
+|   |   |
+| **Logon Type**  | Key file  |
+| **User**  | vagrant  |
+| **SSH Key**  | *See below*  |
+
+#### Advanced Tab
+| Label  | Input  |
+| :-------------: |:-------------:|
+| **Default local directory**  | ~/utexas-drupalvm-projects/  |
+| **Default remote directory**  | /var/www/development  |
+
+### Sequel Pro
+
+Select *SSH* as the connection type.
+
+| Label  | Input  |
+| :-------------: |:-------------:|
+| **MySQL Host**  | 127.0.0.1 *OR* utexas-drupalvm.dev**  |
+| **Username**  | root  |
+| **Password**  | same  |
+| **Database**  | drupal  |
+| **Port**  | Leave blank  |
+|   |   |
+| **SSH Host**  | 192.168.88.90  |
+| **SSH User**  | vagrant  |
+| **SSH Key**  | *See below*  |
+
+#### SSH Key for Sequel Pro
+
+The **COMPLETELY UNSECURE** key is located at `~/.vagrant.d/insecure_private_key` and can be found by:
+* clicking the picture of the key,
+* checking *Show hidden files*,
+* navigating to user-root (`~/`), and
+* selecting the folder `/.vagrant.d/`
+
+> **Note:** The basic Drupal VM configuration uses 192.168.88.88 instead of 192.168.88.90.
 
 #### Updating RSA Key for Known_Hosts
 To gain access to provisioning access (such as connecting via SSH to the MySQL databases), delete the currently listed ```known_host``` for the Vagrantbox:
