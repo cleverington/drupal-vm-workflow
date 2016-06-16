@@ -27,8 +27,8 @@ vagrant_synced_folders:
   #   'public_html'. So installations should be done using this path as 'root'.
   #
   # The local_path variable needs to be configured based on each User's box/location
-  - local_path: ~/moody-projects/public_html
-    destination: /var/www/public_html
+  - local_path: ~/moody-projects/development
+    destination: /var/tmp/development
     type: rsync
     create: true
 
@@ -112,34 +112,22 @@ apache_vhosts:
 
 # Drupal 6 Moody Multisite Instance
   - servername: "advertising.utexas.edu.multisite.vm"
-    documentroot: "/var/www/public_html/d6/multisite/sites/advertising.utexas.edu.multisite.vm"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/public_html/d6/multisite"
+    documentroot: "/var/www/public_html/d6/multisite"
 
   - servername: "commstudies.utexas.edu.multisite.vm"
-    documentroot: "/var/www/public_html/d6/multisite/sites/commstudies.utexas.edu.multisite.vm"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/public_html/d6/multisite"
+    documentroot: "/var/www/public_html/d6/multisite"
 
   - servername: "csd.utexas.edu.multisite.vm"
-    documentroot: "/var/www/public_html/d6/multisite/sites/csd.utexas.edu.multisite.vm"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/public_html/d6/multisite"
+    documentroot: "/var/www/public_html/d6/multisite"
 
   - servername: "journalism.utexas.edu.multisite.vm"
-    documentroot: "/var/www/public_html/d6/multisite/sites/journalism.utexas.edu.multisite.vm"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/public_html/d6/multisite"
+    documentroot: "/var/www/public_html/d6/multisite"
 
   - servername: "moody.utexas.edu.multisite.vm"
-    documentroot: "/var/www/public_html/d6/multisite/sites/moody.utexas.edu.multisite.vm"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/public_html/d6/multisite"
+    documentroot: "/var/www/public_html/d6/multisite"
 
   - servername: "rtf.utexas.edu.multisite.vm"
-    documentroot: "/var/www/public_html/d6/multisite/sites/rtf.utexas.edu.multisite.vm"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000/var/www/public_html/d6/multisite"
+    documentroot: "/var/www/public_html/d6/multisite"
 
 # Drupal 6 Moody Instances
   - servername: "advertising.utexas.edu.local.vm"
@@ -185,10 +173,10 @@ apache_vhosts:
     extra_parameters: |
           ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ adminer_install_dir }}"
 
-  - servername: "xhprof.{{ vagrant_hostname }}"
-    documentroot: "{{ php_xhprof_html_dir }}"
-    extra_parameters: |
-          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ php_xhprof_html_dir }}"
+#  - servername: "xhprof.{{ vagrant_hostname }}"
+#    documentroot: "{{ php_xhprof_html_dir }}"
+#    extra_parameters: |
+#          ProxyPassMatch ^/(.*\.php(/.*)?)$ "fcgi://127.0.0.1:9000{{ php_xhprof_html_dir }}"
 
   - servername: "pimpmylog.{{ vagrant_hostname }}"
     documentroot: "{{ pimpmylog_install_dir }}"
@@ -224,9 +212,9 @@ nginx_hosts:
    root: "{{ adminer_install_dir }}"
    is_php: true
 
- - server_name: "xhprof.{{ vagrant_hostname }}"
-   root: "{{ php_xhprof_html_dir }}"
-   is_php: true
+# - server_name: "xhprof.{{ vagrant_hostname }}"
+#   root: "{{ php_xhprof_html_dir }}"
+#   is_php: true
 
  - server_name: "pimpmylog.{{ vagrant_hostname }}"
    root: "{{ pimpmylog_install_dir }}"
@@ -431,7 +419,7 @@ installed_extras:
   # - solr
   # varnish
   - xdebug
-  - xhprof
+  # xhprof
 
 # Add any extra apt or yum packages you would like installed.
 extra_packages:
@@ -444,6 +432,7 @@ extra_packages:
 nodejs_version: "0.12"
 nodejs_npm_global_packages:
   - name: grunt
+nodejs_install_npm_user: "{{ drupalvm_user }}"
 
 # `ruby` must be in installed_extras for this to work.
 ruby_install_gems_user: "{{ drupalvm_user }}"
@@ -452,7 +441,7 @@ ruby_install_gems: []
 # You can configure almost anything else on the server in the rest of this file.
 extra_security_enabled: false
 
-drush_version: "7.1.0"
+drush_version: "7.3.0"
 drush_keep_updated: true
 drush_composer_cli_options: "--prefer-dist --no-interaction"
 
@@ -499,6 +488,7 @@ composer_home_group: "{{ drupalvm_user }}"
 
 # Run specified scripts after VM is provisioned. Path is relative to the
 # `provisioning/playbook.yml` file.
+pre_provision_scripts: []
 post_provision_scripts: []
   # - "../examples/scripts/configure-solr.sh"
 
@@ -531,7 +521,7 @@ php_xdebug_idekey: PHPSTORM
 php_xdebug_max_nesting_level: 256
 
 # Solr Configuration (if enabled above).
-# Unsure if Solr is currently available on UT Web
+# Solr is currently unavailable on UT Web
 # solr_version: "4.10.4"
 # solr_xms: "64M"
 # solr_xmx: "128M"

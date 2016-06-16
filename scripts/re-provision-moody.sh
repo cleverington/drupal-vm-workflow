@@ -1,49 +1,25 @@
 #!/bin/bash
 
-# provision-moody.sh
-# This bash script needs to be executed to execute the needed actions
+# re-provision-moody.sh
+# This bash script needs to be executed to perform the needed actions
 #   - for spinning up the current Moody College Tasks tool.
 
 # This script is meant for use on by Moody College of Communication
 #   - Developers for creating test environments. It should not be used for
 #   - creating or altering Production environments on UT Web.
 
-# Clearing Existing Content - Optional
-#
-# Script will need a number of 'Remove directory if it exists' caveats.
-#   - Since everything is being loaded / tracked via a Git workflow, there
-#   - is no issue with removing content/structure/etc. changes from the VM.
-#   - Anything created on the VM should be created with the clear and present
-#   - understanding that everything ON the VM will be deleted during the process.
-#
-# Optional - Allow Developer Opt-Out
-#
-# However, because the VM may be powerered-down and powered back up with no
-#   - changes to the infrastructre / setup of the VM, Developers should have
-#   - the option to NOT execute the script.#
+# The re-provision-moody.sh script should be run when the /tmp/multisite folder
+#   - already exists, with all associated content.
 
 # Define Variables
 departments="advertising commstudies csd journalism moody rtf"
 
 ## Installing the Moody College Drupal 6 Multisite Instances
 echo "==========================================================================="
-echo "Configuring local settings for Moody College Drupal 6 Multisite installation."
-echo "-- Creating temporary files"
-git clone https://comm-webmaster@bitbucket.org/moodycollegedevelopers/moody-multisite.git /var/tmp/multisite
-echo "... done."
-echo "====="
-echo "-- Removing cruft files for Multisite Installation..."
-rm -r /var/tmp/multisite/.htaccess
-echo "... done."
-echo "====="
-echo "-- Adding clean .htaccess file"
-sudo cp -rp /var/www/redesign/settings-files/.htaccess /var/tmp/multisite/.htaccess
-echo "... done."
-echo "====="
 echo "-- Adding Site Installation Files"
-mkdir -p /var/www/public_html/d6/multisite
-rm -rf /var/www/public_html/d6/multisite/*
-cp -rp /var/www/var/tmp/multisite/* /var/www/public_html/d6/multisite/
+sudo mkdir -p /var/www/public_html/d6/multisite
+sudo rm -rf /var/www/public_html/d6/multisite/*
+sudo cp -rp /var/tmp/multisite/* /var/www/public_html/d6/multisite/
 echo " "
 echo "==========================================================================="
 echo "-- Adding sym-links for local development...."
@@ -55,8 +31,6 @@ do
   sudo ln -s /var/www/public_html/d6/multisite/sites/${sym_link_variable}.utexas.edu /var/www/public_html/d6/multisite/sites/${sym_link_variable}.utexas.edu.multisite.vm
 done
 
-sudo cp -rp /var/tmp/multisite/.htaccess /var/www/public_html/d6/multisite/.htaccess
-
 echo "...done."
 echo " "
 echo "==========================================================================="
@@ -65,7 +39,7 @@ echo "-- Configuring all site-folders...."
 for default_settings in ${departments}
 do
   echo "-- -- Configuring site-folder for ${default_settings}"
-  cp -p /var/www/redesign/settings-files/d6-default/settings.php /var/www/public_html/d6/multisite/sites/${default_settings}.utexas.edu/settings.php
+  sudo cp -p /var/www/redesign/settings-files/d6-default/settings.php /var/www/public_html/d6/multisite/sites/${default_settings}.utexas.edu/settings.php
 done
 
 echo "...done."

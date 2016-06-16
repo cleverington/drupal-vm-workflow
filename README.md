@@ -32,7 +32,7 @@ npm install -g grunt-cli
 #### Install Required Software
 
 * Vagrant - https://www.vagrantup.com/downloads.html
-* Homebrew (for other packages) - http://brew.sh/ 
+* Homebrew (for other packages) - http://brew.sh/
 * Node.js - https://nodejs.org/en/
 
 ```
@@ -56,6 +56,11 @@ brew install git
 
 vagrant plugin install vagrant-vbguest
 vagrant plugin install vagrant-hostmanager
+
+** Download the Drupal VM **
+cd ~/moodyprojects
+git clone https://github.com/geerlingguy/drupal-vm.git
+** Enter the Drupal VM Folder to install Provisioning Requirements: **
 sudo ansible-galaxy install -r provisioning/requirements.yml --force
 ```
 

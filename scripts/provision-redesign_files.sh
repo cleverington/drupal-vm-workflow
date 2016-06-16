@@ -20,18 +20,18 @@ departments="advertising commstudies csd journalism moody rtf"
 echo "==========================================================================="
 echo "Initializing..."
 echo "-- Updating Drush Bash File."
-sudo cp -rp /var/www/redesign/drush-files/moodyredesign.aliases.drushrc.php ~/.drush/
+cp -rp /var/www/redesign/drush-files/moodyredesign.aliases.drushrc.php ~/.drush/
 
 # Temp Script for default 'files' placements for Drupal 7 installation
 for utdk_redesign_files in ${departments}
 do
   echo "-- -- Adding directory for ${utdk_redesign_files} files"
-  sudo mkdir -p /var/www/public_html/d7/${utdk_redesign_files}/sites/default/files
+  mkdir -p /var/www/public_html/d7/${utdk_redesign_files}/sites/default/files
   echo "-- -- Editing files directory permissions"
-  sudo chmod -R 777 /var/www/public_html/d7/${utdk_redesign_files}/sites/default/files
+  chmod -R 777 /var/www/public_html/d7/${utdk_redesign_files}/sites/default/files
   echo "====="
   echo "-- -- Copying files for ${utdk_redesign_files}"
-  sudo cp -rp /var/tmp/moody-d7/sites-utdk-basic-default-files/* /var/www/public_html/d7/${utdk_redesign_files}/sites/default/files
+  cp -rp /var/tmp/moody-d7/sites-utdk-basic-default-files/* /var/www/public_html/d7/${utdk_redesign_files}/sites/default/files
   drush @moodyredesign.${utdk_redesign_files}.utexas.edu.redesign.vm cc all
 done
 
