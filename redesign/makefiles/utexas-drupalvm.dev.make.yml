@@ -1,6 +1,7 @@
-# redesign-core.utexas.edu.make
+# utexas-drupalvm.dev.make
 #
 
+# Replace '<your-eid>' with your eid.
 
 core: "7.x"
 api: "2"
@@ -11,7 +12,7 @@ projects:
     type: "core"
     download:
       type: "file"
-      url: "file:///Users/crl2728/tar-bin/profiles/utexas-7.x-2.2.tar.gz"
+      url: "file:///Users/<your-eid>/tar-bin/profiles/utexas-7.x-2.2.tar.gz"
 
 
 # Modules
@@ -91,7 +92,7 @@ projects:
     directory_name: "sites/all/modules/custom/features/content_type_team_member"
     download:
       type: "file"
-      url: "file:///Users/crl2728/tar-bin/features/utexas-content_type_team_member-7.x-1.1.zip"
+      url: "file:///Users/<your-eid>/tar-bin/features/utexas-content_type_team_member-7.x-1.1.zip"
 
 # UTDK Extension Roles
   role_landing_page_editor:
@@ -99,34 +100,32 @@ projects:
     directory_name: "sites/all/modules/custom/features/role_landing_page_editor"
     download:
       type: "file"
-      url: "file:///Users/crl2728/tar-bin/features/utexas-role_landing_page_editor-7.x-1.0.zip"
+      url: "file:///Users/<your-eid>/tar-bin/features/utexas-role_landing_page_editor-7.x-1.0.zip"
 
   role_site_builder:
     type: "module"
     directory_name: "sites/all/modules/custom/features/role_site_builder"
     download:
       type: "file"
-      url: "file:///Users/crl2728/tar-bin/features/utexas-role_site_builder-7.x-1.0.zip"
+      url: "file:///Users/<your-eid>/tar-bin/features/utexas-role_site_builder-7.x-1.0.zip"
 
   role_site_manager:
     type: "module"
     directory_name: "sites/all/modules/custom/features/role_site_manager"
     download:
       type: "file"
-      url: "file:///Users/crl2728/tar-bin/features/utexas-role_site_manager-7.x-1.0.zip"
+      url: "file:///Users/<your-eid>/tar-bin/features/utexas-role_site_manager-7.x-1.0.zip"
 
   role_standard_page_editor:
     type: "module"
     directory_name: "sites/all/modules/custom/features/role_standard_page_editor"
     download:
       type: "file"
-      url: "file:///Users/crl2728/tar-bin/features/utexas-role_standard_page_editor-7.x-1.0.zip"
+      url: "file:///Users/<your-eid>/tar-bin/features/utexas-role_standard_page_editor-7.x-1.0.zip"
 
   role_team_member_editor:
     type: "module"
     directory_name: "sites/all/modules/custom/features/role_team_member_editor"
     download:
       type: "file"
-      url: "file:///Users/crl2728/tar-bin/features/utexas-role_team_member_editor-7.x-1.0.zip"
-
-
+      url: "file:///Users/<your-eid>/tar-bin/features/utexas-role_team_member_editor-7.x-1.0.zip"

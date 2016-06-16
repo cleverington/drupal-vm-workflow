@@ -1,5 +1,5 @@
-# Moody College of Communication Tasks
-## A Vagrant enabled automation tool for building, testing, migrating & reviewing Drupal 6 to Drupal 7 Migration tasks.
+# Moody's UTexas Drupal VM Platform
+## A Vagrant enabled automation tool for building, testing, migrating & reviewing Drupal 7 & Drupal 8 tasks.
 
 ## Requirements
 * Git (Apple Shipped is good enough)
@@ -13,7 +13,7 @@
 * Composter version 1.0-dev (cdea645eabe658e08fb2f4e5b80bddbd61c3adef) 2016-02-24 13:07:17
 * Drush 7.1.0
 
-> Note that the Grunt Moody College of Communication Tasks tool is intended to be compatible with Node.js 0.12.9, npm 2.10.1, grunt-cli 0.1.13, grunt 0.4.5 & bower 1.4.1 as approved for usage withing the UT Drupal Kit 2.x.
+> Note that the Moody's UTexas Drupal VM Platform tool is intended to be compatible with Node.js 0.12.9, npm 2.10.1, grunt-cli 0.1.13, grunt 0.4.5 & bower 1.4.1 as approved for usage within the UT Drupal Kit 2.x.
 >   In addition, the Tasks tool has only been tested 'Live' with Mac OS X El Capitan 10.11.3
 
 > See [ITS | UT Drupal Kit | Forty Acres Theme - 7. Grunt workflow for using SASS in a sub-theme](https://wikis.utexas.edu/display/UTDK/Forty+Acres+Theme) for more details. (Access to the UT Web Developers Wiki is required.)
@@ -31,6 +31,51 @@ npm install -g grunt-cli
 * PHPStorm
 
 ## Quickstart
+> **Note:** Despite the Drupal VM being 'baseline' configured for PHP 7.0, this config.yml file is configured for PHP 5.6.
+
+Until June 2016, the Drupal VM supported versions of PHP prior to 5.6.
+
+With the release of the Drupal VM 3.0, **PHP 5.6** is the lowest version supported. Developers should carefully test changes/configuration/code/etc. on a development server prior to pushing any changes to Production
+
+### Current Directory Structure
+```
+~/utexas-drupalvm-projects
+  composer.json
+  development/
+    ...
+    sites/
+    index.php
+  redesign/
+    config-files/
+    drush-files/
+    makefiles/
+    scripts/
+    settings-files/
+      d7/
+        development/
+        other-sites-as-needed/
+      d7-default/
+        files/
+      d8/
+```
+
+### (Pending) Composer Directory Structure
+```
+~/utexas-drupalvm-projects
+  composer.json
+  config/
+    config.yml
+    local.config.yml
+    Vagrantfile.local
+  docroot/
+    ...
+    sites/
+    index.php
+  vendor/
+    ...
+    geerlingguy/
+      drupal-vm/
+```
 
 #### Install Required Software
 
@@ -68,7 +113,7 @@ sudo ansible-galaxy install -r provisioning/requirements.yml --force
 ```
 
 
-Download copies of all UT Drupal Kit tools and plugins & Moody College Drupal 6 Multisite errata:
+Download copies of all UT Drupal Kit tools and plugins errata:
 ```
 ~/tar-bin
     - /features
@@ -78,10 +123,13 @@ Download copies of all UT Drupal Kit tools and plugins & Moody College Drupal 6 
         - utexas-role_site_manager-7.x-1.1.zip
         - utexas-role_standard_page_editor-7.x-1.1.zip
         - utexas-role_team_member_editor-7.x-1.1.zip
+        - your-features.zip
     - /modules
+        - your-modules.zip
     - /profiles
         - utexas-7.x-2.2.tar.gz
     - /themes
+        - your-forty-acres-subthemes.zip
 ```
 
 #### The required commands, in order:  <These will eventually be scripted>
@@ -125,7 +173,7 @@ Once Vagrant finishes build the VM, Drupal needs to be installed for the various
 In addition, the databases *must* be configured to give Global permission to the ```drupal``` user. See **Troubleshooting**
 
 > Note - This migration / redesign automation tool requires retrieval of Source Code via Git, ensuring all work can be completed at any machine, anywhere.
-> It requires running a specialized script (moody-build.sh or similar) into the /scripts/ folder to pull down a copy of the required content into the /development/, /redesign/, and /multisite directories prior to vagrant up.
+> It requires running a specialized script (development.sh or similar) into the /scripts/ folder to pull down a copy of the required content into the /development/, /redesign/, and /multisite directories prior to vagrant up.
 
 >   Users must follow the commands as outlined because a password is currently required for accessing the Git repository.
 
@@ -142,7 +190,7 @@ cd /var/www/public_html/
 
 See config.yml for database information.
 
-### To re-provision the Moody Drupal 7 Single Site Installations:
+### To re-provision the Drupal Single Site Installations:
 > **Note:** This script is not built yet, but will require manipulation by Users to function properly.
 
 ```
@@ -175,7 +223,7 @@ extra_packages:
 ```
 
 * **unzip**
-  * ```unzip``` is a tool for 'unzipping' compressed files and directories such as Zip files and tar-balls. It is a requirement for the MoodyVM and should not be removed. The necessary files downloaded by the Developer via the ```~/tarb-bin``` directory are all tar-balls, for example, which require the ```unzip``` package.
+  * ```unzip``` is a tool for 'unzipping' compressed files and directories such as Zip files and tar-balls. It is a requirement for Moody's Utexas Projects VM and should not be removed. The necessary files downloaded by the Developer via the ```~/tarb-bin``` directory are all tar-balls, for example, which require the ```unzip``` package.
 * **nano**
   * ```nano``` is a text-editor similar to Vim (vi) with a much simpler User Interface, including on-screen instructions for commands.
 * **links**
@@ -263,6 +311,10 @@ For example, when creating a new Vagrantbox (```vagrant halt && vagrant destroy 
 
 As a reminder though, these keys aren't safe. Even the 'generation' in the D-VM tends to recreate existing keys.
 
+### NFS vs RSYNC
+
+Sometimes NFS is wonky and/or hard to configure (especially on Windows machines). If you do not have Administrative access, it is best to simply use rsync for sycing files to the Drupal VM.
+
 #### Updating RSA Key for Known_Hosts
 To gain access to provisioning access (such as connecting via SSH to the MySQL databases), delete the currently listed ```known_host``` for the Vagrantbox:
 * Using a Text Editor (such as Sublime), edit the known_hosts file located at ~/.ssh/known_hosts
@@ -282,7 +334,7 @@ The global priveleges for the drupal user should only need to be altered once fo
 
 ## Additional Resources
 * [Mac OS X Setup Guide by Sourabh Bajaj](http://sourabhbajaj.com/mac-setup/ "Mac OS X Setup Guide by Sourabh Bajaj")
-The Mac OS X Setup Guide has step-by-step instructions for installing many of the necessary tools for mastering the Moody Tasks such as:
+The Mac OS X Setup Guide has step-by-step instructions for installing many of the necessary tools for mastering the Tasks such as:
   * Homebrew
   * PIP
   * Python (non-Apple version)

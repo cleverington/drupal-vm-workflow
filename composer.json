@@ -1,0 +1,20 @@
+{
+  "name": "Moody's Drupal VM Tool",
+  "version": "1.0.0",
+  "type": "project",
+  "description": "A VM for local Moody UTDK Drupal development, built with Vagrant + Ansible, and built on a foundation of Jeff Geerling's Drupal VM.",
+  "keywords": ["vagrant", "ut drupal kit", "local development"],
+  "homepage": "https://bitbucket.org/crl2728/drupal-vm-workflow/overview",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Charles Leverington",
+      "homepage": "https://www.drupal.org/u/cleverington"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/crl2728/grunt-redesign/overview"
+  },
+  "require": {}
+}

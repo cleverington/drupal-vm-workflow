@@ -9,7 +9,7 @@ vagrant_synced_folder_default_type: nfs
 # machine name, and IP address for each instance.
 vagrant_hostname: utexas-drupalvm.dev
 vagrant_machine_name: utexasdrupalvm
-vagrant_ip: 192.168.88.89
+vagrant_ip: 192.168.88.90
 
 # Allow Drupal VM to be accessed via a public network interface on your host.
 # Vagrant boxes are insecure by default, so be careful. You've been warned!
@@ -24,7 +24,22 @@ vagrant_synced_folders:
   # any of the build_* settings are 'true'. By default the folder is set to
   # the drupal-vm folder.
   - local_path: ~/utexas-drupalvm-projects/development
-    destination: /var/www/utexasdrupalvm
+    destination: /var/www/development
+    type: nfs
+    create: true
+
+  - local_path: ~/utexas-drupalvm-projects/redesign
+    destination: /var/tmp/redesign
+    type: nfs
+    create: true
+
+  - local_path: ~/utexas-drupalvm-projects/scripts
+    destination: /var/tmp/scripts
+    type: nfs
+    create: true
+
+  - local_path: ~/tarb-bin
+    destination: /tar-bin
     type: nfs
     create: true
 
@@ -50,22 +65,22 @@ drupal_composer_dependencies:
 
 # Set this to 'true' and 'build_makefile', 'build_composer' to 'false' if you
 # are using Composer's create-project as a site deployment strategy.
-build_composer_project: true
+build_composer_project: false
 drupal_composer_project_package: "drupal-composer/drupal-project:8.x-dev"
 drupal_composer_project_options: "--prefer-dist --stability dev --no-interaction"
 
 # Set this to 'false' if you don't need to install drupal (using the drupal_*
 # settings below), but instead copy down a database (e.g. using drush sql-sync).
-install_site: true
+install_site: false
 
 # Required Drupal settings.
-drupal_core_path: "{{ drupal_composer_install_dir }}/web"
+drupal_core_path: "/var/www/development"
 drupal_mysql_user: drupal
 drupal_mysql_password: drupal
 drupal_mysql_database: drupal
 
 # Settings for installing a Drupal site if 'install_site:' is 'true'.
-drupal_major_version: 8
+drupal_major_version: 7
 drupal_domain: "{{ vagrant_hostname }}"
 drupal_site_name: "Utexas Drupal VM Test Site"
 drupal_install_profile: standard
@@ -190,11 +205,14 @@ installed_extras:
 # Add any extra apt or yum packages you would like installed.
 extra_packages:
   - sqlite
+  - unzip
+  - nano
+  - links
 
 # You can configure almost anything else on the server in the rest of this file.
 extra_security_enabled: false
 
-drush_version: "master"
+drush_version: "8.x"
 drush_keep_updated: true
 drush_composer_cli_options: "--prefer-dist --no-interaction"
 
@@ -214,6 +232,32 @@ firewall_log_dropped_packets: false
 # PHP Configuration. Currently-supported versions: 5.6, 7.0.
 # To use 5.6, see: http://docs.drupalvm.com/en/latest/other/php-56/
 php_version: "5.6"
+php_packages:
+  - php5
+  - php5-apcu
+  - php5-mcrypt
+  - php5-cli
+  - php5-common
+  - php5-curl
+  - php5-dev
+  - php5-fpm
+  - php5-gd
+  - php5-sqlite
+  - php-pear
+  - libpcre3-dev
+php_conf_paths:
+  - /etc/php5/fpm
+  - /etc/php5/apache2
+  - /etc/php5/cli
+php_extension_conf_paths:
+  - /etc/php5/fpm/conf.d
+  - /etc/php5/apache2/conf.d
+  - /etc/php5/cli/conf.d
+php_fpm_daemon: php5-fpm
+php_fpm_conf_path: "/etc/php5/fpm"
+php_fpm_pool_conf_path: "/etc/php5/fpm/pool.d/www.conf"
+php_mysql_package: php5-mysql
+
 php_memory_limit: "192M"
 php_display_errors: "On"
 php_display_startup_errors: "On"
