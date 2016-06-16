@@ -2,13 +2,12 @@
 
 > Note - See README.md in project-root
 
-The Vagrantfile and config.yml files present should be copied into the drupalvm/ directory 'as is', with no alterations.
+The Vagrantfile and config.yml files present should be copied into the drupal-vm/ directory 'as is', with no alterations.
 
-Any changes to the Vagrantfile or config.yml files should be made here, then updated on the copy within the drupalvm/ folder.
+Any changes to the Vagrantfile or config.yml files should be made here, then updated on the copy within the drupal-vm/ folder.
 
 Command:
 ```
-cp ~/moody-project/redesign/config-files/config.yml ~/moody-project/drupalvm/config.yml
-cp ~/moody-project/redesign/config-files/Vagrantfile ~/moody-project/drupalvm/Vagrantfile
+cp ~/utexas-drupalvm-projects/redesign/config-files/config.yml ~/utexas-drupalvm-projects/drupal-vm/config.yml
+cp ~/utexas-drupalvm-projects/redesign/config-files/Vagrantfile ~/utexas-drupalvm-projects/drupal-vm/Vagrantfile
 ```
-

@@ -1,3 +1,8 @@
+# Global Ignores
+# Should always include these ignores to prevent file cruft.
+.DS_Store
+
+
 # Brought over from UT Drupal Kit:
 #   Ignore files created by node or bower and/or compiled SASS files in dist folder
 dist/
@@ -16,6 +21,7 @@ redesign/sql-dumps/*.sql
 # The only file changes for Drupal VM should be the config.yml file
 #   as the drush.make file will be imported via SymLinks.
 drupalvm/*
+**/local-settings.php
 
 # Ignoring /files/ directory, which will need to be manually downloaded from UT Box
 redesign/files/
