@@ -60,6 +60,12 @@ With the release of the Drupal VM 3.0, **PHP 5.6** is the lowest version support
       d7-default/
         files/
       d8/
+
+~/tar-bin
+    - /features
+    - /modules
+    - /profiles
+    - /themes
 ```
 
 ### (Pending) Composer Directory Structure
@@ -226,7 +232,7 @@ extra_packages:
 ```
 
 * **unzip**
-  * ```unzip``` is a tool for 'unzipping' compressed files and directories such as Zip files and tar-balls. It is a requirement for Moody's Utexas Projects VM and should not be removed. The necessary files downloaded by the Developer via the ```~/tarb-bin``` directory are all tar-balls, for example, which require the ```unzip``` package.
+  * ```unzip``` is a tool for 'unzipping' compressed files and directories such as Zip files and tar-balls. It is a requirement for Moody's Utexas Projects VM and should not be removed. The necessary files downloaded by the Developer via the ```~/tar-bin``` directory are all tar-balls, for example, which require the ```unzip``` package.
 * **nano**
   * ```nano``` is a text-editor similar to Vim (vi) with a much simpler User Interface, including on-screen instructions for commands.
 * **links**

@@ -49,7 +49,7 @@ echo "...done."
 echo "==========================================================================="
 
 echo "==========================================================================="
-echo "-- Configuring ${configuring_redesign}...."
+echo "-- Configuring...."
 cp -p ~/utexas-drupalvm-projects/redesign/settings-files/d7/development/local-settings.php ~/utexas-drupalvm-projects/development/sites/default/
 echo "...done."
 echo "==========================================================================="
