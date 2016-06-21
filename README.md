@@ -1,6 +1,16 @@
 # Moody's UTexas Drupal VM Platform
 ## A Vagrant enabled automation tool for building, testing, migrating & reviewing Drupal 7 & Drupal 8 tasks.
 
+## Warning!
+
+While creating the initial VM based on the instructions within this document, your Mac / Linux box will actually go out of compliance and create a vulnerability for UPD Amplification Attacks as outlined in this UT Wiki page:
+**[UDP Amplification Portmapper (RPCBind)](https://wikis.utexas.edu/pages/viewpage.action?pageId=124848220)**
+
+Thankfully, the wiki also includes instructions for creating a TCP Wrapper via *Step 2* under the Linux instructions.
+
+Finish it with a restart and turn on your Firewall.
+
+
 ## Requirements
 * Git (Apple Shipped is good enough)
 * Python 2.7.11
