@@ -70,6 +70,12 @@ With the release of the Drupal VM 3.0, **PHP 5.6** is the lowest version support
       d7-default/
         files/
       d8/
+
+~/tar-bin
+    - /features
+    - /modules
+    - /profiles
+    - /themes
 ```
 
 ### (Pending) Composer Directory Structure
@@ -118,11 +124,6 @@ brew install git
 vagrant plugin install vagrant-vbguest
 vagrant plugin install vagrant-hostmanager
 
-** Download the Drupal VM **
-cd ~/utexas-drupalvm-projects
-git clone https://github.com/geerlingguy/drupal-vm.git
-** Enter the Drupal VM Folder to install Provisioning Requirements: **
-sudo ansible-galaxy install -r provisioning/requirements.yml --force
 ```
 
 
@@ -145,13 +146,13 @@ Download copies of all UT Drupal Kit tools and plugins errata:
         - your-forty-acres-subthemes.zip
 ```
 
-#### The required commands, in order:  <These will eventually be scripted>
+#### Installation Instructions
 ```
-mkdir ~/utexas-drupalvm-projects
 git clone https://bitbucket.org/crl2728/drupal-vm-workflow.git ~/utexas-drupalvm-projects
 (When asked, choose 'yes')
-git submodule add git@github.com:geerlingguy/drupal-vm.git ~/utexas-drupalvm-projects/drupal-vm/
-cp ~/utexas-drupalvm-projects/redesign/config-files/config.yml ~/utexas-drupalvm-projects/drupal-vm/config.yml
+cd ~/utexas-drupalvm-projects/
+source utexas-vm-builder.sh
+
 ```
 
 ### Download SQL-Dumps for Migration
@@ -162,9 +163,9 @@ Copy SQL-Dumps from any SQL-Dumps available:
     - /redesign
         - sql-dumps
 ```
-> Note - '/utexas-drupalvm-projects/' is **required** to be the root project directory.
+> **Note:** - '/utexas-drupalvm-projects/' is **required** to be the root project directory.
 
->   Deviation from using /utexas-drupalvm-projects/ requires the 'vagrant_synced_folders' variable to be edited within the ```config.yml``` file.
+>   Deviation from using /utexas-drupalvm-projects/ requires the 'vagrant_synced_folders' variable to be edited within the ```config.yml``` file along with a few other changes throughout the yaml file.
 
 #### Download Site Files
 > **Note:** This task should only be performed once. Git should be used for all other changes.
@@ -174,6 +175,11 @@ Copy SQL-Dumps from any SQL-Dumps available:
 > **Note:** This will eventually be scripted, as shown, but requires using Git clone as shown, for now.
 ```
 git clone <your-drupal-repository-here>.git ~/utexas-drupalvm-projects/development
+```
+
+Alternatively, you can edit ~/utexas-drupalvm-projects/redesign/scripts/provision-development.sh with your repo information and run the following command:
+```
+source ~/utexas-drupalvm-projects/redesign/scripts/provision-development.sh
 ```
 
 #### Turn on the Virtual Server and Update
@@ -236,7 +242,7 @@ extra_packages:
 ```
 
 * **unzip**
-  * ```unzip``` is a tool for 'unzipping' compressed files and directories such as Zip files and tar-balls. It is a requirement for Moody's Utexas Projects VM and should not be removed. The necessary files downloaded by the Developer via the ```~/tarb-bin``` directory are all tar-balls, for example, which require the ```unzip``` package.
+  * ```unzip``` is a tool for 'unzipping' compressed files and directories such as Zip files and tar-balls. It is a requirement for Moody's Utexas Projects VM and should not be removed. The necessary files downloaded by the Developer via the ```~/tar-bin``` directory are all tar-balls, for example, which require the ```unzip``` package.
 * **nano**
   * ```nano``` is a text-editor similar to Vim (vi) with a much simpler User Interface, including on-screen instructions for commands.
 * **links**

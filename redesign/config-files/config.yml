@@ -38,7 +38,7 @@ vagrant_synced_folders:
     type: nfs
     create: true
 
-  - local_path: ~/tarb-bin
+  - local_path: ~/tar-bin
     destination: /tar-bin
     type: nfs
     create: true
