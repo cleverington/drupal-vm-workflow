@@ -3,13 +3,9 @@
 
 ## Warning!
 
-While creating the initial VM based on the instructions within this document, your Mac / Linux box will actually go out of compliance and create a vulnerability for UPD Amplification Attacks as outlined in this UT Wiki page:
-**[UDP Amplification Portmapper (RPCBind)](https://wikis.utexas.edu/pages/viewpage.action?pageId=124848220)**
+After a great deal of research, NFS is not currently supported on the utexas network unless your Firewall is completely secured with a software like http://www.murusfirewall.com/.
 
-Thankfully, the wiki also includes instructions for creating a TCP Wrapper via *Step 2* under the Linux instructions.
-
-Finish it with a restart and turn on your Firewall.
-
+Rsync is recommended.
 
 ## Requirements
 * Git (Apple Shipped is good enough)
@@ -78,7 +74,7 @@ With the release of the Drupal VM 3.0, **PHP 5.6** is the lowest version support
     - /themes
 ```
 
-### (Pending) Composer Directory Structure
+### (Pending) Composer Directory Structure (for Drupal 8, so it will be a while)
 ```
 ~/utexas-drupalvm-projects
   composer.json
@@ -185,6 +181,7 @@ source ~/utexas-drupalvm-projects/redesign/scripts/provision-development.sh
 #### Turn on the Virtual Server and Update
 ```
 cd ~/utexas-drupalvm-projects/drupal-vm/ && vagrant up
+vagrant ssh
 sudo yum upgrade -y
 ```
 
@@ -332,7 +329,7 @@ As a reminder though, these keys aren't safe. Even the 'generation' in the D-VM 
 
 ### NFS vs RSYNC
 
-Sometimes NFS is wonky and/or hard to configure (especially on Windows machines). If you do not have Administrative access, it is best to simply use rsync for sycing files to the Drupal VM.
+Sometimes NFS is wonky and/or hard to configure (especially on Windows machines). If you do not have Administrative access, it is best to simply use rsync for syncing files to the Drupal VM.
 
 ### FileZilla
 

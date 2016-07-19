@@ -3,7 +3,7 @@
 # geerlingguy/ubuntu1404, geerlingguy/ubuntu1204, parallels/ubuntu-14.04, etc.
 vagrant_box: geerlingguy/ubuntu1404
 vagrant_user: vagrant
-vagrant_synced_folder_default_type: nfs
+vagrant_synced_folder_default_type: rsync
 
 # If you need to run multiple instances of Drupal VM, set a unique hostname,
 # machine name, and IP address for each instance.
@@ -25,22 +25,22 @@ vagrant_synced_folders:
   # the drupal-vm folder.
   - local_path: ~/utexas-drupalvm-projects/development
     destination: /var/www/development
-    type: nfs
+    type: rsync
     create: true
 
   - local_path: ~/utexas-drupalvm-projects/redesign
     destination: /var/tmp/redesign
-    type: nfs
+    type: rsync
     create: true
 
   - local_path: ~/utexas-drupalvm-projects/scripts
     destination: /var/tmp/scripts
-    type: nfs
+    type: rsync
     create: true
 
   - local_path: ~/tar-bin
     destination: /tar-bin
-    type: nfs
+    type: rsync
     create: true
 
 # Memory and CPU to use for this VM.
