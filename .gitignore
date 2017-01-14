@@ -3,27 +3,23 @@
 .DS_Store
 
 
-# Brought over from UT Drupal Kit:
-#   Ignore files created by node or bower and/or compiled SASS files in dist folder
-dist/
-node_modules/
-src/bower_components
-
 # Eventually, SQL Dumps will be created/deleted via Grunt and should not
 #  be archived via Git.
 # Ignore .sql dumps
 redesign/sql-dumps/*.sql
 
-# Never move ideas into deployment:
+# Never move PStorm Configurations into Deployment:
 .idea/
 
-# Remove DrupalVM Cruft
+# Remove Drupal VM Files
 # The only file changes for Drupal VM should be the config.yml file
-#   as the drush.make file will be imported via SymLinks.
-drupalvm/*
+#   as the drush.make file will be imported via SymLinks or copy/paste.
+#
+drupal-vm/*
 **/local-settings.php
+development/*
 
-# Ignoring /files/ directory, which will need to be manually downloaded from UT Box
+# Ignoring /files/ directory, which is for local project files
 redesign/files/
 temp/
 

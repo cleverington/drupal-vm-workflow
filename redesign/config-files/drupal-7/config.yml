@@ -24,7 +24,7 @@ vagrant_synced_folders:
   # any of the build_* settings are 'true'. By default the folder is set to
   # the drupal-vm folder.
   - local_path: ~/drupal-vm-workflow/development
-    destination: /var/www/public_html/development
+    destination: /var/www/development
     type: nfs
     create: true
 
@@ -68,9 +68,9 @@ drush_make_options: "--no-gitinfofile"
 
 # Set 'build_makefile' to 'false' and this to 'true' if you are using a
 # composer based site deployment strategy.
-build_composer: false
+build_composer: true
 drupal_composer_path: "{{ config_dir }}/drupal.composer.json"
-drupal_composer_install_dir: "/var/www/public_html/development"
+drupal_composer_install_dir: "/var/www/development"
 drupal_composer_dependencies:
   - "drupal/devel:1.x-dev"
 
@@ -85,13 +85,13 @@ drupal_composer_project_options: "--prefer-dist --stability dev --no-interaction
 install_site: true
 
 # Required Drupal settings.
-drupal_core_path: "{{ drupal_composer_install_dir }}/web"
+drupal_core_path: "{{ drupal_composer_install_dir }}/docroot"
 drupal_mysql_user: drupal
 drupal_mysql_password: drupal
 drupal_mysql_database: drupal
 
 # Settings for installing a Drupal site if 'install_site:' is 'true'.
-drupal_major_version: 8
+drupal_major_version: 7
 drupal_domain: "{{ vagrant_hostname }}"
 drupal_site_name: "Drupal VM Test Site"
 drupal_install_profile: standard
@@ -120,7 +120,7 @@ configure_drush_aliases: true
 apache_vhost_php_fpm_parameters: |
     <FilesMatch \.php$>
       SetHandler "proxy:fcgi://{{ php_fpm_listen }}"
-    </FilesMatch># Apache VirtualHosts. Add one for each site you are running inside the VM. For
+    </FilesMatch>
 
 # Apache VirtualHosts. Add one for each site you are running inside the VM. For
 # multisite deployments, you can point multiple servernames at one documentroot.
@@ -301,7 +301,7 @@ adminer_install_filename: index.php
 nodejs_version: "0.12"
 nodejs_npm_global_packages: []
 nodejs_install_npm_user: "{{ drupalvm_user }}"
-npm_config_prefix: "~/.npm-global"
+npm_config_prefix: "/home/{{ drupalvm_user }}/.npm-global"
 
 # Ruby Configuration (if enabled above).
 ruby_install_gems_user: "{{ drupalvm_user }}"
@@ -328,12 +328,12 @@ php_xdebug_idekey: PHPSTORM
 php_xdebug_max_nesting_level: 256
 
 # Solr Configuration (if enabled above).
-solr_version: "5.5.1"
+solr_version: "5.5.3"
 solr_xms: "64M"
 solr_xmx: "128M"
 
 # Selenium configuration.
-selenium_version: 2.46.0
+selenium_version: 2.53.0
 
 # Other configuration.
 dashboard_install_dir: /var/www/dashboard
