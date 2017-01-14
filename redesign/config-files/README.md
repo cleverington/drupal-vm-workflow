@@ -8,6 +8,6 @@ Any changes to the Vagrantfile or config.yml files should be made here, then upd
 
 Command:
 ```
-cp ~/utexas-drupalvm-projects/redesign/config-files/config.yml ~/utexas-drupalvm-projects/drupal-vm/config.yml
-cp ~/utexas-drupalvm-projects/redesign/config-files/Vagrantfile ~/utexas-drupalvm-projects/drupal-vm/Vagrantfile
+cp ~/drupal-vm-workflow/redesign/config-files/config.yml ~/drupal-vm-workflow/drupal-vm/config.yml
+cp ~/drupal-vm-workflow/redesign/config-files/Vagrantfile ~/drupal-vm-workflow/drupal-vm/Vagrantfile
 ```

@@ -29,27 +29,27 @@
 echo "==========================================================================="
 echo "Configuring local Drupal 7 UTDK installation."
 echo "-- Creating temporary files"
-git clone https://insert-your-drupal-installation-repo-here.git ~/utexas-drupalvm-projects/development
-git clone https://insert-your-drupal-sites-folder-repo-here.git ~/utexas-drupalvm-projects/development/sites
+git clone https://insert-your-drupal-installation-repo-here.git ~/drupal-vm-workflow/development
+git clone https://insert-your-drupal-sites-folder-repo-here.git ~/drupal-vm-workflow/development/sites
 echo "... done."
 echo "====="
 echo "-- Adding clean .htaccess file to repository"
-cp -rp ~/utexas-drupalvm-projects/redesign/settings-files/d7-default/.htaccess ~/utexas-drupalvm-projects/development/.htaccess
-mkdir ~/utexas-drupalvm-projects/development/sites/default/files
-cp -rp ~/utexas-drupalvm-projects/redesign/settings-files/d7-default/files/.htaccess ~/utexas-drupalvm-projects/development/sites/default/files/.htaccess
+cp -rp ~/drupal-vm-workflow/redesign/settings-files/d7-default/.htaccess ~/drupal-vm-workflow/development/.htaccess
+mkdir ~/drupal-vm-workflow/development/sites/default/files
+cp -rp ~/drupal-vm-workflow/redesign/settings-files/d7-default/files/.htaccess ~/drupal-vm-workflow/development/sites/default/files/.htaccess
 echo "... done."
 echo "====="
 
 echo "==========================================================================="
 echo "-- Configuring site-folders...."
 echo "-- -- Configuring site-folder for Development"
-cp -p ~/utexas-drupalvm-projects/redesign/settings-files/d7-default/settings.php ~/utexas-drupalvm-projects/development/sites/default/settings.php
-cp -p ~/utexas-drupalvm-projects/redesign/settings-files/d7-default/default.settings.php ~/utexas-drupalvm-projects/development/sites/default/
+cp -p ~/drupal-vm-workflow/redesign/settings-files/d7-default/settings.php ~/drupal-vm-workflow/development/sites/default/settings.php
+cp -p ~/drupal-vm-workflow/redesign/settings-files/d7-default/default.settings.php ~/drupal-vm-workflow/development/sites/default/
 echo "...done."
 echo "==========================================================================="
 
 echo "==========================================================================="
 echo "-- Configuring...."
-cp -p ~/utexas-drupalvm-projects/redesign/settings-files/d7/development/local-settings.php ~/utexas-drupalvm-projects/development/sites/default/
+cp -p ~/drupal-vm-workflow/redesign/settings-files/d7/development/local-settings.php ~/drupal-vm-workflow/development/sites/default/
 echo "...done."
 echo "==========================================================================="

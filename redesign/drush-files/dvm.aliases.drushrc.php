@@ -8,9 +8,9 @@
 
 // Development Server
 
-$aliases['utexas-drupalvm-projects.dev'] = array(
-  'uri' => 'utexas-drupalvm-projects.dev',
-  'root' => '/var/www/public_html/development',
+$aliases['drupal-vm-workflow.dev'] = array(
+  'uri' => 'drupal-vm-workflow.dev',
+  'root' => '/var/www/public_html/development/web',
   'path-aliases' => array(
     '%files' => 'sites/default/files',
     '%dump-dir' => '/var/tmp',

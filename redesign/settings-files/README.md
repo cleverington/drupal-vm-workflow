@@ -7,7 +7,7 @@ Custom settings.php files for specific instances should be placed here prior to 
 
 Expected file structure:
 ```
-{{ settings-fles }}:
+{{ settings-files }}:
  - default.settings.php
  - local-settings.php
  - settings.php
@@ -15,27 +15,10 @@ Expected file structure:
 
 ```
 settings-files/
-    - d6-multisite
-        - advertising/
-            - {{ settings-files }}
-        - commstudies/
-        - csd/
-        - journalism/
-        - moody/
-        - rtf/
-    - d6
-        - advertising/
-        - commstudies/
-        - csd/
-        - journalism/
-        - moody/
-        - rtf/
-    - d7
-        - advertising/
-        - commstudies/
-        - csd/
-        - journalism/
-        - moody/
-        - rtf/        
+    - d7-default
+        - files/
+            - .htaccess
+        - .htaccess
+        - default.settings.php
+        - settings.php
 ```
-

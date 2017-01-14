@@ -48,7 +48,7 @@ With the release of the Drupal VM 3.0, **PHP 5.6** is the lowest version support
 
 ### Current Directory Structure
 ```
-~/utexas-drupalvm-projects
+~/drupal-vm-workflow
   composer.json
   development/
     ...
@@ -76,7 +76,7 @@ With the release of the Drupal VM 3.0, **PHP 5.6** is the lowest version support
 
 ### (Pending) Composer Directory Structure (for Drupal 8, so it will be a while)
 ```
-~/utexas-drupalvm-projects
+~/drupal-vm-workflow
   composer.json
   config/
     config.yml
@@ -144,9 +144,9 @@ Download copies of all UT Drupal Kit tools and plugins errata:
 
 #### Installation Instructions
 ```
-git clone https://bitbucket.org/crl2728/drupal-vm-workflow.git ~/utexas-drupalvm-projects
+git clone https://bitbucket.org/crl2728/drupal-vm-workflow.git ~/drupal-vm-workflow
 (When asked, choose 'yes')
-cd ~/utexas-drupalvm-projects/
+cd ~/drupal-vm-workflow/
 source utexas-vm-builder.sh
 
 ```
@@ -155,13 +155,13 @@ source utexas-vm-builder.sh
 Copy SQL-Dumps from any SQL-Dumps available:
 
 ```
-~/utexas-drupalvm-projects/
+~/drupal-vm-workflow/
     - /redesign
         - sql-dumps
 ```
-> **Note:** - '/utexas-drupalvm-projects/' is **required** to be the root project directory.
+> **Note:** - '/drupal-vm-workflow/' is **required** to be the root project directory.
 
->   Deviation from using /utexas-drupalvm-projects/ requires the 'vagrant_synced_folders' variable to be edited within the ```config.yml``` file along with a few other changes throughout the yaml file.
+>   Deviation from using /drupal-vm-workflow/ requires the 'vagrant_synced_folders' variable to be edited within the ```config.yml``` file along with a few other changes throughout the yaml file.
 
 #### Download Site Files
 > **Note:** This task should only be performed once. Git should be used for all other changes.
@@ -170,17 +170,17 @@ Copy SQL-Dumps from any SQL-Dumps available:
 ##### Download Active Git Repository of UTDK Installation
 > **Note:** This will eventually be scripted, as shown, but requires using Git clone as shown, for now.
 ```
-git clone <your-drupal-repository-here>.git ~/utexas-drupalvm-projects/development
+git clone <your-drupal-repository-here>.git ~/drupal-vm-workflow/development
 ```
 
-Alternatively, you can edit ~/utexas-drupalvm-projects/redesign/scripts/provision-development.sh with your repo information and run the following command:
+Alternatively, you can edit ~/drupal-vm-workflow/redesign/scripts/provision-development.sh with your repo information and run the following command:
 ```
-source ~/utexas-drupalvm-projects/redesign/scripts/provision-development.sh
+source ~/drupal-vm-workflow/redesign/scripts/provision-development.sh
 ```
 
 #### Turn on the Virtual Server and Update
 ```
-cd ~/utexas-drupalvm-projects/drupal-vm/ && vagrant up
+cd ~/drupal-vm-workflow/drupal-vm/ && vagrant up
 vagrant ssh
 sudo yum upgrade -y
 ```
@@ -260,7 +260,7 @@ This is especially true when applying changes to UT Web. By using the 'patch' fu
 Git Projects in Drupal should always be known as '6.x-?.x' (for Drupal 6), '7.x-?.x' (for Drupal 7), and '8.x-?.x' with various Branches and Forks eventually created based on Project needs. Currently the project root for both projects is 'master', but this is temporary.
 
 ### Example Workflow
-#### Changes are made to ~/utexas-drupalvm-projects/redesign/config-files/config.yml from branch 'master':
+#### Changes are made to ~/drupal-vm-workflow/redesign/config-files/config.yml from branch 'master':
 ```
 git branch config_changes
 git checkout config_changes
@@ -290,8 +290,8 @@ git push origin config_changes
 > Note - Always run ```git status``` on the server prior to applying any patches.
 
 ```
-scp ~/utexas-drupalvm-projects/config_changes_YYYY-MM-DD.patch vagrant@utexas-drupalvm.dev/var/tmp/config_changes_YYYY-MM-DD.patch
-cd ~/utexas-drupalvm-projects/drupal-vm/
+scp ~/drupal-vm-workflow/config_changes_YYYY-MM-DD.patch vagrant@utexas-drupalvm.dev/var/tmp/config_changes_YYYY-MM-DD.patch
+cd ~/drupal-vm-workflow/drupal-vm/
 vagrant ssh
 cd /var/tmp/
 git apply -v /var/tmp/config_changes_YYYY-MM-DD.patch
@@ -348,7 +348,7 @@ Select *SFTP - SSH File Transfer Protocol* as the connection type.
 #### Advanced Tab
 | Label  | Input  |
 | :-------------: |:-------------:|
-| **Default local directory**  | ~/utexas-drupalvm-projects/  |
+| **Default local directory**  | ~/drupal-vm-workflow/  |
 | **Default remote directory**  | /var/www/development  |
 
 ### Sequel Pro
