@@ -62,13 +62,13 @@ drupalvm_database: mysql
 
 # Set this to 'false' if you are using a different site deployment strategy and
 # would like to configure 'vagrant_synced_folders' and 'apache_vhosts' manually.
-build_makefile: false
+build_makefile: true
 drush_makefile_path: "{{ config_dir }}/drupal.make.yml"
 drush_make_options: "--no-gitinfofile"
 
 # Set 'build_makefile' to 'false' and this to 'true' if you are using a
 # composer based site deployment strategy.
-build_composer: true
+build_composer: false
 drupal_composer_path: "{{ config_dir }}/drupal.composer.json"
 drupal_composer_install_dir: "/var/www/development"
 drupal_composer_dependencies:
@@ -85,15 +85,15 @@ drupal_composer_project_options: "--prefer-dist --stability dev --no-interaction
 install_site: true
 
 # Required Drupal settings.
-drupal_core_path: "{{ drupal_composer_install_dir }}/docroot"
+drupal_core_path: "{{ drupal_composer_install_dir }}"
 drupal_mysql_user: drupal
 drupal_mysql_password: drupal
 drupal_mysql_database: drupal
 
 # Settings for installing a Drupal site if 'install_site:' is 'true'.
-drupal_major_version: 8
+drupal_major_version: 7
 drupal_domain: "{{ vagrant_hostname }}"
-drupal_site_name: "Drupal VM Test Site"
+drupal_site_name: "Drupal VM - Drupal 7 Test Site"
 drupal_install_profile: standard
 drupal_enable_modules: [ 'devel' ]
 drupal_account_name: admin

@@ -24,15 +24,49 @@
 
 ## Download the Drupal VM
 echo "==========================================================================="
-git clone https://github.com/geerlingguy/drupal-vm.git ~/drupal-vm-workflow/drupal-vm
-echo "....done."
+echo "This script will download and configure a copy of Jeff Geerling's Drupal VM."
+echo "Are you sure?"
+OPTIONS=("Yes" "No")
+select opt in "${OPTIONS[@]}"
+do
+  case $opt in
+    "Yes")
+      echo "Downloading...."
+      git clone https://github.com/geerlingguy/drupal-vm.git ~/drupal-vm-workflow/drupal-vm
+      echo "....done."
+      break
+      ;;
+    "No")
+      return 0
+      ;;
+  esac
+done
 
 ## Copy utexas Drupal VM config.yml File
+SECOND_OPTIONS=("Drupal 7" "Drupal 8" "Quit")
 echo "==========================================================================="
-echo "Configuring Drupal VM installation for the Utexas Drupal VM."
+echo "Please selection Drupal VM Configuration:"
 echo "(A fancy way of saying 'copy config.yml from the Git repo to the Drupal VM directory.)"
-cp -rp ~/drupal-vm-workflow/redesign/config-files/config.yml ~/drupal-vm-workflow/drupal-vm/config.yml
-echo "...done."
+select opt in "${SECOND_OPTIONS[@]}"
+do
+  case $opt in
+    "Drupal 7")
+      echo "Copying...."
+      echo cp -rp ~/drupal-vm-workflow/redesign/drupal-7/config.yml ~/drupal-vm-workflow/drupal-vm/config.yml
+      echo "....done."
+      break
+      ;;
+    "Drupal 8")
+      echo "Copying...."
+      cp -rp ~/drupal-vm-workflow/redesign/drupal-8/config.yml ~/drupal-vm-workflow/drupal-vm/config.yml
+      echo "....done."
+      break
+      ;;
+    "Quit")
+      return 0
+      ;;
+  esac
+done
 
 ## Creating the VM
 echo "==========================================================================="
@@ -40,5 +74,5 @@ echo "Creating the VM"
 echo "You will need to add your Drupal to ~/drupal-vm-workflow/development separately."
 echo "Another great option is to edit ~/drupal-vm-workflow/redesign/scripts/provision-development.sh with your Git Repository and run the script!"
 cd ~/drupal-vm-workflow/drupal-vm/
-sudo ansible-galaxy install -r provisioning/requirements.yml --force
+ansible-galaxy install -r provisioning/requirements.yml --force
 vagrant up

@@ -1,4 +1,4 @@
-# Moody's UTexas Drupal VM Platform
+# Drupal VM Workflow Tool
 ## A Vagrant enabled automation tool for building, testing, migrating & reviewing Drupal 7 & Drupal 8 tasks.
 
 ## Warning!
@@ -9,44 +9,54 @@ Rsync is recommended.
 
 ## Requirements
 * Git (Apple Shipped is good enough)
-* Python 2.7.11
-* Vagrant 1.8.1
-* Ansible 2.0.1.0
-* grunt-cli v1.2.0
-* Node.js v0.12.13
-* npm 2.15.1
-* Bower 1.7.2
-* Composter version 1.0-dev (cdea645eabe658e08fb2f4e5b80bddbd61c3adef) 2016-02-24 13:07:17
-* Drush 7.1.0
-
-> Note that the Moody's UTexas Drupal VM Platform tool is intended to be compatible with Node.js 0.12.9, npm 2.10.1, grunt-cli 0.1.13, grunt 0.4.5 & bower 1.4.1 as approved for usage within the UT Drupal Kit 2.x.
->   In addition, the Tasks tool has only been tested 'Live' with Mac OS X El Capitan 10.11.3
-
-> See [ITS | UT Drupal Kit | Forty Acres Theme - 7. Grunt workflow for using SASS in a sub-theme](https://wikis.utexas.edu/display/UTDK/Forty+Acres+Theme) for more details. (Access to the UT Web Developers Wiki is required.)
+* Python
+* Vagrant
+* Ansible
+* grunt-cli
+* Node.js
+* npm
+* Bower
+* Composter version
+* Drush
 
 > See [Enterprise Systems Management | Vagrant Virtual Machines | Getting started with Vagrant](https://wikis.utexas.edu/display/itsyesm/Getting+started+with+Vagrant) for more details. (Access to the UT Web Developers Wiki is required.)
 
-* Install _[Node.js v0.12.9](https://nodejs.org/en/blog/release/v0.12.9/ "Node.js v0.12.9")_
-* Once _Node.js v0.12.9_ is installed, use _npm_ to install the most recent version of [grunt-cli](https://github.com/gruntjs/grunt-cli" "grunt-cli"), the Grunt command line interface, by running:
+* Install _[Node.js](https://nodejs.org/en/download/ "Node.js")_
+* Once _Node.js_ is installed, use _npm_ to install the most recent version of [grunt-cli](https://github.com/gruntjs/grunt-cli" "grunt-cli"), the Grunt command line interface, by running:
 ```
 npm install -g grunt-cli
 ```
+* Likewise, install gulp and grunt:
+```
+npm install -g grunt
+npm install -g gulp
+```
+
 
 ## Recommendations
 * Sublime Text 3 **OR** Atom.io **OR** Brackets.io
 * PHPStorm
 * iTerm2
 * Sequel Pro
+  * (If on Pantheon) terminus-pancakes
 * FileZilla
 
 ## Quickstart
-> **Note:** Despite the Drupal VM being 'baseline' configured for PHP 7.0, this config.yml file is configured for PHP 5.6.
+> **Note:** The Drupal VM being 'baseline' configured for PHP 7.0.
+> The config.yml can be customized easily for
 
 Until June 2016, the Drupal VM supported versions of PHP prior to 5.6.
 
 With the release of the Drupal VM 3.0, **PHP 5.6** is the lowest version supported. Developers should carefully test changes/configuration/code/etc. on a development server prior to pushing any changes to Production
 
-### Current Directory Structure
+### Current Directory Structures
+
+Drupal 7 & Multisite
+====================
+
+Branch: 7.x-0.x-dev
+-------------------
+
 ```
 ~/drupal-vm-workflow
   composer.json
@@ -57,6 +67,7 @@ With the release of the Drupal VM 3.0, **PHP 5.6** is the lowest version support
   redesign/
     config-files/
     drush-files/
+    composer-files/ <--- Soon (TM)
     makefiles/
     scripts/
     settings-files/
@@ -74,7 +85,13 @@ With the release of the Drupal VM 3.0, **PHP 5.6** is the lowest version support
     - /themes
 ```
 
-### (Pending) Composer Directory Structure (for Drupal 8, so it will be a while)
+Drupal 8
+========
+
+Branch: 8.x-0.x-dev
+-------------------
+
+(Pending) Composer Directory Structure (for Drupal 8)
 ```
 ~/drupal-vm-workflow
   composer.json
@@ -97,6 +114,7 @@ With the release of the Drupal VM 3.0, **PHP 5.6** is the lowest version support
 * Vagrant - https://www.vagrantup.com/downloads.html
 * Homebrew (for other packages) - http://brew.sh/
 * Node.js - https://nodejs.org/en/
+  - Sometimes Node.js installs with a `sudo` and requires `sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}` in order to properly install add-ons like Gulp, Grunt, etc.
 
 ```
 brew tap homebrew/dupes
@@ -144,10 +162,10 @@ Download copies of all UT Drupal Kit tools and plugins errata:
 
 #### Installation Instructions
 ```
-git clone https://bitbucket.org/crl2728/drupal-vm-workflow.git ~/drupal-vm-workflow
+git clone https://github.com/cleverington/drupal-vm-workflow.git ~/drupal-vm-workflow
 (When asked, choose 'yes')
 cd ~/drupal-vm-workflow/
-source utexas-vm-builder.sh
+source drupal-vm-builder.sh
 
 ```
 
@@ -195,13 +213,15 @@ In addition, the databases *must* be configured to give Global permission to the
 
 ###  Future Tasks for development.sh Script:
 * Allow the User to select between two tasks (Redesign Development or Migration Work), and then:
-  * Migration Work - Copy the config.yml file from /redesign/config-files/migration-config.yml to /drupal-vm/config.yml for use in the VM
-  * Migration Work - Copy the config.yml file from /redesign/config-files/development-config.yml to /drupal-vm/config.yml for use in the VM
+  * Migration Work - Copy the config.yml file from /redesign/config-files/drupal-7/migration-config.yml to /drupal-vm/config.yml for use in the VM
+  * Migration Work - Copy the config.yml file from /redesign/config-files/drupal-8/migration-config.yml to /drupal-vm/config.yml for use in the VM
+  * Migration Work - Copy the config.yml file from /redesign/config-files/drupal-7/development-config.yml to /drupal-vm/config.yml for use in the VM
+  * Migration Work - Copy the config.yml file from /redesign/config-files/drupal-8/development-config.yml to /drupal-vm/config.yml for use in the VM
 
 ###  To Access the VM:
 ```
 vagrant ssh
-cd /var/www/public_html/
+cd /var/www
 ```
 
 See config.yml for database information.
@@ -257,7 +277,7 @@ Because some files shared between projects, such as the local-settings.php files
 
 This is especially true when applying changes to UT Web. By using the 'patch' functionality, only the specific changes to specific files are made, whereas using the ```git pull``` functionality pulls down complete copies of every single file and compares them to the files on the server. By using patches, changes are done in KB instead of MB, which can greatly reduce the digital overhead on UT Web.
 
-Git Projects in Drupal should always be known as '6.x-?.x' (for Drupal 6), '7.x-?.x' (for Drupal 7), and '8.x-?.x' with various Branches and Forks eventually created based on Project needs. Currently the project root for both projects is 'master', but this is temporary.
+Git Projects in Drupal should always be known as '6.x-?.x' (for Drupal 6), '7.x-?.x' (for Drupal 7), and '8.x-?.x' with various Branches and Forks eventually created based on Project needs. Currently the project root for both projects is '7.x-0.x-dev', but this is temporary as it will all be rolled into `master` and allow for User selection of preferred project / options.
 
 ### Example Workflow
 #### Changes are made to ~/drupal-vm-workflow/redesign/config-files/config.yml from branch 'master':
@@ -290,7 +310,7 @@ git push origin config_changes
 > Note - Always run ```git status``` on the server prior to applying any patches.
 
 ```
-scp ~/drupal-vm-workflow/config_changes_YYYY-MM-DD.patch vagrant@utexas-drupalvm.dev/var/tmp/config_changes_YYYY-MM-DD.patch
+scp ~/drupal-vm-workflow/config_changes_YYYY-MM-DD.patch vagrant@drupal-vm-workflow.dev/var/tmp/config_changes_YYYY-MM-DD.patch
 cd ~/drupal-vm-workflow/drupal-vm/
 vagrant ssh
 cd /var/tmp/
@@ -338,7 +358,7 @@ Select *SFTP - SSH File Transfer Protocol* as the connection type.
 #### General Tab
 | Label  | Input  |
 | :-------------: |:-------------:|
-| **Host**  | 127.0.0.1 *OR* utexas-drupalvm.dev**  |
+| **Host**  | 127.0.0.1 *OR* drupal-vm-workflow.dev**  |
 | **Port**  | Leave blank  |
 |   |   |
 | **Logon Type**  | Key file  |
@@ -349,7 +369,9 @@ Select *SFTP - SSH File Transfer Protocol* as the connection type.
 | Label  | Input  |
 | :-------------: |:-------------:|
 | **Default local directory**  | ~/drupal-vm-workflow/  |
-| **Default remote directory**  | /var/www/development  |
+| **Default Drupal 7 remote directory**  | /var/www/development  |
+| **Default Drupal 8 remote directory**  | /var/www/development/docroot  |
+
 
 ### Sequel Pro
 
@@ -357,13 +379,13 @@ Select *SSH* as the connection type.
 
 | Label  | Input  |
 | :-------------: |:-------------:|
-| **MySQL Host**  | 127.0.0.1 *OR* utexas-drupalvm.dev**  |
+| **MySQL Host**  | 127.0.0.1 *OR* drupal-vm-workflow.dev**  |
 | **Username**  | root  |
 | **Password**  | same  |
 | **Database**  | drupal  |
 | **Port**  | Leave blank  |
 |   |   |
-| **SSH Host**  | 192.168.88.90  |
+| **SSH Host**  | 192.168.88.88  |
 | **SSH User**  | vagrant  |
 | **SSH Key**  | *See below*  |
 
@@ -375,18 +397,15 @@ The **COMPLETELY UNSECURE** key is located at `~/.vagrant.d/insecure_private_key
 * navigating to user-root (`~/`), and
 * selecting the folder `/.vagrant.d/`
 
-> **Note:** The basic Drupal VM configuration uses 192.168.88.88 instead of 192.168.88.90.
+> **Note:** The basic Drupal VM configuration uses 192.168.88.88 instead of 192.168.88.88.
 
 #### Updating RSA Key for Known_Hosts
 To gain access to provisioning access (such as connecting via SSH to the MySQL databases), delete the currently listed ```known_host``` for the Vagrantbox:
 * Using a Text Editor (such as Sublime), edit the known_hosts file located at ~/.ssh/known_hosts
-* Delete the line with the utexas-drupalvm.dev virtualbox (192.168.88.89)
-* Re-run ```vagrant up``` from the ```~/utexas-drupalvm/drupal-vm``` directory
+* Delete the line with the drupal-vm-workflow.dev virtualbox (192.168.88.88)
+* Re-run ```vagrant up``` from the ```~/drupal-vm-workflow/drupal-vm``` directory
 
 #### Updating User Tables
-Within the current draft version of the installation, the ```drupal``` user is not being granted ANY privileges within any database except the Development database (```drupal```).
-
-Until a script can be used to correct the issue during VM generation, Developers must manually grant privileges within all databases.
 
 The easiest method to do this is either using the MySQL CLI or through a simple DBA program such as Sequel Pro.
 
@@ -404,4 +423,4 @@ The Mac OS X Setup Guide has step-by-step instructions for installing many of th
   * iTerm2 (It's just prettier)
   * zsh (Its smoother than Bash)
   * Oh-My-Zsh (Prettiest Terminal coloration out there)
-  * Sublime Text 3 (PHPStorm is a great tool, but nothing beats a well configured Sublime Text 3 for straight content editing.)
+  * Sublime Text 3 (PHPStorm is a great tool, but nothing beats a well configured Sublime Text 3 for straight content editing (not when cost is considered!).)

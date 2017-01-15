@@ -20,5 +20,27 @@ projects:
     #   branch: "8.1.x"
     #   working-copy: true
 
-  # Other modules.
+  # DeveloperModules
   devel: "1.x-dev"
+
+  # Contrib Modules
+  admin_menu:
+  ds:
+  panels:
+  views:
+
+  # Contrib Themes
+  #
+  # Note: Always load themes after modules in a base-install, as some themes
+  # have module dependancies.
+  adminimal_theme:
+  zen:
+
+# If all projects or libraries share common attributes, the `defaults`
+# array can be used to specify these globally, rather than
+# per-project.
+
+defaults:
+  projects:
+    version: ~
+    subdir: "contrib"
