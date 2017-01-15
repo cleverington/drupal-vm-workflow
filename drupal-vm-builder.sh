@@ -22,6 +22,8 @@
 #   - changes to the infrastructure / setup of the VM, Developers should have
 #   - the option to NOT execute the script.#
 
+# If edits to Bash Scripts are needed: https://www.shellcheck.net/ 
+
 ## Download the Drupal VM
 echo "==========================================================================="
 echo "This script will download and configure a copy of Jeff Geerling's Drupal VM."

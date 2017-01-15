@@ -5,7 +5,7 @@
 
 After a great deal of research, NFS is not currently supported on the utexas network unless your Firewall is completely secured with a software like http://www.murusfirewall.com/.
 
-Rsync is recommended.
+Rsync is recommended if NFS is unavailable, but will significantly reduce Development speed.
 
 ## Requirements
 * Git (Apple Shipped is good enough)
